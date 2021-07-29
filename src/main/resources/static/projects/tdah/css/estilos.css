@@ -1,0 +1,952 @@
+/*********************************
+**********   GENERAL   ***********
+*********************************/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+/*********************************
+***********   HEADER   ***********
+*********************************/
+header{
+    width: 100%;
+}
+
+header div{
+    height: 60px;
+}
+
+header .logos-left{
+    float: left;
+}
+
+header .logos-right{
+    float: right;
+}
+
+header img{
+    height: 100%;
+}
+
+header .img-gob{
+    width: 200px;
+}
+
+header .img-sep{
+    width: 160px;
+}
+
+header .img-tecnm{
+    width: 180px;
+}
+
+header .img-cenidet{
+    width: 150px;
+}
+
+header img:hover{
+    opacity: 0.7;
+}
+
+/*********************************
+************   MENU   ************
+*********************************/
+.nav-bar{
+    display: none;
+    font-weight: bold;
+}
+
+.nav-bar i{
+    font-size: 1.25em;
+    margin-right: 8px;
+}
+
+.menu{
+    clear: both;
+    width: 100%;
+    background: #1d3c74;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.menu, .submenu{
+    list-style: none;
+    cursor: default;
+}
+
+.menu__link{
+    padding: 14px 30px;
+    color: white;
+    display: block;
+    font-size: 0.9em;
+    text-decoration: none;
+    transition: 0.5s ease;
+}
+
+.menu__link:hover,
+.container-submenu:hover{
+    background: #1d48a5;
+}
+
+.submenu .menu__link{
+    background: #183261;
+    padding-left: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    transition: 0.5s ease;
+}
+
+.submenu .menu__item:last-child .menu__link{
+    border-bottom: none;
+}
+
+.submenu .menu__link:hover{
+    background: #023ba7;
+    padding-left: 26px;
+}
+
+.container-submenu{
+    position: relative;
+}
+
+.submenu{
+    position: absolute;
+    top: 47px;
+    width: 460px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    box-shadow: 0 0 3px 0 #000;
+}
+
+.container-submenu:hover .submenu{
+    opacity: 1;
+    visibility: visible;
+    transition: 0.5s ease;
+}
+
+.main-nav i{
+    margin-right: 5px;
+}
+
+.container-submenu i{
+    margin-right: 0;
+}
+
+/*********************************
+************   GUIA   ************
+*********************************/
+.content{
+    width: 90%;
+    max-width: 1600px;
+    margin: auto;
+}
+
+.guide{
+    grid-column: 1/3;
+    margin-top: 10px;
+}
+
+.guide ul{
+    list-style: none;
+}
+
+.guide ul li{
+    display: inline-block;
+    color: #444;
+    margin-right: 3px;
+}
+
+.guide ul li:hover{
+    text-decoration: underline;
+}
+
+.guide ul li a{
+    color: #333;
+    text-decoration: none;
+}
+
+.guide ul li:last-child a{
+    font-weight: bold;
+    color: #111;
+}
+
+/*********************************
+******   TITULO PRINCIPAL   ******
+*********************************/
+.title{
+    width: 100%;
+    height: 150px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.title img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    opacity: 0.9;
+}
+
+.title div{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    color: #fff;
+    font-size: 1.125em;
+    text-shadow: 2px 1px 2px #000;
+}
+
+/*********************************
+*********   INDEX.HTNL   *********
+*********************************/
+.content-main{
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: 1fr 50px;
+    grid-column-gap: 20px;
+}
+
+main{
+    grid-column: 1/2;
+    grid-row: 1/2;
+    padding: 15px 10px 0 15px;
+    text-align: center;
+}
+
+main p{
+    font-size: 1.0em;
+    line-height: 20px;
+}
+
+main h2{
+    font-size: 1.2em;
+}
+
+aside{
+    grid-column: 2/3;
+    grid-row: 1/3;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.img-tdah{
+    width: 85%;
+}
+
+.img-neurofeedback{
+    width: 85%;
+}
+
+.btn_contenedor{
+    grid-column: 1/2;
+    grid-row: 2/3;
+    clear: both;
+    width: 100%;
+    text-align: center;
+}
+
+.btn_contenedor .btn{
+    font-size: 1.125em;
+    text-decoration: none;
+    margin: 0 30px;
+    border: 3px solid #1B396B;
+    color: #1B396B;
+    padding: 0.625rem 1.8rem;
+    border-radius: 3px;
+}
+
+.btn_contenedor .btn:hover{
+    background: #1B396B;
+    color: #fff;
+}
+
+/*********************************
+*********   PERFIL.HTML   ********
+*********************************/
+.content-perfil{
+    width: 90%;
+    max-width: 1600px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #345177;
+}
+
+.cabecera{
+    width: 100%;
+    background: #006699;
+}
+
+.cabecera h4{
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.foto-perfil{
+    width: 100%;
+    height: 120px;
+    padding-left: 50px;
+    display: flex;
+}
+
+.foto-perfil img{
+    height: 100%;
+    padding-top: 20px;
+}
+
+.foto-perfil div{
+    margin-left: 30px;
+    font-size: 1.25em;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: flex-end;
+    padding-top: 45px;
+    color: #345177;
+}
+
+.informacion-profesional{
+    width: 100%;
+    margin: 20px 20px;
+    border: 1px solid rgb(180, 180, 180);
+}
+
+.informacion-profesional h5{
+    padding: 10px 10px;
+    background: #676f77;
+    color: #fff;
+    font-size: 1em;
+}
+
+.informacion-profesional .datos{
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.informacion-profesional .datos .datos-group{
+    width: 50%;
+    padding: 10px 20px;
+}
+
+.informacion-profesional .datos label{
+    width: 100%;
+    font-size: 18px;
+    color: #222;
+}
+
+.informacion-profesional .datos input[type="text"],
+.informacion-profesional .datos select{
+    margin-top: 5px;
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+    color: #222;
+}
+
+.informacion-profesional .datos input[type="submit"]{
+    float: right;
+    margin-top: 10px;
+    font-size: 1em;
+    border: 3px solid #222;
+    color: #222;
+    background: #fff;
+    text-decoration: none;
+    padding: 0.55rem 1.1rem;
+    font-size: 18px;
+}
+
+.informacion-profesional .datos input[type="submit"]:hover{
+    color: #fff;
+    background: #222;
+}
+
+.pacientes{
+    width: 100%;
+    margin: 20px 20px;
+    border: 1px solid rgb(180, 180, 180);
+    height: 300px;
+}
+
+.pacientes h5{
+    padding: 10px 10px;
+    background: #676f77;
+    color: #fff;
+    font-size: 1em;
+}
+
+.pacientes .btn_contenedor{
+    clear: both;
+    width: 100%;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.pacientes .btn_contenedor .btn{
+    display: inline-block;
+    font-size: 1.125em;
+    text-decoration: none;
+    margin: 0 30px;
+    border: 3px solid #222;
+    color: #222;
+    padding: 0.625rem 1.25rem;
+    border-radius: 3px;
+}
+
+.pacientes .btn_contenedor .btn:hover{
+    background: #222;
+    color: #fff;
+}
+
+/*********************************
+**********   FORM.HTML   *********
+*********************************/
+.title-form{
+    text-align: center;
+    color: #222;
+    margin: 20px 0;
+    font-size: 1.55em;
+}
+
+.section{
+    display: flex;
+    flex-wrap: wrap;
+    width: 1111px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.section__name{
+    /* background: #ddd; */
+    background: #cde3ff;
+    color: #222;
+    padding: 10px 20px;
+    border: 1px solid #fff;
+}
+
+.section__registro-sesiones{
+    padding: 10px 30px;
+}
+
+.section__name--selected{
+    background: #98d6ff;
+}
+
+.section__name:hover{
+    /* background: #aac4e6; */
+    background: #98d6ff;
+    cursor: pointer;
+}
+
+.tdah-form{
+    width: 1105px;
+    margin: auto;
+    /* border: 1px solid #ccc; */
+}
+
+.group{
+    padding-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: 0px 5px 0px 0 rgba(56, 56, 56, 0.15);
+    border-radius: 10px;
+}
+
+.input-group{
+    display: flex;
+    flex-wrap: space-between;
+    width: 50%;
+}
+
+.input-group-table{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px 10px 5px 20px;
+}
+
+.division{
+    width: 100%;
+    height: 20px;
+}
+
+.table-antecedentes-escolares{
+    font-size: 18px;
+}
+
+.tabla-antecedentes-escolares{
+    border-collapse: separate;
+    border-spacing: 30px 7px;
+}
+
+.input-group-table__label{
+    width: 100%;
+    font-size: 18px;
+    padding-bottom: 10px;
+}
+
+.input-group-table__input{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.tabla-color{
+    color: #fff;
+    background: #777;
+}
+
+.input-group--color1{
+    /* background: #e7e8ea; */
+    background: #f1f1f1;
+}
+
+.input-group--color2{
+    /* background: #c9e9fc; */
+    background: #c4c5c7;
+}
+
+.input-group__label{
+    width: 100%;
+    font-size: 18px;
+    margin: 5px 0;
+    padding-left: 20px;
+}
+
+.input-group__input{
+    width: 100%;
+    margin: 4px 20px 10px 5px;
+}
+
+.input--small{
+    display: flex;
+    width: 100%;
+    margin-top: 7px;
+}
+
+.input--small input[type="text"]{
+    width: 195px
+}
+
+.input--small div{
+    margin-left: 10px;
+}
+
+#antecedentes-personales-no-patologicos,#antecedentes-personales-patologicos,#antecedentes-pre-peri-y-postnatales,#historia-del-desarrollo,#antecedentes-escolares,#dinamica-familiar,#aspecto-de-personalidad-emocionales,#registro-sesiones{
+    display: none;
+}
+
+input{
+    outline: none;
+    font-size: 17px;
+}
+
+.tabla-no-patologicos input{
+    font-size: 15px;
+    text-align: center;
+}
+
+input[type="text"]:focus,textarea:focus,select:focus{
+    /* outline: 2px solid #2972fa; */
+    outline: 2px solid #5ec2fc;
+}
+
+textarea{
+    resize: none;
+    margin: 10px 200px 0 200px;
+    border: none;
+    font-size: 17px;
+    border: 1px solid #ccc;
+}
+
+select{
+    border: 1px solid #ccc;
+}
+
+input[type="text"], input[type="date"]{
+    width: 100%;
+    border: 1px solid #ccc;
+    height: 25px;
+}
+
+.tdah-form__datos-personales input{
+    font-size: 17px;
+}
+
+.input-group--btn{
+    display: flex;
+    width: 50%;
+    justify-content: flex-end;
+    padding-right: 25px;
+    padding-top: 10px;
+}
+
+.input-group--btn__guardar{
+    font-size: 1.125em;
+    margin-bottom: 10px;
+    padding: 0.6rem 1.6rem;
+    border: 3px solid #222;
+    color: #222;
+}
+
+.input-group--btn__guardar:hover{
+    color: #fff;
+    background: #222;
+}
+
+.input-group-error{
+    display: flex;
+    flex-wrap: space-between;
+    width: 50%;
+    background:  rgb(240, 186, 186);
+    
+}
+/*********************************
+**********   SESIONES   *********
+*********************************/
+.contenedor{
+	display: grid;
+	grid-template-columns: minmax(300px,1fr); /* Esto es para el responsive muy poco que tiene, la caja se hara pequeña hasta los 300 y maximo hasta 1 fr */
+}
+
+.cajita1{
+	background: #eeee;
+	/* box-shadow: 7px 0px 10px -12px rgba(0,0,0,0.6); */
+	display: flex;
+	flex-wrap: nowrap;  /* Para que el nombre este a lado de la web cam*/
+	grid-column: 1; /* Para acomodarlo*/
+	grid-row: 1;
+    box-shadow: 0px 5px 0px 0 rgba(56, 56, 56, 0.15);
+    border-radius: 10px;
+    justify-content: space-between;
+}
+
+.cajita1-left{
+    display: flex;
+	flex-wrap: nowrap;  /* Para que el nombre este a lado de la web cam*/
+	grid-column: 1; /* Para acomodarlo*/
+	grid-row: 1;
+}
+
+.cajita1-right{
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+    gap: 12px;
+}
+
+#gum{
+	width: 299px; /* Tamaño del video de la webcam*/
+	height: 168px;
+    margin: 10px 0px;
+    margin-left: 20px;
+    background: rgba(74, 78, 81, 0.7);
+    border-radius: 8px;
+}
+
+.datos{
+	line-height: 30px; /* Como tipo interlineado */
+    display: flex;
+    align-items: center;
+}
+
+.tablita{
+	width: 400px; /* Tamaño video de la tabla */
+	height: 200px;
+}
+
+.juego1{
+	width: 400px; /* Tamaño video del juego*/
+	height: 200px;
+}
+
+.cajavideo{
+    margin-top: 20px;
+	padding: 30px;  /* La caja del video*/
+	grid-column: 1;
+	grid-row: 2;
+	display: flex;
+	justify-content: center; /* Se centren y se ponga alado , si se hace mas chico aun no se hace para abajo, falta el responsive */
+    background: #f1f1f1;
+    box-shadow: 0px 5px 0px 0 rgba(56, 56, 56, 0.15);
+    border-radius: 10px;
+}
+
+.activar-camara{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 110px;
+}
+
+.fa-video,
+.fa-download,
+.fa-video-slash,
+.fa-circle,
+.fa-stop-circle{
+	color: #444;
+	font-size: 48px;
+	cursor: pointer;
+	transition: 0.2s ease;
+}
+
+.fa-video:hover,
+.fa-download:hover,
+.fa-video-slash:hover,
+.fa-circle:hover,
+.fa-stop-circle:hover{
+	font-size: 51px;
+}
+
+.gum-icon{
+	position: relative;
+	top: calc(50% - 24px);
+	left: calc(-50% + 65px);
+	cursor: default;
+}
+
+.gum-icon:hover{
+	font-size: 48px;
+}
+
+.activar-camara__label,
+.descarga__label,
+.label-recording{
+	width: 100%;
+}
+
+.recording{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 57px;
+}
+
+.descarga{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 74px;
+	margin-left: 3px;
+}
+
+.icon-recording{
+    margin-bottom: 7px;
+    cursor: pointer;
+}
+
+.icon-borde-exterior{
+    border-radius: 50%;
+    border: 3px solid black;
+}
+
+.icon-borde-interior{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: red;
+    border: 12px solid #fff;
+}
+
+/*********************************
+********   MEDIA QUERIES   *******
+*********************************/
+@media (max-width: 768px){
+    body{
+        font-size: 15px;
+    }
+    header div{
+        height: 50px;
+    }
+    header .img-gob{
+        width: 160px;
+    }
+    header .img-sep{
+        width: 120px;
+    }
+    
+    header .img-tecnm{
+        width: 140px;
+    }
+    header .img-cenidet{
+        width: 110px;
+    }
+    .nav-bar{
+        clear: both;
+        display: block;
+        background: #1B396B;
+        color: #fff;
+        height: 47px;
+    }
+    .btn-menu{
+        display: inline-block;
+        height: 47px;
+        padding: 11px;
+        margin-left: 11px;
+        cursor: pointer;
+    }
+    .menu{
+        justify-content: start;
+        flex-wrap: wrap;
+        width: 100%;
+        position: absolute;
+        margin-left: -100%;
+        z-index: 1000;
+    }
+    .submenu{
+        height: 0;
+        overflow: hidden;
+        width: 100%;
+        box-shadow: none;
+    }
+    .menu__item{
+        width: 100%;
+        border-bottom: 1px solid rgba(255,255,255,0.5);
+    }
+    .submenu .menu__link{
+        border-bottom: none;
+    }
+    .menu__link{
+        padding: 22px;
+    }
+    .submenu{
+        top: 0;
+        position: relative;
+        opacity: 1;
+        visibility: visible;
+    }
+    .mostrar-menu{
+        transition: all 0.5s;
+        margin: 0;
+    }
+
+    .title div{
+        font-size: 15px;
+    }
+    .content-main{
+        grid-template-columns: 1fr 250px;
+        grid-template-rows: 1fr 170px 50px;
+    }
+    main{
+        grid-column: 1/3;
+        grid-row: 1/2;
+    }
+    aside{
+        grid-column: 1/3;
+        grid-row: 2/3;
+    }
+    .img-tdah{
+        width: 30%;
+        margin-right: 5%;
+    }
+    .img-neurofeedback{
+        width: 30%;
+        height: 180px;
+        margin-left: 5%;
+    }
+    .btn_contenedor{
+        margin-top: 50px;
+        grid-column: 1/3;
+        grid-row: 3/4;
+    }
+}
+
+@media (max-width: 538px) {
+    body{
+        font-size: 14px;
+    }
+    .content{
+        width: 100%;
+        grid-template-columns: 1fr 250px;
+        grid-template-rows: 28px 1fr 1fr 110px;
+    }
+    header div{
+        height: 40px;
+    }
+    header .img-gob{
+        width: 88px;
+    }
+    header .img-sep{
+        width: 75px;
+    }
+    header .img-tecnm{
+        width: 110px;
+    }
+    header .img-cenidet{
+        width: 95px;
+    }
+
+    .title div{
+        font-size: 14px;
+    }
+    .content-main{
+        grid-template-columns: 1fr 250px;
+        grid-template-rows: 1fr 360px 50px;
+    }
+    .img-tdah{
+        width: 50%;
+        margin: 0 5%;
+        padding-bottom: 20px;
+    }
+    .img-neurofeedback{
+        width: 50%;
+        margin: 0 5%;
+    }
+    aside{
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 375px) {
+    body{
+        font-size: 13px;
+    }
+    header div{
+        height: 40px;
+    }
+    header .img-gob{
+        width: 80px;
+    }
+    header .img-sep{
+        width: 70px;
+    }
+    
+    header .img-tecnm{
+        width: 90px;
+    }
+    header .img-cenidet{
+        width: 50px;
+    }
+
+    .title div{
+        font-size: 13px;
+    }
+    .content-main{
+        grid-template-columns: 1fr 250px;
+        grid-template-rows: 1fr 330px 50px;
+    }
+}
+
+@media (max-width: 320px) {
+    .title div{
+        font-size: 12px;
+    }
+    .content-main{
+        grid-template-columns: 1fr 250px;
+        grid-template-rows: 1fr 305px 50px;
+    }
+}

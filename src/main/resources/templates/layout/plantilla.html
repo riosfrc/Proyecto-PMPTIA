@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:fragment="header">
+        <div class="logos-left">
+            <a href="https://www.gob.mx/" target="_blank"><img class="img-gob" th:src="@{/generics/media/gob.png}" alt=""></a>
+            <a href="https://www.gob.mx/sep" target="_blank"><img class="img-sep" th:src="@{/generics/media/sep.png}" alt=""></a>
+        </div>
+        <div class="logos-right">
+            <a href="https://www.tecnm.mx/" target="_blank"><img class="img-tecnm" th:src="@{/generics/media/tecnm.jpg}" alt=""></a>
+            <a href="https://www.cenidet.tecnm.mx/" target="_blank"><img class="img-cenidet" th:src="@{/generics/media/cenidet.jpg}" alt=""></a>
+        </div>
+        <span class="nav-bar">
+            <div class="btn-menu" id="btnMenu"><i class="fas fa-bars"></i>Menú</div>
+        </span>
+        <nav class="main-nav">
+            <ul class="menu" id="menu">
+                <li class="menu__item"><a th:href="@{/}" class="menu__link"><i class="fas fa-home"></i>Inicio</a></li>
+                <li class="menu__item container-submenu">
+                    <a class="menu__link btn-submenu"><i class="fas fa-file-alt"></i> Formularios <i class="fas fa-chevron-down"></i></a>
+                    <ul class="submenu">
+                        <li class="menu__item"><a th:href="@{/covid/index.html}" class="menu__link">COVID-19, neumonía viral y neumonía bacterina</a></li>
+                        <li class="menu__item"><a th:href="@{/tdah/index.html}" class="menu__link">Transtorno por déficit de atención e hiperactividad</a></li>
+                        <li class="menu__item"><a th:href="@{/robos/index.html}" class="menu__link">Detección de casos de robo a transportistas</a></li>
+                    </ul>
+                </li>
+                <li class="menu__item"><a th:href="@{/login.html}" class="menu__link"><i class="fas fa-user-circle"></i>Iniciar sesión</a></li>
+                <li class="menu__item"><a href="#" class="menu__link"><i class="fas fa-envelope"></i>Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+</body>
+</html>

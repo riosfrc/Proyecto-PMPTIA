@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/projects/robos/css/estilos.css}">
+    <title>Subir imagenes</title>
+</head>
+<body>
+    
+    <header th:replace="layout/plantilla :: header"></header>
+    
+    <div class="content-main">
+        <nav class="guide">
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i></a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="index.html">Robos</a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+	    		<li><a href="perfil.html">Perfil</a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="">Subida de imagenes</a></li>
+            </ul>
+        </nav>
+
+
+        <h1 class="title-main">Subir imagenes</h1>
+        <div class="tipo-escenas">
+            <label for="">Seleccione el tipo de escena:<br></label>
+            <div class="checkbox" id="checkbox">
+                <div class="checkbox__input"><input id="checkbox-escenas-normales" type="checkbox"><span> Escenas normales</span></div>
+                <div class="checkbox__input"><input id="checkbox-escenas-antes-de-crimen" type="checkbox"><span> Escenas antes de crimen</span></div>
+                <div class="checkbox__input"><input id="checkbox-escenas-durante-el-crimen" type="checkbox"><span> Escenas durante el crimen</span></div>
+                <div class="checkbox__input"><input id="checkbox-escenas-despues-del-crimen" type="checkbox"><span> Escenas despues del crimen</span></div>
+            </div>
+        </div>
+
+        <div class="escenas-upload escenas-normales" id="escenas-normales" style="display: none;">
+            <h2>Escenas normales:</h2>
+
+            <div class="btn-container">
+                <button type="button" class="btn-file btn-file-form" id="btnFile">Subir imagenes<span class="span-form"><i class="fas fa-plus"></i></span></button>
+            </div>
+
+            <div id="wrapper">
+                <div id="container-input">
+                    <div class="wrap-file">
+                        <input type="file" id="file" name="file[]" accept="image/*" multiple hidden/>
+                        <div id="preview-images"></div>
+                        <i class="fas fa-images" id="icon-upload"></i>
+                    </div>
+
+                    <!-- REMPLAZAR -->
+                    <div class="btn-submit" style="display: none">
+                        <input id="submit" type="submit" class="btn__input btn__input--btn-submit" value="Detección">
+                    </div>
+
+                </div>
+                <h2 id="success"></h2>
+            </div>
+        </div>
+        
+        <div class="escenas-upload escenas-antes-de-crimen" id="escenas-antes-de-crimen" style="display: none;">
+            <h2>Escenas antes de crimen:</h2>
+
+            <div class="btn-container">
+                <button type="button" class="btn-file btn-file-form" id="btnFile">Subir imagenes<span class="span-form"><i class="fas fa-plus"></i></span></button>
+            </div>
+
+            <div id="wrapper">
+                <div id="container-input">
+                    <div class="wrap-file">
+                        <input type="file" id="file" name="file[]" accept="image/*" multiple hidden/>
+                        <div id="preview-images"></div>
+                        <i class="fas fa-images" id="icon-upload"></i>
+                    </div>
+
+                    <!-- REMPLAZAR -->
+                    <div class="btn-submit" style="display: none">
+                        <input id="submit" type="submit" class="btn__input btn__input--btn-submit" value="Detección">
+                    </div>
+
+                </div>
+                <h2 id="success"></h2>
+            </div>
+        </div>
+
+        <div class="escenas-upload escenas-durante-el-crimen" id="escenas-durante-el-crimen" style="display: none;">
+            <h2>Escenas durante el crimen:</h2>
+
+            <div class="btn-container">
+                <button type="button" class="btn-file btn-file-form" id="btnFile">Subir imagenes<span class="span-form"><i class="fas fa-plus"></i></span></button>
+            </div>
+
+            <div id="wrapper">
+                <div id="container-input">
+                    <div class="wrap-file">
+                        <input type="file" id="file" name="file[]" accept="image/*" multiple hidden/>
+                        <div id="preview-images"></div>
+                        <i class="fas fa-images" id="icon-upload"></i>
+                    </div>
+
+                    <!-- REMPLAZAR -->
+                    <div class="btn-submit" style="display: none">
+                        <input id="submit" type="submit" class="btn__input btn__input--btn-submit" value="Detección">
+                    </div>
+
+                </div>
+                <h2 id="success"></h2>
+            </div>
+        </div>
+
+        <div class="escenas-upload escenas-despues-del-crimen" id="escenas-despues-del-crimen" style="display: none;">
+            <h2>Escenas despues del crimen:</h2>
+
+            <div class="btn-container">
+                <button type="button" class="btn-file btn-file-form" id="btnFile">Subir imagenes<span class="span-form"><i class="fas fa-plus"></i></span></button>
+            </div>
+
+            <div id="wrapper">
+                <div id="container-input">
+                    <div class="wrap-file">
+                        <input type="file" id="file" name="file[]" accept="image/*" multiple hidden/>
+                        <div id="preview-images"></div>
+                        <i class="fas fa-images" id="icon-upload"></i>
+                    </div>
+
+                    <!-- REMPLAZAR -->
+                    <div class="btn-submit" style="display: none">
+                        <input id="submit" type="submit" class="btn__input btn__input--btn-submit" value="Detección">
+                    </div>
+
+                </div>
+                <h2 id="success"></h2>
+            </div>
+        </div>
+
+        <div class="btn-form" style="display: none;">
+            <input class="btn-form__input btn-form__input-submit" type="submit" value="Enviar">
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
+    <script th:src="@{/generics/js/upload.js}"></script>
+    <script th:src="@{/projects/robos/js/subir-imagenes.js}"></script>
+    <script th:src="@{/generics/js/nav.js}"></script>
+</body>
+</html>

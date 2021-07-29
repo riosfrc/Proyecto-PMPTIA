@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/projects/robos/css/estilos.css}">
+    <title>Bienvenido</title>
+</head>
+<body>
+    
+    <header th:replace="layout/plantilla :: header"></header>
+
+    <div class="title">
+        <img th:src="@{/projects/robos/media/flotilla.jpg}" alt="">
+        <div><h1>Detección Automática de Casos de <br>Robo a Transportistas</h1></div>
+    </div>
+
+    <div class="content-main">
+        <nav class="guide">
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i></a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="index.html">Robos</a></li>
+            </ul>
+        </nav>
+
+        <div class="text">
+            <h2>Problematica</h2>
+            <p>En la actualidad, los transportistas son víctimas de múltiples tipos de crimen que ponen en riesgo la vida humana y la economía de los mismos, siendo el robo y el asalto los más frecuentes, por consiguiente, la prevención y detección del crimen a transportistas en carretera ha sido un gran desafío para las autoridades competentes, dado que en su mayoría usan el monitoreo por un humano.<br><br></p>
+            <h2>Objetivo general</h2>
+            <p>Detectar comportamientos sospechosos de robos a transportistas, mediante la aplicación de técnicas de Aprendizaje Profundo basadas en Redes Neuronales Convolucionales 3D.</p>
+        </div>
+
+        <div class="btn_contenedor">
+            <a th:href="@{/robos/perfil.html}" class="btn btn--right">Ir al repositorio</a>
+        </div>
+    </div>
+    
+    <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
+    <script th:src="@{/generics/js/nav.js}"></script>
+</body>
+</html>

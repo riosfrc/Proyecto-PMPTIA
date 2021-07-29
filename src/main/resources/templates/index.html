@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{main/css/estilos.css}">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Inicio</title>
+</head>
+<body>
+
+	<header th:replace="layout/plantilla :: header"></header>
+	
+        <div class="container-slider">
+            <div class="title">
+                <h1>Pre-diagnóstico y Monitoreo de Patologías con Técnicas<br/>de Inteligencia Artificial</h1>
+            </div>
+            <div class="slider" id="slider">
+                <div class="slider__section">
+                    <img class="slider__img" th:src="@{main/media/TDAH.jpg}" alt="">
+                </div>
+                <div class="slider__section">
+                    <img class="slider__img" th:src="@{main/media/rayos-x1.jpg}" alt="">
+                </div>
+                <div class="slider__section">
+                    <img class="slider__img" th:src="@{main/media/tomografia(2).jpg}" alt="">
+                </div>
+            </div>
+
+            <div class="slider__btn slider__btn--right" id="btn-right"> <i class="fas fa-chevron-right"></i></div>
+            <div class="slider__btn slider__btn--left" id="btn-left"> <i class="fas fa-chevron-left"></i></div>
+        </div>
+        
+    <main>
+        <div class="content">
+            <h2>¿Qué realizamos?</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, veritatis velit, amet accusantium dolor dignissimos rerum totam alias fuga nostrum facere illo dolorum, esse molestiae voluptatem vero natus quaerat autem.<br/><br/></p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis velit quia totam maxime. Sapiente earum voluptatibus provident deleniti libero ab, enim at sed deserunt aliquam ducimus omnis porro itaque culpa!<br/><br/></p>
+            <h2>¿Quiénes somos?</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, veritatis velit, amet accusantium dolor dignissimos rerum totam alias fuga nostrum facere illo dolorum, esse molestiae voluptatem vero natus quaerat autem.<br/><br/></p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis velit quia totam maxime. Sapiente earum voluptatibus provident deleniti libero ab, enim at sed deserunt aliquam ducimus omnis porro itaque culpa!</p>
+        </div>
+    </main>
+
+    <footer>
+            <p>© Copyright 2021 TecNM/CENIDET - Todos los Derechos Reservados</p>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
+    <script th:src="@{generics/js/nav.js}"></script>
+    <script th:src="@{main/js/slider.js}"></script>
+</body>
+</html>

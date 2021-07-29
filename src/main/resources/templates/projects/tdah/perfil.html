@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/projects/tdah/css/estilos.css}">
+    <title>Perfil</title>
+</head>
+<body>
+    
+    <header th:replace="layout/plantilla :: header"></header>
+	<div class="content">
+		<nav class="guide">
+        	<ul>
+        		<li><a href="#"><i class="fas fa-home"></i></a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="index.html">TDAH</a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="perfil.html">Perfil</a></li>
+        	</ul>
+        </nav>
+	
+	    <div class="content-perfil">
+	        <div class="cabecera">
+	            <h4>Mi perfil</h4>
+	        </div>
+	        <div class="foto-perfil">
+	            <img th:src="@{/generics/media/blank-profile.png}">
+	            <div>
+	                <h3>Nombre completo</h3>
+	                <h4>correo@correo.com</h4>
+	            </div>
+	        </div>
+	        <div class="informacion-profesional">
+	            <h5>Datos Profesionales</h5>
+	            <div class="datos">
+	                <div class="datos-group">
+	                    <label for="">Nombre Completo:</label>
+	                    <input type="text">
+	                </div>
+	                <div class="datos-group">
+	                    <label for="">Correo:</label>
+	                    <input type="text">
+	                </div>
+	                <div class="datos-group">
+	                    <label for="">Cédula profesional:</label>
+	                    <input type="text">
+	                </div>
+	                <div class="datos-group">
+	                    <label for="">Especialidad:</label>
+	                    <select name="Opciones_esp">
+	                        <option>Psicólogo</option> 
+	                        <option>Neurólogo</option> 
+	                        <option>Neuropediatra</option> 
+	                    </select>
+	                </div>
+	                <div class="datos-group">
+	                </div>
+	                <div class="datos-group">
+	                    <input type="submit" value="Actualizar">
+	                </div>
+	            </div>
+	        </div>
+	        <div class="pacientes">
+	            <h5>Datos pacientes </h5>
+	            <div class="btn_contenedor">
+	                <a th:href="@{/tdah/form.html}" class="btn">Registrar paciente</a>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+    <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
+    <script th:src="@{/generics/js/nav.js}"></script>
+</body>
+</html>

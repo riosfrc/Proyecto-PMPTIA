@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/projects/covid/css/estilos.css}">
+    <title>Document</title>
+</head>
+<body>
+
+	<header th:replace="layout/plantilla :: header"></header>
+
+    <div class="content-diagnostico">
+        <nav class="guide">
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i></a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="index.html">Covid-19 y neumonía</a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="diagnostico.html">Diagnóstico</a></li>
+            </ul>
+        </nav>
+		
+		 <div class="subtitle-container">
+        	<h2>Detección de COVID-19, Neumonía Bacteriana y Neumonía Viral</h2>
+        	<hr class="subtitle-line"/>
+        </div>
+		
+        <p>Carga la imagen o imagenes de radiografía o tomografía computariazada de tórax,<br>
+            para la deteccion de COVID-19 u otras enfermedades respiratorias.</p>
+        <form id="form">
+        	<div class="input-group"> 
+                <label class="input-group__label" for="">Edad del paciente:</label>
+                <div class="input-group__input">
+                    <input type="text" name="edad" maxlength="2">
+                </div>
+            </div>
+            <div class="input-group">
+                <label class="input-group__label" for="">Peso del paciente (kg):</label>
+                <div class="input-group__input">
+                    <input type="text" name="peso" maxlength="5">
+                </div>
+            </div>
+            <div class="input-group">
+                <label class="input-group__label" for="">Sexo del paciente:</label>
+                <div class="input-group__input">
+                    <input type="radio" name="sexo" id="masculino" value="Masculino"> Masculino
+                    <input type="radio" name="sexo" id="femenino" value="Femenino"> Femenino
+                </div>
+            </div>
+            <div class="btn-container">
+                <button type="button" class="btn-file" id="btnFile">Subir imagenes<span><i class="fas fa-plus"></i></span></button>
+            </div>
+            <div id="wrapper">
+                <div id="container-input">
+                    <div class="wrap-file">
+                        <input type="file" id="file" name="file[]" accept="image/*" multiple />
+                        <div id="preview-images"></div>
+                        <i class="fas fa-images" id="icon-upload"></i>
+                    </div>
+					<div class="wrapper-btn">
+	                    <div class="btn">
+	                        <button id="submit" class="btn__input">Detección</button>
+	                    </div>
+                    </div>
+                </div>
+                <div class="preload">
+                    <img src="imagenes/preload.gif" alt="preload" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
+    <script th:src="@{/generics/js/nav.js}"></script>
+    <script src="/projects/covid/js/submit-diagnostico.js"></script>
+</body>
+</html>

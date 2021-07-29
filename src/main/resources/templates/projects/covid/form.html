@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/projects/covid/css/estilos.css}">
+    <title>Document</title>
+</head>
+<body>
+	
+	<header th:replace="layout/plantilla :: header"></header>
+	
+    <div class="content-form">
+        <nav class="guide">
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i></a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="index.html">Covid-19 y neumonía</a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="form">Formulario</a></li>
+            </ul>
+        </nav>
+		
+		<div class="subtitle-container">
+        	<h2>Detección de COVID-19, Neumonía Bacteriana y Neumonía Viral</h2>
+        	<hr class="subtitle-line"/>
+        </div>
+
+        <legend>Se requiere ingresar los datos personales del paciente. Cumpliendo con los terminos de confidencialidad.</legend>
+
+        <form id="form">
+            <div class="input-group"> 
+                <label class="input-group__label" for="">Edad del paciente:</label>
+                <div class="input-group__input">
+                    <input type="text" name="edad" maxlength="2">
+                </div>
+            </div>
+            <div class="input-group">
+                <label class="input-group__label" for="">Peso del paciente (kg):</label>
+                <div class="input-group__input">
+                    <input type="text" name="peso" maxlength="5">
+                </div>
+            </div>
+            <div class="input-group">
+                <label class="input-group__label" for="">Sexo del paciente:</label>
+                <div class="input-group__input">
+                    <input type="radio" name="sexo" id="masculino" value="Masculino"> Masculino
+                    <input type="radio" name="sexo" id="femenino" value="Femenino"> Femenino
+                </div>
+            </div>
+            <div class="input-group">
+                <label class="input-group__label" for="">Saturación de oxígeno (%):</label>
+                <div class="input-group__input">
+                    <input type="text" name="saturacionOxigeno" maxlength="5">
+                </div>
+            </div>
+            <div class="input-group">
+                <label class="input-group__label">Enfermedad:</label>
+                <div class="input-group__input">
+                    <select name="enfermedad" id="combo_enfermedad" class="combo_box">
+                        <option value="">- Seleccione enfermedad -</option>
+                        <option value="covid-19">COVID-19</option>
+                        <option value="neumonia viral">Neumonía Viral</option>
+                        <option value="neumonia bacteriana">Neumonía Bacteriana</option>
+                        <option value="sano">Sano</option>
+                    </select>
+                </div>
+            </div>
+            <!-- <div id="covid-19"> -->
+            <div class="input-group">
+                <label class="input-group__label">Fase de la enfermedad:</label>
+                <div class="input-group__input">
+                       <select name="faseEnfermedad" id="combo_enfermedad" class="combo_box">
+                        <option value="">- Seleccione opcion -</option>
+                        <option value="critico">Crítica</option>
+                        <option value="severo">Severa</option>
+                        <option value="moderado">Moderada</option>
+                    </select>
+                </div>
+            </div>
+            <!-- </div> -->
+            <div class="input-group">   
+                <label class="input-group__label" for="">Tipo de imagen a subir:</label>
+                <div class="input-group__input">
+                    <select name="tipoImagen" id="combo_imagen" class="combo_box">
+                        <option value="">- Seleccione tipo de imagen -</option>
+                        <option value="tomografia"><label>Tomografía computarizada</label></option>
+                        <option value="radiografia"><label>Radiografía de Toráx</label></option>
+                    </select>
+                </div>
+            </div>
+        
+            <div class="btn-container">
+            	<div class="btn-container-file">
+            		<button type="button" class="btn-file btn-file-form" id="btnFile">Subir imagenes<span class="span-form"><i class="fas fa-plus"></i></span></button>
+	        	</div>
+	        </div>
+	
+			<div id="wrapper">
+				<div id="container-input">
+					<input type="file" id="file" name="file[]" accept="image/*" multiple hidden/>
+					<div class="wrap-file">
+						<div id="preview-images"></div>
+						<i class="fas fa-images" id="icon-upload"></i>
+					</div>
+				</div>
+			</div>
+	
+			<div class="btn-container">
+	            <input class="btn-submit" type="submit" id="submit" value="Enviar" style="margin: 10px 0">
+	        </div>
+        </form>
+        <a th:href="@{/covid/form/imagenes-subidas}">Ver imagenes subidas</a>
+
+        <div id="modal_container" class="modal-container">
+  			<div class="modal">
+    			<h1>Formulario Enviado Exitosamente</h1>
+   	 			<p><span id="textData"></span><br>Gracias por su colaboración en este proyecto.</p>
+   	 			<div class="icon-modal"><i class="far fa-check-circle"></i></div>
+			    <button id="close">Cerrar</button>
+			</div>
+		</div>
+    </div>
+    <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
+    <script th:src="@{/generics/js/nav.js}"></script>
+    <script th:src="@{/projects/covid/js/submit-form.js}"></script>
+</body>
+</html>

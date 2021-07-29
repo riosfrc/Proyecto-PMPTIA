@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/projects/tdah/css/estilos.css}">
+    <script th:src="@{/projects/tdah/js/html2pdf.bundle.min.js}"></script><!--libreria para crear el PDF-->
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <header th:replace="layout/plantilla :: header"></header>
+    
+    <div class="content">
+        <nav class="guide">
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i></a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="index.html">TDAH</a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="form.html">Formulario</a></li>
+            </ul>
+        </nav>
+        <h1 class="title-form">PERFIL DEL PACIENTE</h1>
+        <div class="section">
+            <div class="section__name section__datos-personales section__name--selected">Datos del paciente</div>
+            <div class="section__name section__antecedentes-personales-no-patologicos">Antecedentes personales nopatológicos</div>
+            <div class="section__name section__antecedentes-personales-patologicos">Antecedentes personales patológicos</div>
+            <div class="section__name section__antecedentes-pre-peri-y-postnatales">Antecedentes pre-peri y postnatales</div>
+            <div class="section__name section__historia-del-desarrollo">Historia del desarrollo</div>
+            <div class="section__name section__antecedentes-escolares">Antecedentes escolares</div>
+            <div class="section__name section__dinamica-familiar">Dinámica familiar</div>
+            <div class="section__name section__aspecto-de-personalidad-emocionales">Aspectos de personalidad y/o emocionales</div>
+            <div class="section__name section__registro-sesiones">Reg. de sesiones</div>
+        </div>
+        <form class="tdah-form" id="formulario">
+            <!-- Datos personales -->
+            <div class="tdah-form__datos-personales" id="datos-personales">
+                <div class="group input-group--color1">
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Nombre:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Fecha de registro:</label>
+                        <input class="input-group__input" type="date">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Sexo:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="sexo"> Masculino
+                            <input type="radio" name="sexo"> Femenino
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Fecha de nacimiento:</label>
+                        <input class="input-group__input" type="date">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Lugar de nacimiento:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Lateralidad:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Antecedentes de zurdería:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Escolaridad:</label>
+                        <select class="input-group__input" style="height: 26px">
+                            <option value="">- Seleccione una opción -</option>
+                            <option value="">Primaria</option>
+                            <option value="">Secundaria</option>
+                            <option value="">Preparatoria</option>
+                            <option value="">Universidad</option>
+                            <option value="">Maestría</option>
+                            <option value="">Doctorado</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Familiar responsable:</label>
+                        <select class="input-group__input" style="height: 26px">
+                            <option value="">- Seleccione una opción -</option>
+                            <option value="">Madre</option>
+                            <option value="">Padre</option>
+                            <option value="">Tutor(a)</option>
+                        </select>
+                    </div>
+                    <div class="input-group"></div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Nombre del padre:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Edad:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Ocupación:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Escolaridad:</label>
+                        <select class="input-group__input" style="height: 26px">
+                            <option value="">- Seleccione una opción -</option>
+                            <option value="">Primaria</option>
+                            <option value="">Secundaria</option>
+                            <option value="">Preparatoria</option>
+                            <option value="">Universidad</option>
+                            <option value="">Maestría</option>
+                            <option value="">Doctorado</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Ciudad:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Teléfono:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Teléfono de oficina:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group"></div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Nombre de la madre:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Edad:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Ocupación:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Escolaridad:</label>
+                        <select class="input-group__input" style="height: 26px">
+                            <option value="">- Seleccione una opción -</option>
+                            <option value="">Primaria</option>
+                            <option value="">Secundaria</option>
+                            <option value="">Preparatoria</option>
+                            <option value="">Universidad</option>
+                            <option value="">Maestría</option>
+                            <option value="">Doctorado</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Ciudad:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Teléfono:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Teléfono de oficina:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group"></div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+                    <div class="input-group input-group--color1">
+                        <label class="input-group__label" for="">Estado civil de los padres:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="estado-civil"> Soltero
+                            <input type="radio" name="estado-civil"> Casado
+                        </div>
+                    </div>
+                    <div class="input-group input-group--color1">
+                        <label class="input-group__label" for="">Desde:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group input-group--color1"></div>
+                    <div class="input-group--btn input-group--color1">
+                        <button class="input-group--btn__guardar">Guardar</button>
+                    </div>
+                </div>
+
+                <div class="division"></div>
+            </div>
+
+            <!-- Antecedentes personales no patologicos -->
+            <div class="tdah-form__antecedentes-personales-no-patologicos" id="antecedentes-personales-no-patologicos">
+
+                <div class="group input-group--color1">
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Vive en: </label>
+                        <div class="input-group__input">
+                            <input type="radio" name="hogar"> Casa
+                            <input type="radio" name="hogar"> Departamento
+                            <input type="radio" name="hogar"> Cuarto
+                            <div class="input--small"><label for=""><input type="radio" name="hogar"> Otro:</label>
+                                <div><input type="text"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">El lugar es:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="lugar"> Propio
+                            <input type="radio" name="lugar"> Rentado
+                            <input type="radio" name="lugar"> Prestado
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Con cuáles servicios cuenta?:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Lugar que ocupa el niño en la familia:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Tiene habitación propia o la comparte?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="habitación"> Propia
+                            <input type="radio" name="habitación"> Compartida
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿De dónde es originaria su familia?:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Ingreso familiar mensual:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Quiénes contribuyen?:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">El niño depende económicamente de: </label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Número de personas que viven en la casa:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group-table">
+                        <label class="input-group-table__label" for="">Familiares que viven en la casa:</label>
+                        <div class="input-group-table__input">
+                            <table class="tabla-no-patologicos" border="1">
+                                <tr class=" tabla-color">
+                                <th>Parentesco</th>
+                                <th>Nombre</th>
+                                <th>Edad</th>
+                                <th>Escolaridad</th>
+                                <th>Ocupación</th>
+                                </tr>
+                                <tr>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Juegos o actividades preferidas y/o preferidos:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Juguetes preferidos:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Descripción del tiempo libre y pasatiempos:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Realiza actividades extraescolares?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="actividades"> Sí
+                            <input type="radio" name="actividades"> No
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Tiene amigos?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="amigos"> Sí
+                            <input type="radio" name="amigos"> No
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Cuántos?:</label>
+                        <select class="input-group__input" style="height: 26px">
+                            <option value="">- Seleccione una opción -</option>
+                            <option value="">1 a 2</option>
+                            <option value="">3 a 4</option>
+                            <option value="">5 ó mas</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿De dónde los conoce?:</label>
+                        <select class="input-group__input" style="height: 26px">
+                            <option value="">- Seleccione una opción -</option>
+                            <option value="">Escuela</option>
+                            <option value="">Vecindario</option>
+                            <option value="">Externos</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Sale con ellos?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="salirAmigos"> Sí
+                            <input type="radio" name="salirAmigos"> No
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Con qué frecuencia sale con sus amigos?:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group--btn input-group--color1">
+                        <button class="input-group--btn__guardar">Guardar</button>
+                    </div>
+                </div>
+
+                <div class="division"></div>
+            </div>
+
+            <!-- Antecedentes personales patologicos -->
+            <div class="tdah-form__antecedentes-personales-patologicos" id="antecedentes-personales-patologicos">
+                <div class="group input-group--color1">
+                    <div class="input-group-table input-group--color1">
+                        <label class="input-group-table__label">Enfermedades que haya presentado a lo largo de su vida
+                            (anotar edad, desarrollo y tx):</label>
+                        <div class="input-group-table__input">
+                            <table width="40%">
+                                <tr>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Meningitis</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Asma</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Poliomielitis</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Encefalitis</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Varicela</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Apnea</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Cáncer</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Sarampión</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td>Epilepsia</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="division"></div>
+                    <div class="input-group ">
+                        <label class="input-group__label">Otra:</label>
+                        <input class="input-group__input" type="text" name="Otra">
+                    </div>
+                    <div class="input-group ">
+                        <label class="input-group__label">¿Actualmente está enfermo?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="estaEnfermo"> Sí
+                            <input type="radio" name="estaEnfermo"> No
+                        </div>
+                    </div>
+                    <div class="input-group ">
+                        <label class="input-group__label">Tratamiento:</label>
+                        <input class="input-group__input" type="text" name="Tratamiento">
+                    </div>
+                </div>
+                <div class="division"></div>
+                <div class="group input-group--color1">
+                    <div class="input-group ">
+                        <label class="input-group__label">Ha tenido:</label>
+                        <div class="input-group__input">
+                            <input type="checkbox" name="Rad1"> Golpes en la médula espinal<br>
+                            <input type="checkbox" name="Rad1"> Golpes en la cabeza <br>
+                            <input type="checkbox" name="Rad3"> Tumores<br>
+                            <input type="checkbox" name="Rad2"> Alergias
+                        </div>
+                    </div>
+                    <div class="input-group ">
+                        <label class="input-group__label">Especificar:</label>
+                        <input class="input-group__input" type="text" name="Especificar">
+                    </div>
+                    <div class="input-group ">
+                        <label class="input-group__label">Enfermedades neorológicas
+                            (parálisis,hidrocefálea,etc):</label>
+                        <input class="input-group__input" type="text" name="Enfermedades">
+                    </div>
+                    <div class="input-group ">
+                        <label class="input-group__label">Alteraciones psicológicas o psiquiátras
+                            (depresión,etc):</label>
+                        <input class="input-group__input" type="text" name="Alteraciones">
+                    </div>
+                </div>
+                <div class="group input-group--color1">
+                    <div class="input-group ">
+                        <label class="input-group__label">¿Presenta secuelas?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="secuelas"> Sí
+                            <input type="radio" name="secuelas"> No
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label">¿De qué tipo?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label">Ha tenido:</label>
+                        <div class="input-group__input">
+                            <input type="checkbox" name=""> Temperatura mayor a los 40°<br>
+                            <input type="checkbox" name=""> Convulsiones<br>
+                            <input type="checkbox" name=""> Perdida de la conciencia<br>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label">Especificar:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                </div>
+                <div class="division"></div>
+                <div class="group input-group--color1">
+                    <div class="input-group input-group--color1">
+                        <label class="input-group__label">Presenta problemas de: </label>
+                    </div>
+                    <div class="input-group input-group--color1">
+                        <label class="input-group__label">Visión:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group input-group--color1">
+                        <label class="input-group__label">¿Usa o requiere lentes?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="Lentes"> Sí
+                            <input type="radio" name="Lentes"> No
+                        </div>
+                    </div>
+                    <div class="input-group input-group--color1">
+                        <label class="input-group__label">¿Desde cuándo?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group input-group--color1">
+                        <label class="input-group__label">Motricidad:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group ">
+                        <label class="input-group__label">¿Usa o requiere aparatos ortopédicos?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="aparatosOrtopedicos"> Sí
+                            <input type="radio" name="aparatosOrtopedicos"> No
+                        </div>
+                    </div>
+                    <div class="input-group input-group--color1">
+                        <label class="input-group__label">¿Desde cuándo?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                </div>
+                <div class="division"></div>
+                <div class="group input-group--color1">
+                    <div class="input-group input-group--color1">
+                        <label class="input-group__label">Medicamentos que toma actualmente:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group input-group--color1">
+                        <label class="input-group__label">Posología:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group input-group--color1">
+                        <label class="input-group__label">¿Desde cuándo?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group input-group--color1">
+                        <label class="input-group__label">¿Para qué la toma?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group input-group--color1">
+                        <label class="input-group__label">Reacciones adversas:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group--btn input-group--color1">
+                        <button class="input-group--btn__guardar">Guardar</button>
+                    </div>
+                </div>
+                <div class="division"></div>
+            </div>
+
+            <!-- Antecedentes pre-peri y postnatales-->
+            <div class="tdah-form__antecedentes-pre-per</div>i-y-postnatales" id="antecedentes-pre-peri-y-postnatales">
+                <div class="group input-group--color1">
+                    <div class="input-group">
+                        <label class="input-group__label">Edad de la madre al nacer el niño/a:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label">Edad del padre al nacer el niño/a:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label">Padres:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="situacion"> Juntos
+                            <input type="radio" name="situacion"> Separados
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label">Duración del embarazo:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label">¿Fué un embarazo deseado y planeado?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="embarazoDeseado"> Sí
+                            <input type="radio" name="embarazoDeseado"> No
+                        </div>
+                    </div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+                    <div class="input-group-table">
+                        <label class="input-group-table__label">¿Durante el embarazo presentó lo siguiente? (anotar en
+                            qué mes y los datos pertinentes):</label>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label">Problemas o enfermedades emocionales:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label">Enfermedades médicas:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label">Consumo de medicamentos:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label">Amenaza de aborto:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label">Desnutrición:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label">Exposición a Rx:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label">Ultrasonidos:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label">Consumo de drogas (alcohol, cigarros, etc.):</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label">Otro:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group--btn">
+                        <button class="input-group--btn__guardar">Guardar</button>
+                    </div>
+                </div>
+
+                <div class="division"></div>
+            </div>
+
+            <!-- Historia del desarrollo -->
+            <div class="tdah-form__historia-del-desarrollo" id="historia-del-desarrollo">
+                <div class="group input-group--color1">
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Peso al nacer (kg):</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Talla (cm):</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Calificación APGAR (apariencia, pulso, gedto,
+                            actividad, respiración):</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Especificaciones:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Tipo de nacimiento:</label>
+                        <select class="input-group__input" style="height: 26px">
+                            <option value="">- Seleccione una opción -</option>
+                            <option value=""> Parto normal</option>
+                            <option value=""> Parto inducido</option>
+                            <option value=""> Psicoprofilaxis</option>
+                            <option value=""> Cesárea programada</option>
+                            <option value=""> Cesárea no programada</option>
+                            <option value=""> Anestesia</option>
+                            <option value=""> Fórceps</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Lloró inmediatamente al nacer?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="Lloro"> Sí
+                            <input type="radio" name="Lloro"> No
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Respiró inmediatamente al nacer?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="Respiro"> Sí
+                            <input type="radio" name="Respiro"> No
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Estuvo en incubadora?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="Incubadora"> Sí
+                            <input type="radio" name="Incubadora"> No
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Complicaciones al momento de su nacimiento (sufrimiento
+                            fetal, hipoxia, etc.):</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+                    <div class="input-group"></div>
+                    <label class="input-group__label" for="">Edad a la que...</label>
+                    <div class="input-group input-group--color1">
+                        <label class="input-group__label" for="">Sostuvo la cabeza (2 o 3m):</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Subió y bajo escaleras (18m):</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Se sentó (6m):</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Dijo palabras (18m):</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Se sostuvo en pie (9m):</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Caminó solo (12m):</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">(Indagar enuresis y envopresis):</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                    <div class="input-group--btn input-group--color1">
+                        <button class="input-group--btn__guardar">Guardar</button>
+                    </div>
+                </div>
+                <div class="division"></div>
+            </div>
+
+            <!-- Antecedentes escolares -->
+            <div class="tdah-form__antecedentes-escolares" id="antecedentes-escolares">
+
+                <div class="group input-group--color1">
+                    <div class="input-group-table">
+                        <label class="input-group-table__label" for="">Estuvo o está el niño en (especificar):</label>
+                        <div class="input-group-table__input">
+                            <table class="tabla-antecedentes-escolares">
+                                <tr>
+                                    <td><input type="checkbox" name=""> Guardería</td>
+                                    <td><input type="radio" name="tipo1"> Pública</td>
+                                    <td><input type="radio" name="tipo1"> Privada</td>
+                                    <td> Años cursados: </td>
+                                    <td><input type="text" name=""></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name=""> Preescolar</td>
+                                    <td><input type="radio" name="tipo2"> Pública</td>
+                                    <td><input type="radio" name="tipo2"> Privada</td>
+                                    <td> Años cursados:</td>
+                                    <td><input type="text" name=""></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name=""> Primaria</td>
+                                    <td><input type="radio" name="tipo3"> Pública</td>
+                                    <td><input type="radio" name="tipo3"> Privada</td>
+                                    <td> Años cursados:</td>
+                                    <td><input type="text" name=""></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name=""> Educacíon especial</td>
+                                    <td><input type="radio" name="tipo4"> Pública</td>
+                                    <td><input type="radio" name="tipo4"> Privada</td>
+                                    <td> Años cursados:</td>
+                                    <td><input type="text" name=""></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name=""> Estimulación temprana</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td> Años cursados:</td>
+                                    <td><input type="text" name=""></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name=""> Clases de regularizaión</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name=""> Escuela de idiomas</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name=""> Terapia de lenguaje, de conducta,<br>
+                                        emocinales, psicomotricidad, etc.</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">Años de estudio: </label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">Curso escolar actual: </label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿Ha perdido algun grado escolar?: </label>
+                        <div class="input-group__input">
+                            <input type="radio" name="Escolar"> Sí
+                            <input type="radio" name="Escolar"> No
+                        </div>
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿Por qué?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿Falta mucho a clases?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="faltaClases"> Sí
+                            <input type="radio" name="faltaClases"> No
+                        </div>
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿Por qué?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿Ha cambiado de escuela?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="Cambioescuela"> Sí
+                            <input type="radio" name="Cambioescuela"> No
+                        </div>
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿Por qué?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿Le gusta ir a la escuela?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="gustaEscuela"> Sí
+                            <input type="radio" name="gustaEscuela"> No
+                        </div>
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿Por qué?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿Recibe constantes quejas de los maestros?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="Quejas"> Sí
+                            <input type="radio" name="Quejas"> No
+                        </div>
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿Por qué?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">Qué opinan los maestros del aprendizaje y
+                            comportamiento del niño?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿A qué se deben los problemas en la escuela según el
+                            niño?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿Aprende con facilidad?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="Aprende"> Sí
+                            <input type="radio" name="Aprende"> No
+                        </div>
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">Actividades que se le facilitan:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">Actividades que se le dificultan:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">Promedio actual: </label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                </div>
+
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+                    <div class="input-group">
+                        <label class="input-group__label" for="">El niño presenta algún problema en: </label>
+                        <div class="input-group__input">
+                            <input type="checkbox" name=""> Lenguaje<br>
+                            <input type="checkbox" name=""> Lectura<br>
+                            <input type="checkbox" name=""> Escritura<br>
+                            <input type="checkbox" name=""> Matemáticas<br>
+                            <input type="checkbox" name=""> Motricidad<br>
+                            <div class="input--small"><label for=""><input type="checkbox" name="problemas">
+                                    Otro:</label>
+                                <div><input type="text"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+                    <div class="input-group input-group--color1">
+                        <label class="input-group__label" for="">¿A qué edad comenzó a leer?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿Cómo lee?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="lee"> Rapido
+                            <input type="radio" name="lee"> Normal
+                            <input type="radio" name="lee"> No lee
+                        </div>
+                    </div>
+
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">Cuando lee:</label>
+                        <div class="input-group__input">
+                            <input type="checkbox" name=""> Omite alguna letra<br>
+                            <input type="checkbox" name=""> Titubéa<br>
+                            <input type="checkbox" name=""> Confunde letras<br>
+                            <input type="checkbox" name=""> Dice una letra por otra<br>
+                            <input type="checkbox" name=""> Se salta renglones<br>
+                            <input type="checkbox" name=""> Se equivoca de línea<br>
+                            <input type="checkbox" name=""> Repite sílabas o palabras<br>
+                            <input type="checkbox" name=""> Cambia palabras
+                            <div class="input--small"><label for=""><input type="checkbox" name=""> Otro:</label>
+                                <div><input type="text"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿A qué edad comenzó a escribrir?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿Le cuesta trabajo escribir?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="Escribir"> Sí
+                            <input type="radio" name="Esribir"> No
+                        </div>
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿Por que?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">Al escribir: </label>
+                        <div class="input-group__input">
+                            <input type="checkbox" name=""> Confunde letras<br>
+                            <input type="checkbox" name=""> Deletrea letras<br>
+                            <input type="checkbox" name=""> Escribe con lentitud<br>
+                            <input type="checkbox" name=""> Tiene mala ortografía<br>
+                            <input type="checkbox" name=""> Es incomprensible<br>
+                        </div>
+                    </div>
+
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">Otro: </label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿A qué edad comenzó a contar?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+                    <div class="input-group ">
+                        <label class="input-group__label" for="">¿A qué edad comenzó a hacer operaciones
+                            sencillas?:</label>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group-table ">
+                        <div class="input-group-table__input">
+                            <table width="90%">
+                                <tr>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Escribe mal los números</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> No reconoce los números</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Confunde los signos</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> En dictado confunde los números</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Acomoda mal las cifras</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Le cuesta trabajo hacer operaciones linealmente</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Le cuesta trabajo hacer la operaciones verticalmente</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> No sabe sumar</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> No sabe restar</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Nos sabe multiplicar</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> No sabe dividir</td>
+                                    <td> Otro:</td>
+                                    <td><input type="text" name=""></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+                    <div class="input-group-table">
+                        <label class="input-group-table__label">Es torpe o tiene problemas para:</label>
+                        <div class="input-group-table__input">
+                            <table width=70%>
+                                <tr>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Caminar</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Correr</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Subir escaleras</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Sujetar</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Lanzar objetos</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Jugar c/ cosas grandes</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Abotonarse</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Vestirse</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Amarrarse las agujetas</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Recortar</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Escribir</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Iluminar</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td>
+                                        <div class="input--small"><label for=""> Otro:</label>
+                                            <div><input type="text"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+                    <div class="input-group-table input-group--color1">
+                        <label class="input-group-table__label" for="">Tiene dificultad para:</label>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-group__label">
+                            <input type="checkbox" name="">
+                            <label for="">Decir oraciones completas (3 elementos):</label>
+                        </div>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <div class="input-group__label">
+                            <input type="checkbox" name="">
+                            <label for="">Comprender lo que dice:</label>
+                        </div>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <div class="input-group__label">
+                            <input type="checkbox" name="">
+                            <label for="">Hablar menos que los otros niños:</label>
+                        </div>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <div class="input-group__label">
+                            <input type="checkbox" name="">
+                            <label for="">Hablar más que los otros niños:</label>
+                        </div>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <div class="input-group__label">
+                            <input type="checkbox" name="">
+                            <label for="">Tiene dificultad para decir algunas letras:</label>
+                        </div>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group ">
+                        <div class="input-group__label">
+                            <input type="checkbox" name="">
+                            <label for="">Otro: </label>
+                        </div>
+                        <input class="input-group__input" type="text" name="">
+                    </div>
+
+                    <div class="input-group--btn input-group--color1"></div>
+                    <div class="input-group--btn input-group--color1">
+                        <button class="input-group--btn__guardar">Guardar</button>
+                    </div>
+                </div>
+                <div class="division"></div>
+            </div>
+
+            <!-- Dinamica familiar -->
+            <div class="tdah-form__dinamica-familiar" id="dinamica-familiar">
+
+                <div class="group input-group--color1">
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Descripción de la dinámica familiar (quién está con él,
+                            actividades semanales, etc):</label>
+                    </div>
+
+                    <div class="input-group">
+                        <textarea class="input-group__input" name="" id="" cols="30" rows="5"></textarea>
+                    </div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+                    <div class="input-group-table">
+                        <div class="input-group-table__label">Tiempo que le dedica al niño(a):</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Madre:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Padre:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Con qué miembro de la familia se lleva mejor?:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+
+                    <div class="input-group-table">
+                        <label class="input-group-table__label" for="">En los últimos dos años su familia ha
+                            experimentado:</label>
+                        <div class="input-group-table__input">
+                            <table width=70%>
+                                <tr>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Divorcio</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Cambio de escuela</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Cambio de vivienda</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Problemas financieros</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Enfermedades</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Pérdida de trabajo</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Separaciones</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Pérdida de trabajo</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Algún suceso familiar ha afectado especialmente al
+                            niño(a)?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="Suceso"> Sí
+                            <input type="radio" name="Suceso"> No
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Cuál?:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿De qué manera?:</label>
+                        <input class="input-group__input" type="text">
+                    </div>
+
+                    <div class="input-group--btn input-group--color1">
+                        <button class="input-group--btn__guardar">Guardar</button>
+                    </div>
+                </div>
+                <div class="division"></div>
+            </div>
+
+            <!-- ASPECTOS DE PERSONALIAD Y/0 EMOCIONALES -->
+            <div class="tdah-form__aspecto-depersonalidad-emocionales" id="aspecto-de-personalidad-emocionales">
+                <div class="group input-group--color1">
+                    <div class="input-group-table input-group--color1">
+                        <label class="input-group-table__label">El niño se muestra usualmente:</label>
+                        <div class="input-group-table__input">
+                            <table width=50%>
+                                <tr>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Miedoso</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Berrinchudo</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Celoso</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Rebelde</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Se autolesiona</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Agresivo </td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Aislado</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Nervioso</td>
+                                    <td><input type="checkbox" name=""></td>
+                                    <td> Desapegado </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="input-group-table input-group--color1">
+                        <label class="input-group-table__label">Descripción de personalidad del niño:</label>
+                        <textarea class="input-group-table__input" name="" id="" cols="20" rows="5"></textarea>
+                    </div>
+                    <div class="input-group"></div>
+                    <div class="input-group--btn input-group--color1">
+                        <button class="input-group--btn__guardar">Guardar</button>
+                    </div>
+                </div>
+                <div class="division"></div>
+            </div>
+
+            <!-- REGISTRO DE SESIONES -->
+            <div class="tdah-form__registro-sesiones" id="registro-sesiones">
+                <div class="contenedor">
+                    <!-- Contendor principal -->
+                    <div class="cajita1">
+                        <!--Esta es la caja donde esta la webcam del usuario y sus datos -->
+                        <div class="cajita1-left">
+                            <video id="gum" playsinline autoplay muted></video>
+                            <i class="fas fa-video-slash gum-icon"></i>
+
+                            <div class="datos">
+                                <div>
+                                    <p>Nombre: Inuyasha <br> Años: 21 años <br> Sesión: 1</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cajita1-right">
+	                        <div class="activar-camara">
+	                        	<i class="fas fa-video" id="start"></i>
+	                        	<label class="activar-camara__label">Activar camara</label>
+                        	</div>
+                            <div class="recording">
+                                <i class="far fa-circle" id="record"></i>
+                                <label id="label-recording">Grabar</label>
+                            </div>
+                            <div class="descarga">
+	                            <i class="fas fa-download" id="download"></i>
+	                            <label class="descarga__label">Descargar</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cajavideo">
+                        <!-- Esta es la caja de los 2 videos uno es de la tabla y otro del juego -->
+                        <video class="tablita" autoplay muted="false" loop>
+                            <source th:src="@{/projects/tdah/media/tabla.mp4}" type="video/mp4">
+                        </video>
+
+                        <video class="juego1" autoplay muted="false" loop>
+                            <source th:src="@{/projects/tdah/media/juego.mp4}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </form>
+        <div  class="Crear-PDF" id="Creación-de-PDF">
+        	<button id="btn-Crear-PDF">Descargar PDF</button>
+    	</div>
+    </div>
+    <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
+    <script th:src="@{/projects/tdah/js/form.js}"></script>
+    <script th:src="@{/generics/js/nav.js}"></script>
+    <script th:src="@{/generics/js/validaciones.js}"></script>
+
+	<script th:src="@{/projects/tdah/js/imprimir.js}"></script>
+	<script th:src="@{/projects/tdah/js/grabadorpantalla.js}"></script>
+</body>
+
+</html>

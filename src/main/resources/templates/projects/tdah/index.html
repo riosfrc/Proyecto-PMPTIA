@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/projects/tdah/css/estilos.css}">
+        <title>Document</title>
+    </head>
+    <body>
+
+        <header th:replace="layout/plantilla :: header"></header>
+
+        <div class="title">
+            <img th:src="@{/projects/tdah/media/building-blocks.jpg}" alt="">
+            <div><h1>Transtorno por Deficit de Atención e Hiperactividad</h1></div>
+        </div>
+
+        <div class="content">
+            <nav class="guide">
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i></a></li>
+                    <li><i class="fas fa-angle-right"></i></li>
+                    <li><a href="index.html">TDAH</a></li>
+                </ul>
+            </nav>
+
+            <div class="content-main">
+                <main>
+                    <h2>TDAH</h2>
+                    <p><br>El TDAH por sus siglas Tastorno de Déficit de Atención e Hiperactividad es un trastorno neurobiológico de carácter crónico, sintomáticamente evolutivo y de probable transmisión genética, está caracterizado por una dificultad de mantener la atención voluntaria frente a actividades, tanto académicas como cotidianas unido a la falta de control de impulsos.<br><br><br></p>
+                    <h2>NEUROFEEDBACK</h2>
+                    <p><br>La terapia de neurofeedback es un tratamiento que actúa sobre las ondas cerebrales para permitir a la persona tratada estar consciente de su actividad cerebral y modificarla de acuerdo un objetivo establecido; Este sistema utiliza métodos de procesado de señal adaptados por un dispositivo EEG para analizar los datos electroencefalográficos obtenidos por los sensores, filtrándolos y determinando las características de interés (relacionadas con la habilidad cognitiva a entrenar).<br><br></p>
+                </main>
+                <aside>
+                    <img class="img-tdah" th:src="@{/projects/tdah/media/brain.png}" alt="">
+                    <img class="img-neurofeedback" th:src="@{/projects/tdah/media/neurofeedback.png}" alt="">
+                </aside>
+                <div class="btn_contenedor">
+                    <a th:href="@{/tdah/perfil.html}" class="btn">Registrar al paciente</a>
+                </div>
+            </div>
+        </div>
+    <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
+    <script th:src="@{/generics/js/nav.js}"></script>
+</body>
+</html>

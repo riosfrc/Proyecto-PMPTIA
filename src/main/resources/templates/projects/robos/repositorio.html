@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/projects/robos/css/estilos.css}">
+    <title>Repositorio</title>
+</head>
+<body>
+    
+    <header th:replace="layout/plantilla :: header"></header>
+    
+    <div class="content-main">
+        <nav class="guide">
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i></a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="index.html">Robos</a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+	    		<li><a href="perfil.html">Perfil</a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="">Repositorio</a></li>
+            </ul>
+        </nav>
+        <div class="galeria-container">
+            <img th:src="@{/projects/robos/media/scene01.jpg}">
+            <img th:src="@{/projects/robos/media/scene02.jpg}">
+			<img th:src="@{/projects/robos/media/scene03.jpg}">
+			<img th:src="@{/projects/robos/media/scene04.jpg}">
+			<img th:src="@{/projects/robos/media/scene05.jpg}">
+			<img th:src="@{/projects/robos/media/scene06.jpg}">
+			<img th:src="@{/projects/robos/media/scene07.jpg}">
+			<img th:src="@{/projects/robos/media/scene08.jpg}">
+			<img th:src="@{/projects/robos/media/scene09.jpg}">
+			<img th:src="@{/projects/robos/media/scene10.jpg}">
+			<img th:src="@{/projects/robos/media/scene11.jpg}">
+			<img th:src="@{/projects/robos/media/scene12.jpg}">
+			<img th:src="@{/projects/robos/media/scene13.jpg}">
+			<img th:src="@{/projects/robos/media/scene14.jpg}">
+			<img th:src="@{/projects/robos/media/scene15.jpg}">
+			<img th:src="@{/projects/robos/media/scene16.jpg}">
+			<img th:src="@{/projects/robos/media/scene17.jpg}">
+			<img th:src="@{/projects/robos/media/scene18.jpg}">
+			<img th:src="@{/projects/robos/media/scene19.jpg}">
+			<img th:src="@{/projects/robos/media/scene20.jpg}">
+        </div>
+    </div>
+    
+    <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
+    <script th:src="@{/generics/js/nav.js}"></script>
+</body>
+</html>

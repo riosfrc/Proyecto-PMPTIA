@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/projects/covid/css/estilos.css}">
+    <title>Bienvenido</title>
+</head>
+<body>
+
+    <header th:replace="layout/plantilla :: header"></header>
+    
+    <div class="title">
+        <img th:src="@{/projects/covid/media/covid.jpg}" alt="">
+        <div><h1>Detección de COVID-19, Neumonía Bacteriana <br>y Neumonía Viral</h1></div>
+    </div>
+    <div class="content">
+        <nav class="guide">
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i></a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="index.html">Covid-19 y neumonía</a></li>
+            </ul>
+        </nav>
+        <main>
+            <h2>BIENVENIDO<br><br></h2>
+            <p>
+                Usted a ingresado al repositorio del Centro Nacional de Invertigación y Desarrollo Tecnológico,
+                este repositorio es realizado con el fin de recolectar la mayor cantidad de imágenes de Radiografías
+                de Tórax y Tomografías Computarizadas de pacientes que padezcan COVID-19, Neumonía Viral o
+                Bacteriana, para el desarrollo de un modelo de aprendizaje profundo que permita la detección de
+                COVID-19 frente a la neumonia viral bacteriana.<br><br>
+                Sí usted es un paciente que padezca algunas de las patologías mencionadas anteriormente, o pertenece
+                alguna institución medica que que dispone de imágenes clínicas de Radiografías de Toráx o Tomografías
+                Computarizadas que presenten dichas enfermedades, pude colaborar con este proyecto, proporcionado
+                cualquiera de este tipo de imagenes clinicas de estas enfermedades siendo bajo el anonimato del paciente.
+            </p>
+        </main>
+        <aside>
+            <img class="img_radiografia" th:src="@{/projects/covid/media/radiografia.jpg}" alt="" width="180px"/>
+            <img class="img_tomografia" th:src="@{/projects/covid/media/tomografia.jpg}" alt="" width="180px"/>
+        </aside>
+        <div class="btn_contenedor">
+            <a th:href="@{/covid/diagnostico}" class="btn btn--left">Realizar diagnóstico</a>
+            <a th:href="@{/covid/form}" class="btn btn--right">Colaborar en el proyecto</a>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
+    <script th:src="@{/generics/js/nav.js}"></script>
+</body>
+</html>

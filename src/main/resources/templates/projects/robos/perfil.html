@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/projects/robos/css/estilos.css}">
+    <title>Perfil</title>
+</head>
+<body>
+    
+    <header th:replace="layout/plantilla :: header"></header>
+	
+	<div class="content-main">
+		<nav class="guide">
+	    	<ul>
+	    		<li><a href="#"><i class="fas fa-home"></i></a></li>
+	    		<li><i class="fas fa-angle-right"></i></li>
+	    		<li><a href="index.html">Robos</a></li>
+	    		<li><i class="fas fa-angle-right"></i></li>
+	    		<li><a href="index.html">Perfil</a></li>
+	    	</ul>
+	    </nav>
+		
+	    <div class="content-perfil">
+	        <div class="cabecera">
+	            <h4>Mi perfil</h4>
+	        </div>
+	        <div class="foto-perfil">
+	            <img th:src="@{/generics/media/blank-profile.png}">
+	            <div>
+	                <h3>Nombre completo</h3>
+	                <h4>correo@correo.com</h4>
+	            </div>
+	        </div>
+	        <div class="informacion-profesional">
+	            <h5>Datos Profesionales</h5>
+	            <div class="datos">
+	                <div class="input-group">
+	                    <label for="">Nombre Completo:</label>
+	                    <input type="text">
+	                </div>
+	                <div class="input-group">
+	                    <label for="">Correo:</label>
+	                    <input type="text">
+	                </div>
+	                <div class="input-group">
+	                </div>
+	                <div class="input-group">
+	                    <input type="submit" value="Actualizar">
+	                </div>
+	            </div>
+	        </div>
+	        <div class="archivos">
+	            <h5>Repositorios</h5>
+	            <div class="archivos-contenedor">
+	                <div>
+	                    <a th:href="@{/robos/repositorio.html}"><i class="far fa-folder"></i></a>
+	                    <label for=""><br>Escenas normales</label>
+	                </div>
+	                <div>
+	                    <i class="far fa-folder"></i>
+	                    <label for=""><br>Escenas antes de crimen</label>
+	                </div>
+	                <div>
+	                    <i class="far fa-folder"></i>
+	                    <label for=""><br>Escenas durante el crimen</label>
+	                </div>
+	                <div>
+	                    <i class="far fa-folder"></i>
+	                    <label for=""><br>Escenas despues del crimen</label>
+	                </div>
+	                <div class="btn_contenedor">
+	                    <a th:href="@{/robos/subir-imagenes.html}" class="btn">Añadir imagenes</a>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
+    <script th:src="@{/projects/robos/js/perfil.js}"></script>
+    <script th:src="@{/generics/js/nav.js}"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/projects/covid/css/estilos.css}">
+    <title>Document</title>
+</head>
+<body>
+    
+    <header th:replace="layout/plantilla :: header"></header>
+
+    <div class="content-deteccion">
+        <nav class="guide">
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i></a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="index.html">Covid-19 y neumonía</a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="diagnostico.html">Diagnóstico</a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="deteccion.html">Detección</a></li>
+            </ul>
+        </nav>
+        
+        <div class="subtitle-container">
+        	<h2>Detección de COVID-19, Neumonía Bacteriana y Neumonía Viral</h2>
+        	<hr class="subtitle-line"/>
+        </div>
+
+        <div class="grid-deteccion">
+            <div class="title-img1"><h4>Radiografía de torax</h4></div>
+            <div class="title-img2"><h4>Mapa de calor generado</h4></div>
+            <div id="preview" class="styleImage styleImage--img1"><img th:src="@{/projects/covid/media/RadiografíaCOVID-19.JPG}" alt=""></div>
+            <div class="arrow"><i class="fas fa-long-arrow-alt-right"></i></div>
+            <div id="preview" class="styleImage styleImage--img2"><img th:src="@{/projects/covid/media/RadiografíaCOVID-19Mapa.JPG}" alt=""></div>
+            <div class="range-container">
+                <h3 class="range-container__title">Resultados de detección</h3>
+                <input type="range" class="range" id="range" value="97">
+                <div class="range-container__label">
+                    <p class="normal">Normal</p>
+                    <p class="anormal">Anormal</p>
+                </div>
+                <p><b>COVID-19:</b> 99.57%</p>
+                <p><b>Neumonía Viral:</b> 0.34%</p>
+                <p><b>Neumonía Bacteriana:</b> 0.03%</p>
+                <p><b>Normal:</b> 0.06%</p>
+            </div> 
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
+    <script th:src="@{/generics/js/nav.js}"></script>
+    <script th:src="@{/projects/covid/js/range.js}"></script>
+</body>
+</html>
