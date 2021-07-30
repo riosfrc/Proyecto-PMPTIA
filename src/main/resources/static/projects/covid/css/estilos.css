@@ -625,6 +625,7 @@ form{
     justify-content: center;
     margin: auto;
     max-width: 1000px;
+    margin-top: 30px;
 }
 
 form .input-group{
@@ -774,6 +775,70 @@ form input[type="text"]:focus, select:focus{
 	background: #222;
 	border: 2.5px solid #222;
 	color: #fff;
+}
+
+/*********************************
+***********   ADMIN   ************
+*********************************/
+.content-admin{
+	width: 90%;
+    max-width: 1600px;
+    margin: auto;
+}
+.content-admin table{
+	margin-top: 50px;
+	background-color: white;
+	text-align: left;
+	border-collapse: collapse;
+	width: 100%;
+}
+.content-admin th, td{
+	padding: 10px;
+    font-family: Arial;
+}
+.content-admin tr:hover td{
+	background-color: #73ccdf;
+	color: white;
+}
+.content-admin th{
+	background-color: #243d63;
+	border-bottom: solid 5px #0f2836;
+	color: white;
+    font-family: Arial;
+}
+.content-admin img{
+	width: 120px;
+	height: 100px;
+	border: 4px solid #fff;
+}
+
+.content-admin .icon-edit{
+	display: inline-block;
+	padding: 13px 13.5px;
+	background: aqua;
+	color: #fff;
+	font-size: 22px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.content-admin .icon-edit:hover{
+	background: #35d1ff;
+}
+
+.content-admin .icon-delete{
+	display: inline-block;
+	padding: 13px 16.5px;
+	background: red;
+	color: #fff;
+	font-size: 22px;
+	cursor: pointer;
+	border-radius: 5px;
+	margin-left: 8%;
+}
+
+.content-admin .icon-delete:hover{
+	background: #a60000;
 }
 
 /*********************************

@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/projects/tdah/css/estilos.css}">
-    <script th:src="@{/projects/tdah/js/html2pdf.bundle.min.js}"></script><!--libreria para crear el PDF-->
     <title>Document</title>
 </head>
 
@@ -43,11 +42,11 @@
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Nombre:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input" type="text" required>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Fecha de registro:</label>
-                        <input class="input-group__input" type="date">
+                        <input class="input-group__input" type="date" required>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Sexo:</label>
@@ -1329,7 +1328,7 @@
                     </div>
                     <div class="input-group-table input-group--color1">
                         <label class="input-group-table__label">Descripción de personalidad del niño:</label>
-                        <textarea class="input-group-table__input" name="" id="" cols="20" rows="5"></textarea>
+                        <textarea class="input-group-table__input" name="" id="" cols="20" rows="5" required></textarea>
                     </div>
                     <div class="input-group"></div>
                     <div class="input-group--btn input-group--color1">
@@ -1386,16 +1385,10 @@
                 <br>
             </div>
         </form>
-        <div  class="Crear-PDF" id="Creación-de-PDF">
-        	<button id="btn-Crear-PDF">Descargar PDF</button>
-    	</div>
     </div>
     <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
     <script th:src="@{/projects/tdah/js/form.js}"></script>
     <script th:src="@{/generics/js/nav.js}"></script>
-    <script th:src="@{/generics/js/validaciones.js}"></script>
-
-	<script th:src="@{/projects/tdah/js/imprimir.js}"></script>
 	<script th:src="@{/projects/tdah/js/grabadorpantalla.js}"></script>
 </body>
 

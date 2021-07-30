@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/projects/covid/css/estilos.css}">
+    <title>Bienvenido</title>
+</head>
+<body>
+
+	<header th:replace="layout/plantilla :: header"></header>
+	
+	<div class="content-admin"> 
+	    <table id="my-table" border="1">
+	        <tr>
+	        	<th>Imagen</th>
+	        	<th>Tipo de imagen</th>
+	        	<th>Enfermedad</th>
+	        	<th>Fase de enfermedad</th>
+	            <th>Edad</th>
+	            <th>Peso</th>
+	            <th>Sexo</th>
+	            <th>Saturación de oxígeno</th>
+	            <th>Acciones</th>
+	        </tr>
+	    </table>
+	</div>
+	
+	<script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
+    <script th:src="@{/generics/js/nav.js}"></script>
+ 	<script src="/projects/covid/js/tabla-admin.js"></script>
+</body>
+</html>

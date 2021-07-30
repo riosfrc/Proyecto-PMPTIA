@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -27,6 +28,7 @@ import mx.cenidet.projects.covid.repositories.ImagenRepository;
 import mx.cenidet.projects.covid.repositories.ImagenResultadoRepository;
 import mx.cenidet.projects.covid.repositories.PacienteDeteccionRepository;
 import mx.cenidet.projects.covid.repositories.PacienteRepository;
+import mx.cenidet.projects.covid.responses.ImagenResponse;
 
 @Slf4j
 @RestController
@@ -81,11 +83,6 @@ public class CovidRestController {
 		}
 	}
 	
-	@GetMapping("/covid/form/getImages")
-	public List<Imagen> getImages() {
-		return imagenRepository.findAll();
-	}
-	
 	@DeleteMapping("/covid/form/deleteImages")
 	public String deleteImages() {
 		Path currentPath = Paths.get(".");
@@ -129,5 +126,18 @@ public class CovidRestController {
 		} catch(Exception e) {
 			return "422 Unprocessable Entity\nRequired String parameter is not present";
 		}
+	}
+	
+	
+	@GetMapping("/covid/admin/getImages")
+	public List<ImagenResponse> getImages() {
+		List<Imagen> images = imagenRepository.findAll();
+		List<ImagenResponse> imagenResponseList = new ArrayList<>();
+		for(Imagen image : images) {
+			Paciente paciente = image.getPaciente();
+			imagenResponseList.add(new ImagenResponse(paciente.getEdad(), paciente.getEnfermedad(), paciente.getFaseEnfermedad(), paciente.getSaturacionOxigeno(), 
+								   paciente.getPeso(), paciente.getSexo(), image.getTipo(), image.getNombre(), image.getRuta()));
+		}
+		return imagenResponseList;
 	}
 }

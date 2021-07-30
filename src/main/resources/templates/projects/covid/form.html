@@ -27,70 +27,74 @@
         	<hr class="subtitle-line"/>
         </div>
 
-        <legend>Se requiere ingresar los datos personales del paciente. Cumpliendo con los terminos de confidencialidad.</legend>
 
         <form id="form">
-            <div class="input-group"> 
-                <label class="input-group__label" for="">Edad del paciente:</label>
-                <div class="input-group__input">
-                    <input type="text" name="edad" maxlength="2">
+                <div class="input-group"> 
+                    <label class="input-group__label" for="">Edad del paciente*:<abbr title="Este campo es obligatorio" aria-label="requeried"></abbr></label>
+                    <div class="input-group__input">
+                        <input type="text" name="edad" maxlength="2" required>
+                    </div>
                 </div>
-            </div>
-            <div class="input-group">
-                <label class="input-group__label" for="">Peso del paciente (kg):</label>
-                <div class="input-group__input">
-                    <input type="text" name="peso" maxlength="5">
+
+                <div class="input-group">
+                    <label class="input-group__label" for="">Peso del paciente (kg)*:<abbr title="Este campo es obligatorio" aria-label="requeried"></abbr></label>
+                    <div class="input-group__input">
+                        <input type="text" name="peso" maxlength="5" required>
+                    </div>
                 </div>
-            </div>
-            <div class="input-group">
-                <label class="input-group__label" for="">Sexo del paciente:</label>
-                <div class="input-group__input">
-                    <input type="radio" name="sexo" id="masculino" value="Masculino"> Masculino
-                    <input type="radio" name="sexo" id="femenino" value="Femenino"> Femenino
+                
+                    <div class="input-group">
+                        <label  class="input-group__label">Sexo del paciente*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
+                        <div class="input-group__input">
+                            <input type="radio" required name="sexo" id="masculino" value="Masculino"> Masculino
+                            <input type="radio" required name="sexo" id="femenino" value="Femenino"> Femenino
+                        </div>
+                    </div>
+
+                <div class="input-group">
+                    <label class="input-group__label" for="">Saturación de oxígeno (%):</label>
+                    <div class="input-group__input">
+                        <input type="text" name="saturacionOxigeno" maxlength="5">
+                    </div>
                 </div>
-            </div>
-            <div class="input-group">
-                <label class="input-group__label" for="">Saturación de oxígeno (%):</label>
-                <div class="input-group__input">
-                    <input type="text" name="saturacionOxigeno" maxlength="5">
+
+                <div class="input-group">
+                    <label class="input-group__label">Enfermedad*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
+                    <div class="input-group__input">
+                        <select name="enfermedad" id="combo_enfermedad" class="combo_box" required>
+                            <option value="">- Seleccione enfermedad -</option>
+                            <option value="COVID-19">COVID-19</option>
+                            <option value="Neumonía viral">Neumonía Viral</option>
+                            <option value="Neumonía bacteriana">Neumonía Bacteriana</option>
+                            <option value="Sano">Sano</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
+
             <div class="input-group">
-                <label class="input-group__label">Enfermedad:</label>
+                <label class="input-group__label">Fase de la enfermedad*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
                 <div class="input-group__input">
-                    <select name="enfermedad" id="combo_enfermedad" class="combo_box">
-                        <option value="">- Seleccione enfermedad -</option>
-                        <option value="covid-19">COVID-19</option>
-                        <option value="neumonia viral">Neumonía Viral</option>
-                        <option value="neumonia bacteriana">Neumonía Bacteriana</option>
-                        <option value="sano">Sano</option>
-                    </select>
-                </div>
-            </div>
-            <!-- <div id="covid-19"> -->
-            <div class="input-group">
-                <label class="input-group__label">Fase de la enfermedad:</label>
-                <div class="input-group__input">
-                       <select name="faseEnfermedad" id="combo_enfermedad" class="combo_box">
+                       <select name="faseEnfermedad" id="combo_enfermedad" class="combo_box" required>
                         <option value="">- Seleccione opcion -</option>
-                        <option value="critico">Crítica</option>
-                        <option value="severo">Severa</option>
-                        <option value="moderado">Moderada</option>
+                        <option value="Moderada">Moderada</option>
+                        <option value="Severa">Severa</option>
+                        <option value="Crítica">Crítica</option>
+                        <option value="Desconocida">Desconocida</option>
                     </select>
                 </div>
             </div>
-            <!-- </div> -->
-            <div class="input-group">   
-                <label class="input-group__label" for="">Tipo de imagen a subir:</label>
+
+            <div class="input-group">  
+                <label class="input-group__label">Tipo de imagen a subir*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
                 <div class="input-group__input">
-                    <select name="tipoImagen" id="combo_imagen" class="combo_box">
+                    <select name="tipoImagen" id="combo_imagen" class="combo_box" required>
                         <option value="">- Seleccione tipo de imagen -</option>
-                        <option value="tomografia"><label>Tomografía computarizada</label></option>
-                        <option value="radiografia"><label>Radiografía de Toráx</label></option>
+                        <option value="Radiografía de toráx"><label>Radiografía de toráx</label></option>
+                        <option value="Tomografía computarizada"><label>Tomografía computarizada</label></option>
                     </select>
                 </div>
             </div>
-        
+
             <div class="btn-container">
             	<div class="btn-container-file">
             		<button type="button" class="btn-file btn-file-form" id="btnFile">Subir imagenes<span class="span-form"><i class="fas fa-plus"></i></span></button>
@@ -111,6 +115,7 @@
 	            <input class="btn-submit" type="submit" id="submit" value="Enviar" style="margin: 10px 0">
 	        </div>
         </form>
+
         <a th:href="@{/covid/form/imagenes-subidas}">Ver imagenes subidas</a>
 
         <div id="modal_container" class="modal-container">

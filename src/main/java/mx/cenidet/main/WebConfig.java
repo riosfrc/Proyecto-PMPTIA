@@ -16,6 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
 		registro.addViewController("/covid/form/imagenes-subidas").setViewName("projects/covid/imagenes-subidas");
 		registro.addViewController("/covid/diagnostico").setViewName("projects/covid/diagnostico");
 		registro.addViewController("/covid/deteccion").setViewName("projects/covid/deteccion");
+		registro.addViewController("/covid/admin").setViewName("projects/covid/admin");
 		registro.addViewController("/tdah/index.html").setViewName("projects/tdah/index");
 		registro.addViewController("/tdah/perfil.html").setViewName("projects/tdah/perfil");
 		registro.addViewController("/tdah/form.html").setViewName("projects/tdah/form");
