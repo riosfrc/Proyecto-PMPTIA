@@ -127,6 +127,10 @@ header img:hover{
     box-shadow: 0 0 3px 0 #000;
 }
 
+.logout{
+	width: 210px;
+}
+
 .container-submenu:hover .submenu{
     opacity: 1;
     visibility: visible;
@@ -816,6 +820,9 @@ input[type="text"], input[type="date"]{
     .menu__item{
         width: 100%;
         border-bottom: 1px solid rgba(255,255,255,0.5);
+    }
+    .submenu .profile-link{
+    	display: inline-block;
     }
     .submenu .menu__link{
         border-bottom: none;

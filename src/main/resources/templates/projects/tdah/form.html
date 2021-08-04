@@ -42,11 +42,11 @@
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Nombre:</label>
-                        <input class="input-group__input" type="text" required>
+                        <input class="input-group__input" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Fecha de registro:</label>
-                        <input class="input-group__input" type="date" required>
+                        <input class="input-group__input" type="date">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Sexo:</label>
@@ -73,7 +73,7 @@
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Escolaridad:</label>
-                        <select class="input-group__input" style="height: 26px">
+                        <select class="input-group__input" id="escolarida_paciente" style="height: 26px">
                             <option value="">- Seleccione una opción -</option>
                             <option value="">Primaria</option>
                             <option value="">Secundaria</option>
@@ -85,7 +85,7 @@
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Familiar responsable:</label>
-                        <select class="input-group__input" style="height: 26px">
+                        <select class="input-group__input" id="familiar_responable" style="height: 26px">
                             <option value="">- Seleccione una opción -</option>
                             <option value="">Madre</option>
                             <option value="">Padre</option>
@@ -112,7 +112,7 @@
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Escolaridad:</label>
-                        <select class="input-group__input" style="height: 26px">
+                        <select class="input-group__input" id="escolaridad_padre" style="height: 26px">
                             <option value="">- Seleccione una opción -</option>
                             <option value="">Primaria</option>
                             <option value="">Secundaria</option>
@@ -154,7 +154,7 @@
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Escolaridad:</label>
-                        <select class="input-group__input" style="height: 26px">
+                        <select class="input-group__input" id="escolaridad_madre" style="height: 26px">
                             <option value="">- Seleccione una opción -</option>
                             <option value="">Primaria</option>
                             <option value="">Secundaria</option>
@@ -195,7 +195,7 @@
                     </div>
                     <div class="input-group input-group--color1"></div>
                     <div class="input-group--btn input-group--color1">
-                        <button class="input-group--btn__guardar">Guardar</button>
+                        <button type="button" class="input-group--btn__guardar boton_datos">Guardar</button>
                     </div>
                 </div>
 
@@ -347,7 +347,7 @@
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Cuántos?:</label>
-                        <select class="input-group__input" style="height: 26px">
+                        <select class="input-group__input" id="cuantos_amigostiene" style="height: 26px">
                             <option value="">- Seleccione una opción -</option>
                             <option value="">1 a 2</option>
                             <option value="">3 a 4</option>
@@ -356,7 +356,7 @@
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿De dónde los conoce?:</label>
-                        <select class="input-group__input" style="height: 26px">
+                        <select class="input-group__input" id="donde_conoce" style="height: 26px">
                             <option value="">- Seleccione una opción -</option>
                             <option value="">Escuela</option>
                             <option value="">Vecindario</option>
@@ -375,7 +375,7 @@
                         <input class="input-group__input" type="text">
                     </div>
                     <div class="input-group--btn input-group--color1">
-                        <button class="input-group--btn__guardar">Guardar</button>
+                        <button type="button" class="input-group--btn__guardar boton_nopatologicos">Guardar</button>
                     </div>
                 </div>
 
@@ -547,7 +547,7 @@
                         <input class="input-group__input" type="text" name="">
                     </div>
                     <div class="input-group--btn input-group--color1">
-                        <button class="input-group--btn__guardar">Guardar</button>
+                        <button type="button" class="input-group--btn__guardar boton_patologicos">Guardar</button>
                     </div>
                 </div>
                 <div class="division"></div>
@@ -628,7 +628,7 @@
                         <input class="input-group__input" type="text" name="">
                     </div>
                     <div class="input-group--btn">
-                        <button class="input-group--btn__guardar">Guardar</button>
+                        <button type="button" class="input-group--btn__guardar boton_antecedentes_pre">Guardar</button>
                     </div>
                 </div>
 
@@ -662,7 +662,7 @@
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Tipo de nacimiento:</label>
-                        <select class="input-group__input" style="height: 26px">
+                        <select class="input-group__input" id="tipo_nacimiento" style="height: 26px">
                             <option value="">- Seleccione una opción -</option>
                             <option value=""> Parto normal</option>
                             <option value=""> Parto inducido</option>
@@ -735,7 +735,7 @@
                         <input class="input-group__input" type="text">
                     </div>
                     <div class="input-group--btn input-group--color1">
-                        <button class="input-group--btn__guardar">Guardar</button>
+                        <button type="button" class="input-group--btn__guardar boton_historia_desarrollo">Guardar</button>
                     </div>
                 </div>
                 <div class="division"></div>
@@ -1182,7 +1182,7 @@
 
                     <div class="input-group--btn input-group--color1"></div>
                     <div class="input-group--btn input-group--color1">
-                        <button class="input-group--btn__guardar">Guardar</button>
+                        <button type="button" class="input-group--btn__guardar boton_antecedentes_escolares">Guardar</button>
                     </div>
                 </div>
                 <div class="division"></div>
@@ -1284,7 +1284,7 @@
                     </div>
 
                     <div class="input-group--btn input-group--color1">
-                        <button class="input-group--btn__guardar">Guardar</button>
+                        <button type="button" class="input-group--btn__guardar boton_dinamica">Guardar</button>
                     </div>
                 </div>
                 <div class="division"></div>
@@ -1328,11 +1328,11 @@
                     </div>
                     <div class="input-group-table input-group--color1">
                         <label class="input-group-table__label">Descripción de personalidad del niño:</label>
-                        <textarea class="input-group-table__input" name="" id="" cols="20" rows="5" required></textarea>
+                        <textarea class="input-group-table__input" name="" id="" cols="20" rows="5"></textarea>
                     </div>
                     <div class="input-group"></div>
                     <div class="input-group--btn input-group--color1">
-                        <button class="input-group--btn__guardar">Guardar</button>
+                        <button type="button" class="input-group--btn__guardar">Guardar</button>
                     </div>
                 </div>
                 <div class="division"></div>
@@ -1390,6 +1390,9 @@
     <script th:src="@{/projects/tdah/js/form.js}"></script>
     <script th:src="@{/generics/js/nav.js}"></script>
 	<script th:src="@{/projects/tdah/js/grabadorpantalla.js}"></script>
+	<!-- <script th:src="@{/projects/tdah/js/validaciones.js}"></script>
+	<script th:src="@{/projects/tdah/js/script-validaciones.js}"></script> -->
+	<script th:src="@{/projects/tdah/js/combobox-validaciones.js}"></script>
 </body>
 
 </html>

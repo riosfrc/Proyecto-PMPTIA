@@ -1,4 +1,4 @@
-package mx.cenidet.projects.covid.web;
+package mx.cenidet.projects.covid.controllers;
 
 import java.io.File;
 import java.io.FileOutputStream;

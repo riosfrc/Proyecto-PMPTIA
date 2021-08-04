@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -23,12 +24,21 @@
                 <li class="menu__item container-submenu">
                     <a class="menu__link btn-submenu"><i class="fas fa-file-alt"></i> Formularios <i class="fas fa-chevron-down"></i></a>
                     <ul class="submenu">
-                        <li class="menu__item"><a th:href="@{/covid/index.html}" class="menu__link">COVID-19, neumonía viral y neumonía bacterina</a></li>
-                        <li class="menu__item"><a th:href="@{/tdah/index.html}" class="menu__link">Transtorno por déficit de atención e hiperactividad</a></li>
-                        <li class="menu__item"><a th:href="@{/robos/index.html}" class="menu__link">Detección de casos de robo a transportistas</a></li>
+                        <li class="menu__item"><a th:href="@{/covid/index}" class="menu__link">COVID-19, neumonía viral y neumonía bacterina</a></li>
+                        <li class="menu__item"><a th:href="@{/tdah/index}" class="menu__link">Transtorno por déficit de atención e hiperactividad</a></li>
+                        <li class="menu__item"><a th:href="@{/robos/index}" class="menu__link">Detección de casos de robo a transportistas</a></li>
                     </ul>
                 </li>
-                <li class="menu__item"><a th:href="@{/login.html}" class="menu__link"><i class="fas fa-user-circle"></i>Iniciar sesión</a></li>
+                
+                <li sec:authorize="!isAuthenticated()" class="menu__item"><a th:href="@{/login}" class="menu__link"><i class="fas fa-sign-in-alt"></i>Iniciar sesión</a></li>
+                <li sec:authorize="hasAuthority('Admin')" class="menu__item container-submenu">
+                	<a th:href="@{/covid/admin}" class="menu__link btn-submenu"> <i class="fas fa-user-circle"></i> <span>Administrador</span> <i class="fas fa-chevron-down"></i></a>
+                	<ul class="submenu logout">
+                		<li class="menu__item profile-link" hidden><a th:href="@{/covid/admin}" class="menu__link"> Ir al escritorio</a></li>
+                        <li class="menu__item"><a th:href="@{/logout}" class="menu__link"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+                	</ul>
+                </li>
+                
                 <li class="menu__item"><a href="#" class="menu__link"><i class="fas fa-envelope"></i>Contacto</a></li>
             </ul>
         </nav>

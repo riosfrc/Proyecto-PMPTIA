@@ -131,6 +131,10 @@ header img:hover{
     box-shadow: 0 0 3px 0 #000;
 }
 
+.logout{
+	width: 210px;
+}
+
 /* modificado */
 .container-submenu:hover .submenu{
     opacity: 1;
@@ -139,7 +143,7 @@ header img:hover{
 }
 
 .main-nav i{
-    margin-right: 5px;
+    margin-right: 6px;
 }
 
 .container-submenu i{
@@ -834,7 +838,6 @@ form input[type="text"]:focus, select:focus{
 	font-size: 22px;
 	cursor: pointer;
 	border-radius: 5px;
-	margin-left: 8%;
 }
 
 .content-admin .icon-delete:hover{
@@ -917,6 +920,9 @@ form input[type="text"]:focus, select:focus{
     .menu__item{
         width: 100%;
         border-bottom: 1px solid rgba(255,255,255,0.5);
+    }
+    .submenu .profile-link{
+    	display: inline-block;
     }
     .submenu .menu__link{
         border-bottom: none;
