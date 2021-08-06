@@ -29,8 +29,11 @@ public class Imagen {
 	@NotEmpty
 	private String tipo;
 	
+	@NotEmpty
+	private String fecha;
+	
 	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "id_paciente")
 	private Paciente paciente;
 	
@@ -38,10 +41,11 @@ public class Imagen {
 		
 	}
 
-	public Imagen(String nombre, String ruta, String tipo, Paciente paciente) {
+	public Imagen(String nombre, String ruta, String tipo, String fecha, Paciente paciente) {
 		this.nombre = nombre;
 		this.ruta = ruta;
 		this.tipo = tipo;
+		this.fecha = fecha;
 		this.paciente = paciente;
 	}
 	

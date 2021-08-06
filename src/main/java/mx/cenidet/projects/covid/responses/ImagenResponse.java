@@ -26,12 +26,14 @@ public class ImagenResponse {
 	
 	private String rutaImagen;
 	
+	private String fecha;
+	
 	public ImagenResponse() {
 		
 	}
 
 	public ImagenResponse(String edad, String enfermedad, String faseEnfermedad, String saturacionOxigeno,
-						  String peso, String sexo, String tipoImagen, String nombreImagen, String rutaImagen) {
+						  String peso, String sexo, String tipoImagen, String nombreImagen, String rutaImagen, String fecha) {
 		this.edad = edad;
 		this.enfermedad = enfermedad;
 		this.faseEnfermedad = faseEnfermedad;
@@ -41,6 +43,7 @@ public class ImagenResponse {
 		this.tipoImagen = tipoImagen;
 		this.nombreImagen = nombreImagen;
 		this.rutaImagen = rutaImagen;
+		this.fecha = fecha;
 	}
 	
 }

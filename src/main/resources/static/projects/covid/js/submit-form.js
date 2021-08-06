@@ -17,8 +17,11 @@
 	// Genera el thumbnail_id aleatoreamente, llama a la funcion createThumbnail() y añade los archivos al formData
 	file.addEventListener('change', function (e) {
 		for ( var i = 0; i < file.files.length; i++ ) {
-			var thumbnail_id = Math.floor( Math.random() * 30000 ) + '_' + Date.now();
+			var randomNo = Math.floor(100000 + Math.random() * 900000) + '_' + Date.now();
+			var extension = file.files[i].name.split('.').pop();
+			var thumbnail_id = randomNo + '.' + extension;
 			createThumbnail(file, i, thumbnail_id);
+			console.log(thumbnail_id);
 			formData.append(thumbnail_id, file.files[i]);
 		}
 		e.target.value = '';
@@ -42,8 +45,9 @@
 		}
 		
 		// Carga el contenido del array al formData en el formato deseado
-		for(var value of values) {
-			formData.append('file[]', value);
+		for(var index in values) {
+			console.log(values[index]);
+			formData.append('file[]', values[index], keys[index]);
 		}
 		
 		formData.append("edad", document.querySelector('input[name="edad"]').value);
@@ -51,6 +55,7 @@
 		let sexoValue = "";
 		if(document.getElementById('masculino').checked) sexoValue = document.getElementById('masculino').value;
 		if(document.getElementById('femenino').checked) sexoValue = document.getElementById('femenino').value;
+		formData.append("fecha", dateNow());
 		formData.append("sexo", sexoValue);
 		formData.append("saturacionOxigeno", document.querySelector('input[name="saturacionOxigeno"]').value);
 		formData.append("enfermedad", document.querySelector('select[name="enfermedad"]').value);
@@ -64,9 +69,9 @@
 		 	return response.text();
 		 }) .then(function (data) {
 			if(data.includes('200 OK'))
-			showModal(data);
+				showModal(data);
 			else
-			console.log(data);
+				console.log(data);
 		 	clearFormDataAndThumbnails();
 		 	form.reset();
 		 	iconDisplay();
@@ -97,8 +102,12 @@
 	
 	// Borra todo el contenido del formData y los thumbnails
 	var clearFormDataAndThumbnails = function () {
-		for ( var key of formData.keys() ) {
-			formData.delete(key);
+		const keys = [];
+		for(let key of formData.keys()) {
+    		keys.push(key);
+		}
+		for(let id in keys) {
+    		formData.delete(keys[id]);
 		}
 		document.querySelectorAll('.thumbnail').forEach(function (thumbnail) {
 			thumbnail.remove();
@@ -122,6 +131,21 @@
 			iconUpload.style.display = "";
 		}
 	}
+	
+	// Obtener fecha de subida de la imagen en el formato yyyy/mm/dd
+	function dateNow(){
+		var date = new Date();
+
+		var dd = date.getDate();
+		var mm = date.getMonth() + 1;
+		var yyyy = date.getFullYear();
+
+		if (dd < 10) dd = '0' + dd;
+		if (mm < 10) mm = '0' + mm;
+
+		date = yyyy + '/' + mm + '/' + dd;
+		return date;
+    }
 	
 	// Ventana modal
 	const modal_container = document.getElementById('modal_container');

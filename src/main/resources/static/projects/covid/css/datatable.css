@@ -1,0 +1,162 @@
+:root{
+    --highlight-color: #73ccff;
+    --dt-sorted-color: rgb(239, 239, 239);
+
+    --dt-padding: 12px;
+    --dt-padding-sm: 6px;
+    --dt-padding-xsm: 2px;
+
+    --dt-border-color: #ccc;
+    --dt-border-color-02: #ccc;
+    --dt-cell-color: #f4f4f4;
+    --dt-hover-color: var(--highlight-color);
+    --dt-bg-color: var(--highlight-color);
+    --dt-bg-active-button: var(--highlight-color);
+    --dt-text-color-button: #222;
+    --dt-text-color-active-button: #000;
+}
+.datatable-container{
+    border: solid 1px var(--dt-border-color);
+    width: 900px;
+    margin: 24px auto;
+    font-size: 14px;
+}
+
+.datatable-container .header-tools{
+    border-bottom: solid 1px var(--dt-border-color);
+    padding: var(--dt-padding);
+    display: flex;
+    align-items: baseline;
+}
+.datatable-container .header-tools .search{
+    width: 30%;
+}
+.datatable-container .header-tools .search .search-input{
+    width: 100%;
+    display: block;
+    box-sizing : border-box;
+    border-radius: 3px;
+    border: solid 1px var(--dt-border-color-02);
+}
+.datatable-container .header-tools .tools{
+    width: 70%;
+}
+.datatable-container .header-tools .tools ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: start;
+    align-items: baseline;
+}
+.datatable-container .header-tools .tools ul li{
+    display: inline-block;
+    margin: 0 var(--dt-padding-xsm);
+    align-items: baseline;
+}
+.datatable-container .header-tools .tools ul li span input{
+    vertical-align: middle;
+}
+.datatable-container .footer-tools{
+    padding: var(--dt-padding);
+    display: flex;
+    align-items: baseline;
+}
+.datatable-container .footer-tools .list-items{
+    width: 50%;
+}
+.datatable-container .footer-tools .pages{
+    margin-left: auto;
+    margin-right: 0;
+    width: 50%;
+}
+.datatable-container .footer-tools .pages ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
+}
+.datatable-container .footer-tools .pages ul li{
+    display: inline-block;
+    margin: 0 var(--dt-padding-xsm);
+}
+.datatable-container .footer-tools .pages ul li button,
+.datatable-container .header-tools .tools ul li button{
+    color: var(--dt-text-color-button);
+    width: 100%;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 3px;
+    background: transparent;
+    cursor: pointer;
+}
+.datatable-container .footer-tools .pages ul li button:hover,
+.datatable-container .header-tools .tools ul li button:hover{
+    background: var(--dt-bg-active-button);
+    color: var(--dt-text-color-active-button);
+}
+.datatable-container .footer-tools .pages ul li span.active{
+    background-color:  var(--dt-bg-color);
+    border-radius: 3px;
+}
+.datatable-container .footer-tools .pages ul li button,
+.datatable-container .footer-tools .pages ul li span,
+.datatable-container .header-tools .tools ul li button{
+    padding: var(--dt-padding-sm) var(--dt-padding);
+}
+
+.datatable-container .datatable{
+    border-collapse: collapse;
+    /*table-layout: fixed;*/
+    width: 100%;
+}
+.datatable-container .datatable,
+.datatable-container .datatable th{
+    padding: var(--dt-padding) var(--dt-padding);
+}
+
+.datatable-container .datatable td{
+	padding: var(--dt-padding-sm) var(--dt-padding);
+}
+
+.datatable-container .datatable th{
+    font-weight: bolder;
+    text-align: left;
+    border-bottom: solid 1px var(--dt-border-color);
+    cursor: pointer;
+}
+.datatable-container .datatable th:hover{
+    background-color: var(--dt-hover-color);
+}
+
+.datatable-container .datatable td{
+    border-bottom: solid 1px var(--dt-border-color);
+}
+.datatable-container .datatable tbody tr:nth-child(even){
+    background-color: var(--dt-cell-color);
+}
+.datatable-container .datatable tbody tr:hover{
+    background-color: var(--dt-hover-color);
+}
+.datatable-container .datatable tbody tr .table-checkbox{
+    width: 1px;
+}
+
+.datatable-container .datatable .cell-sorted{
+    background-color: var(--dt-sorted-color);
+}
+.datatable-container .datatable .header-sorted{
+    background-color: var(--dt-sorted-color);
+}
+
+.datatable-container .n-entries:focus{
+	outline: none;
+}
+
+.datatable-container td img{
+	margin: 0;
+	padding: 0;
+    height: 55px;
+    width: 65px;
+    border: 3px solid #e5e5e5;
+}

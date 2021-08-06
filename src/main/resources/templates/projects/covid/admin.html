@@ -5,30 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/projects/covid/css/estilos.css}">
+    <link rel="stylesheet" th:href="@{/projects/covid/css/datatable.css}">
     <title>Bienvenido</title>
 </head>
 <body>
 
 	<header th:replace="layout/plantilla :: header"></header>
 	
-	<div class="content-admin"> 
-	    <table id="my-table" border="1">
-	        <tr>
-	        	<th>Imagen</th>
-	        	<th>Tipo de imagen</th>
-	        	<th>Enfermedad</th>
-	        	<th>Fase de enfermedad</th>
-	            <th>Edad</th>
-	            <th style="min-width: 60px;">Peso</th>
-	            <th>Sexo</th>
-	            <th>Saturación de oxígeno</th>
-	            <th style="min-width: 130px;">Acciones</th>
-	        </tr>
-	    </table>
-	</div>
+	    <table id="datatable" class="datatable">
+        <thead>
+            
+        </thead>
+
+        <tbody>
+            
+        </tbody>
+    </table>
+    <script src="/projects/covid/js/datatable.js"></script>
+
+    <script>
+        const dt = new DataTable('#datatable', [
+            {
+                id: 'bEditar',
+                text: 'Editar',
+                icon: '<i class="fas fa-edit"></i>',
+                action: function () {
+                    console.log('Funcion editar');
+                }
+
+            },
+            {
+                id: 'bEliminar',
+                text: 'Eliminar',
+                icon: '<i class="fas fa-trash-alt"></i>',
+                action: function() {
+                	console.log('Funcion eliminar');
+                	deleteAction();
+                }
+            }
+        ]);
+    </script>
 	
 	<script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
     <script th:src="@{/generics/js/nav.js}"></script>
- 	<script src="/projects/covid/js/tabla-admin.js"></script>
 </body>
 </html>

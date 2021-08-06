@@ -649,7 +649,7 @@ form .input-group__input{
     width: 100%;
 }
 
-form input[type="text"], select{
+form input[type="text"], form select{
     outline: none;
     font-size: 17px;
     border: 1px solid #ccc;
@@ -784,7 +784,7 @@ form input[type="text"]:focus, select:focus{
 /*********************************
 ***********   ADMIN   ************
 *********************************/
-.content-admin{
+/* .content-admin{
 	width: 90%;
     max-width: 1600px;
     margin: auto;
@@ -842,7 +842,7 @@ form input[type="text"]:focus, select:focus{
 
 .content-admin .icon-delete:hover{
 	background: #a60000;
-}
+} */
 
 /*********************************
 ********   MEDIA QUERIES   *******
