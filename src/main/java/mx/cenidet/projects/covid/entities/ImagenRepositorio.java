@@ -13,14 +13,14 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "imagen_repositorio")
-public class Imagen {
+public class ImagenRepositorio {
 	
 	@Id
-    @GeneratedValue(generator = "paciente-generator")
-	@GenericGenerator(name = "paciente-generator",
-    				  parameters = @Parameter(name = "prefix", value = "imagen"),
+    @GeneratedValue(generator = "imagen-generator")
+	@GenericGenerator(name = "imagen-generator",
+    				  parameters = @Parameter(name = "prefix", value = "R_IMAGEN"),
     				  strategy = "mx.cenidet.projects.covid.generators.CovidIdGenerator")
-	private String idImagen;
+	private String idImagenRepositorio;
 	
 	private String nombre;
 	
@@ -34,14 +34,14 @@ public class Imagen {
 	
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "id_paciente")
-	private Paciente paciente;
+	@JoinColumn(name = "id_paciente_repositorio")
+	private PacienteRepositorio paciente;
 	
-	public Imagen() {
+	public ImagenRepositorio() {
 		
 	}
 
-	public Imagen(String nombre, String ruta, String tipo, String fecha, Paciente paciente) {
+	public ImagenRepositorio(String nombre, String ruta, String tipo, String fecha, PacienteRepositorio paciente) {
 		this.nombre = nombre;
 		this.ruta = ruta;
 		this.tipo = tipo;

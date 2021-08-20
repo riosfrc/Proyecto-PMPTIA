@@ -17,7 +17,9 @@
 	// Genera el thumbnail_id aleatoreamente, llama a la funcion createThumbnail() y añade los archivos al formData
 	file.addEventListener('change', function (e) {
 		for ( var i = 0; i < file.files.length; i++ ) {
-			var thumbnail_id = Math.floor( Math.random() * 30000 ) + '_' + Date.now();
+			var randomNo = Math.floor( Math.random() * 30000 ) + '_' + Date.now();
+			var extension = file.files[i].name.split('.').pop();
+			var thumbnail_id = randomNo + '.' + extension;
 			createThumbnail(file, i, thumbnail_id);
 			formData.append(thumbnail_id, file.files[i]);
 		}
@@ -42,8 +44,8 @@
 		}
 		
 		// Carga el contenido del array al formData en el formato deseado
-		for(var value of values) {
-			formData.append('file[]', value);
+		for(var index in values) {
+			formData.append('file[]', values[index], keys[index].split('.').pop());
 		}
 		
 		formData.append("edad", document.querySelector('input[name="edad"]').value);
@@ -52,6 +54,7 @@
 		if(document.getElementById('masculino').checked) sexoValue = document.getElementById('masculino').value;
 		if(document.getElementById('femenino').checked) sexoValue = document.getElementById('femenino').value;
 		formData.append("sexo", sexoValue);
+		formData.append("tipoImagen", document.querySelector('select[name="tipoImagen"]').value);
 		
 		 fetch('http://localhost:8090/covid/diagnostico/save', {
 		 	method: 'POST',

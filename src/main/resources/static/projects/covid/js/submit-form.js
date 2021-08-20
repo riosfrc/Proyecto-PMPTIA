@@ -47,7 +47,7 @@
 		// Carga el contenido del array al formData en el formato deseado
 		for(var index in values) {
 			console.log(values[index]);
-			formData.append('file[]', values[index], keys[index]);
+			formData.append('file[]', values[index], keys[index].split('.').pop());
 		}
 		
 		formData.append("edad", document.querySelector('input[name="edad"]').value);
@@ -55,7 +55,6 @@
 		let sexoValue = "";
 		if(document.getElementById('masculino').checked) sexoValue = document.getElementById('masculino').value;
 		if(document.getElementById('femenino').checked) sexoValue = document.getElementById('femenino').value;
-		formData.append("fecha", dateNow());
 		formData.append("sexo", sexoValue);
 		formData.append("saturacionOxigeno", document.querySelector('input[name="saturacionOxigeno"]').value);
 		formData.append("enfermedad", document.querySelector('select[name="enfermedad"]').value);
@@ -131,21 +130,6 @@
 			iconUpload.style.display = "";
 		}
 	}
-	
-	// Obtener fecha de subida de la imagen en el formato yyyy/mm/dd
-	function dateNow(){
-		var date = new Date();
-
-		var dd = date.getDate();
-		var mm = date.getMonth() + 1;
-		var yyyy = date.getFullYear();
-
-		if (dd < 10) dd = '0' + dd;
-		if (mm < 10) mm = '0' + mm;
-
-		date = yyyy + '/' + mm + '/' + dd;
-		return date;
-    }
 	
 	// Ventana modal
 	const modal_container = document.getElementById('modal_container');

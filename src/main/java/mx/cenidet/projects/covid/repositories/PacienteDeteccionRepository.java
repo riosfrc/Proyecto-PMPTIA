@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import mx.cenidet.projects.covid.entities.PacienteDeteccion;
 
-public interface PacienteDeteccionRepository extends JpaRepository<PacienteDeteccion, Long> {
+public interface PacienteDeteccionRepository extends JpaRepository<PacienteDeteccion, String> {
 
 }

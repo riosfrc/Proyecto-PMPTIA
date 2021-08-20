@@ -21,31 +21,14 @@
             
         </tbody>
     </table>
+    
+    <div id="modal-container" class="modal-container">
+  		<div id="modal-body" class="modal-body">
+			
+		</div>
+	</div>
+    
     <script src="/projects/covid/js/datatable.js"></script>
-
-    <script>
-        const dt = new DataTable('#datatable', [
-            {
-                id: 'bEditar',
-                text: 'Editar',
-                icon: '<i class="fas fa-edit"></i>',
-                action: function () {
-                    console.log('Funcion editar');
-                }
-
-            },
-            {
-                id: 'bEliminar',
-                text: 'Eliminar',
-                icon: '<i class="fas fa-trash-alt"></i>',
-                action: function() {
-                	console.log('Funcion eliminar');
-                	deleteAction();
-                }
-            }
-        ]);
-    </script>
-	
 	<script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
     <script th:src="@{/generics/js/nav.js}"></script>
 </body>

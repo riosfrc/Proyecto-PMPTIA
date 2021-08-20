@@ -16,14 +16,14 @@ import lombok.ToString;
 @Data
 @Entity
 @Table(name = "paciente_repositorio")
-public class Paciente {
+public class PacienteRepositorio {
 	
 	@Id
     @GeneratedValue(generator = "paciente-generator")
 	@GenericGenerator(name = "paciente-generator",
-    				  parameters = @Parameter(name = "prefix", value = "paciente"),
+    				  parameters = @Parameter(name = "prefix", value = "R_PACIENTE"),
     				  strategy = "mx.cenidet.projects.covid.generators.CovidIdGenerator")
-	private String idPaciente;
+	private String idPacienteRepositorio;
 	
 	@NotEmpty
 	private String edad;
@@ -45,13 +45,13 @@ public class Paciente {
 	@JsonManagedReference
 	@ToString.Exclude
 	@OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
-	private List<Imagen> imagenes;
+	private List<ImagenRepositorio> imagenes;
 	
-	public Paciente() {
+	public PacienteRepositorio() {
 		
 	}
 
-	public Paciente(String edad, String peso, String sexo, String saturacionOxigeno, String enfermedad, String faseEnfermedad) {
+	public PacienteRepositorio(String edad, String peso, String sexo, String saturacionOxigeno, String enfermedad, String faseEnfermedad) {
 		this.edad = edad;
 		this.peso = peso;
 		this.sexo = sexo;

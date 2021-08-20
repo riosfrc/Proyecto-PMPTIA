@@ -5,6 +5,9 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
@@ -16,8 +19,11 @@ import lombok.ToString;
 public class PacienteDeteccion {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idPaciente;
+	@GeneratedValue(generator = "paciente-deteccion-generator")
+	@GenericGenerator(name = "paciente-deteccion-generator",
+    				  parameters = @Parameter(name = "prefix", value = "D_PACIENTE"),
+    				  strategy = "mx.cenidet.projects.covid.generators.CovidIdGenerator")
+	private String idPacienteDeteccion;
 	
 	@NotEmpty
 	private String edad;
@@ -30,6 +36,8 @@ public class PacienteDeteccion {
 	
 	private String enfermedadDetectada;
 	
+	private String confiabilidad;
+	
 	@JsonManagedReference
 	@ToString.Exclude
 	@OneToMany(mappedBy = "pacienteDeteccion", cascade = CascadeType.ALL)
@@ -39,9 +47,11 @@ public class PacienteDeteccion {
 		
 	}
 	
-	public PacienteDeteccion(String edad, String peso, String sexo) {
+	public PacienteDeteccion(String edad, String peso, String sexo, String enfermedadDetectada, String confiabilidad) {
 		this.edad = edad;
 		this.peso = peso;
 		this.sexo = sexo;
+		this.enfermedadDetectada = enfermedadDetectada;
+		this.confiabilidad = confiabilidad;
 	}
 }

@@ -281,7 +281,7 @@ aside{
 *********************************/
 .content-perfil{
     width: 90%;
-    max-width: 1600px;
+    max-width: 1200px;
     margin: 0 auto;
     margin-top: 20px;
     margin-bottom: 15px;
@@ -383,7 +383,65 @@ aside{
     width: 100%;
     margin: 20px 20px;
     border: 1px solid rgb(180, 180, 180);
-    height: 300px;
+    min-height: 250px;
+}
+
+.pacientes p{
+	text-align: center;
+	color: #222;
+	font-size: 18px;
+}
+
+.fa-user-slash{
+	font-size: 45px;
+	color: #3c3c3c;
+	margin-top: 32px;
+	margin-bottom: 10px;
+}
+
+.table-container{
+	min-width: 870px;
+	margin: 20px auto;
+	padding: 0 20px;
+}
+
+.pacientes .header-tools{
+	text-align: left;
+	padding: 4px 15px;
+	background: #282828;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.pacientes .header-tools .add-patient{
+	padding: 5px 10px;
+	display: inline-block;
+	cursor: pointer;
+	border: 1px solid #282828;
+	transition: 0.4s ease;
+	text-decoration: none;
+	color: #fff;
+}
+
+.pacientes .header-tools .search-patient{
+	display: inline-block;
+	color: #fff;
+	margin-right: 5px;
+}
+
+.pacientes .header-tools .search-patient input{
+	width: 90%;
+	height: 20px;
+	padding-left: 5px;
+}
+
+.pacientes .header-tools .search-patient input:focus{
+	outline: none;
+}
+
+.pacientes .header-tools .add-patient:hover{
+	border: 1px solid #fff;
 }
 
 .pacientes h5{
@@ -393,11 +451,34 @@ aside{
     font-size: 1em;
 }
 
+.pacientes table{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.pacientes table thead tr{
+	background: #333;
+	color: #fff;
+}
+
+.pacientes table thead th{
+	padding: 7px 8px;
+	text-align: left;
+}
+
+.pacientes table tbody tr:nth-child(even){
+	background: #ebebeb;
+}
+
+.pacientes table tbody td{
+	padding: 6px 8px;
+}
+
 .pacientes .btn_contenedor{
     clear: both;
     width: 100%;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 25px;
 }
 
 .pacientes .btn_contenedor .btn{

@@ -1,7 +1,12 @@
+let selectInput = '';
+let dt;
+
 function addRows(data) {
-	let htmlRow = '';
+	selectInput === 'Detecciones' ? selectInput = 'Detecciones' : selectInput = 'Repositorio';
+	console.log(selectInput);
 	const thead = document.querySelector('thead');
-	thead.innerHTML = `
+	if(selectInput === 'Repositorio'){
+		thead.innerHTML = `
 			<tr>
                 <th></th>
                 <th>Imagen</th>
@@ -14,30 +19,106 @@ function addRows(data) {
                 <th>Sexo</th>
                 <th>SpO2</th>
             </tr>`;
-	const tbody = document.querySelector('tbody');
-	tbody.innerHTML = '';
-	var nameImages = [];
-	for(row of data) {
-		nameImages.push(row.nombreImagen)
-		htmlRow += `
+    } else {
+		thead.innerHTML = `
 			<tr>
-                <td><img src="${row.rutaImagen + row.nombreImagen}"/></td>
-                <td>${row.tipoImagen}</td>
-                <td>${row.enfermedad}</td>
-                <td>${row.faseEnfermedad}</td>
-                <td>${row.fecha}</td>
-                <td>${row.edad}</td>
-                <td>${row.peso} kg</td>
-                <td>${row.sexo}</td>
-                <td>${row.saturacionOxigeno} %</td>
+                <th></th>
+                <th>Imagen de entrada</th>
+                <th>Imagen de salida</th>
+                <th>Prediagnóstico</th>
+                <th>Tipo de imagen</th>
+                <th>Fecha</th>
+                <th>Edad</th>
+                <th>Peso</th>
+                <th>Sexo</th>
+                <th>Confiabilidad</th>
             </tr>`;
 	}
+
+	const tbody = document.querySelector('tbody');
+	tbody.innerHTML = '';
+	let htmlRow = '';
+	var nameImages = [];
+	for(row of data) {
+		if(selectInput === 'Repositorio'){
+			nameImages.push(row.nombreImagen)
+			htmlRow += `
+				<tr>
+	                <td><img src="${row.rutaImagen + row.nombreImagen}"/></td>
+	                <td>${row.tipoImagen}</td>
+	                <td>${row.enfermedad}</td>
+	                <td>${row.faseEnfermedad}</td>
+	                <td>${row.fecha}</td>
+	                <td>${row.edad}</td>
+	                <td>${row.peso} kg</td>
+	                <td>${row.sexo}</td>
+	                <td>${row.saturacionOxigeno} %</td>
+	            </tr>`;
+        } else {
+			nameImages.push(row.nombreImagenDeteccion)
+			htmlRow += `
+				<tr>
+	                <td><img src="${row.rutaImagen + row.nombreImagenDeteccion}"/></td>
+	                <td><img src="${row.rutaImagen + row.nombreImagenMapa}"/></td>
+	                <td>${row.prediagnostico}</td>
+	                <td>${row.tipoImagen}</td>
+	                <td>${row.fecha}</td>
+	                <td>${row.edad}</td>
+	                <td>${row.peso} kg</td>
+	                <td>${row.sexo}</td>
+	                <td>${row.confiabilidad} %</td>
+	            </tr>`;
+		}
+	}
 	tbody.innerHTML = htmlRow;
+	dt = new DataTable('#datatable', [
+            {
+                id: 'bEditar',
+                text: 'Editar',
+                icon: '<i class="fas fa-edit"></i>',
+                action: function () {
+					if(dt.getSelected().length === 0) {
+						alert('Marque una fila para editar');
+					} 
+					else if(dt.getSelected().length > 1){
+						alert('Solo debe estar una fila marcada para editar');
+					}
+					else{
+						if(selectInput === 'Repositorio'){
+							console.log('Funcion editar repositorio');
+							editActionRepositorio();
+						} else {
+							console.log('Funcion editar detecciones');
+							editActionDetecciones();
+						}
+                    }
+                }
+
+            },
+            {
+                id: 'bEliminar',
+                text: 'Eliminar',
+                icon: '<i class="fas fa-trash-alt"></i>',
+                action: function() {
+					if(dt.getSelected().length === 0) {
+						alert('Marque una o más filas para eliminar');
+					} else {
+						if(selectInput === 'Repositorio'){
+							console.log('Funcion eliminar repositorio');
+	                		deleteActionRepositorio();
+						} else {
+							console.log('Funcion eliminar detecciones');
+							deleteActionDetecciones();
+						}
+					}
+                }
+            }
+        ], selectInput);
 	dt.parse(nameImages);
 }
 
-(function requestGetImages() {
-	fetch('http://localhost:8090/covid/admin/getImages', {
+function requestGetImagesRepository() {
+	fetch('http://localhost:8090/covid/admin/getImagesRepository', {
 			method: 'GET',
 		})
 		.then(function (response) {
@@ -49,10 +130,205 @@ function addRows(data) {
 		.catch(function (err) {
 			 console.log(err);
 		});
-})();
+};
 
-function requestDeleteImages(dataDelete) {
-	fetch('http://localhost:8090/covid/admin/deleteImages', {
+requestGetImagesRepository();
+
+function requestGetImagesDetection() {
+	fetch('http://localhost:8090/covid/admin/getImagesDetection', {
+			method: 'GET',
+		})
+		.then(function (response) {
+			 return response.json();
+		})
+		.then(function (data) {
+			 addRows(data);
+		})
+		.catch(function (err) {
+			 console.log(err);
+		});
+};
+
+function editActionRepositorio(){
+	const elements = dt.getSelected();
+	const valuesElement = elements[0].values;
+	let img = valuesElement[0];
+	let tipoImagen = valuesElement[1];
+	let enfermedad = valuesElement[2];
+	let faseEnfermedad = valuesElement[3];
+	let edad = valuesElement[5];
+	let peso = valuesElement[6].split(' ')[0];
+	let sexo = valuesElement[7];
+	let SpO2 = valuesElement[8].split(' ')[0];
+	console.log(valuesElement);
+	let modalHtml = `
+		<h1>Editar Imagen Seleccionada</h1>
+		${img}
+		<form id="form">
+                <div class="input-group"> 
+                    <label class="input-group__label" for="">Edad del paciente*:<abbr title="Este campo es obligatorio" aria-label="requeried"></abbr></label>
+                    <div class="input-group__input">
+                        <input type="text" name="edad" value="${edad}" maxlength="2" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-group__label" for="">Peso del paciente (kg)*:<abbr title="Este campo es obligatorio" aria-label="requeried"></abbr></label>
+                    <div class="input-group__input">
+                        <input type="text" name="peso" value="${peso}" maxlength="5" required>
+                    </div>
+                </div>
+                
+                    <div class="input-group">
+                        <label  class="input-group__label">Sexo del paciente*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
+                        <div class="input-group__input">
+                            <input type="radio" required name="sexo" id="masculino" value="Masculino"> Masculino
+                            <input type="radio" required name="sexo" id="femenino" value="Femenino"> Femenino
+                        </div>
+                    </div>
+
+                <div class="input-group">
+                    <label class="input-group__label" for="">Saturación de oxígeno (%):</label>
+                    <div class="input-group__input">
+                        <input type="text" name="saturacionOxigeno" value="${SpO2}" maxlength="5">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-group__label">Enfermedad*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
+                    <div class="input-group__input">
+                        <select name="enfermedad" id="combo_enfermedad" class="combo_box" required>
+                            <option value="">- Seleccione enfermedad -</option>
+                            <option value="COVID-19">COVID-19</option>
+                            <option value="Neumonía viral">Neumonía Viral</option>
+                            <option value="Neumonía bacteriana">Neumonía Bacteriana</option>
+                            <option value="Sano">Sano</option>
+                        </select>
+                    </div>
+                </div>
+
+            <div class="input-group">
+                <label class="input-group__label">Fase de la enfermedad*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
+                <div class="input-group__input">
+                       <select name="faseEnfermedad" id="combo_faseEnfermedad" class="combo_box" required>
+                        <option value="">- Seleccione opcion -</option>
+                        <option value="Moderada">Moderada</option>
+                        <option value="Severa">Severa</option>
+                        <option value="Crítica">Crítica</option>
+                        <option value="Desconocida">Desconocida</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-group">  
+                <label class="input-group__label">Tipo de imagen*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
+                <div class="input-group__input">
+                    <select name="tipoImagen" id="combo_imagen" class="combo_box" required>
+                        <option value="">- Seleccione tipo de imagen -</option>
+                        <option value="Radiografía de toráx"><label>Radiografía de toráx</label></option>
+                        <option value="Tomografía computarizada"><label>Tomografía computarizada</label></option>
+                    </select>
+                </div>
+            </div>
+        </form>
+        <div class="modal-buttons">
+	        <button id="close">Cancelar</button>
+			<button id="save">Guardar</button>
+		</div>
+		`;
+	showModal(modalHtml);
+	document.querySelector(`.input-group__input > input[value="${sexo}"]`).checked = true;
+	document.getElementById('combo_enfermedad').value = enfermedad;
+	document.getElementById('combo_faseEnfermedad').value = faseEnfermedad;
+	document.getElementById('combo_imagen').value = tipoImagen;
+}
+
+function editActionDetecciones(){
+	const elements = dt.getSelected();
+	const valuesElement = elements[0].values;
+	let imgEntrada = valuesElement[0];
+	let imgSalida = valuesElement[1];
+	let diagnostico = valuesElement[2];
+	let tipoImagen = valuesElement[3];
+	let edad = valuesElement[5];
+	let peso = valuesElement[6].split(' ')[0];
+	let sexo = valuesElement[7];
+	let confiabilidad = valuesElement[8].split(' ')[0];
+	
+	let modalHtml = `
+		<h1>Editar Imagen Seleccionada</h1>
+		${imgEntrada}
+		${imgSalida}
+		<form id="form">
+        	<div class="input-group"> 
+                <label class="input-group__label" for="">Edad del paciente*:</label>
+                <div class="input-group__input">
+                    <input type="text" name="edad" value="${edad}" maxlength="2">
+                </div>
+            </div>
+            <div class="input-group">
+                <label class="input-group__label" for="">Peso del paciente (kg)*:</label>
+                <div class="input-group__input">
+                    <input type="text" name="peso" value="${peso}" maxlength="5">
+                </div>
+            </div>
+            <div class="input-group">
+                <label class="input-group__label" for="">Sexo del paciente*:</label>
+                <div class="input-group__input">
+                    <input type="radio" name="sexo" id="masculino" value="Masculino"> Masculino
+                    <input type="radio" name="sexo" id="femenino" value="Femenino"> Femenino
+                </div>
+            </div>
+            <div class="input-group"> 
+                <label class="input-group__label" for="">Confiabilidad (%)*:</label>
+                <div class="input-group__input">
+                    <input type="text" name="edad" value="${confiabilidad}" maxlength="3">
+                </div>
+            </div>
+            <div class="input-group">
+                    <label class="input-group__label">Diagnóstico*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
+                    <div class="input-group__input">
+                        <select name="enfermedad" id="combo_diagnostico" class="combo_box" required>
+                            <option value="">- Seleccione enfermedad -</option>
+                            <option value="COVID-19">COVID-19</option>
+                            <option value="Neumonía viral">Neumonía Viral</option>
+                            <option value="Neumonía bacteriana">Neumonía Bacteriana</option>
+                            <option value="Sano">Sano</option>
+                        </select>
+                    </div>
+                </div>
+            <div class="input-group">  
+                <label class="input-group__label">Tipo de imagen*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
+                <div class="input-group__input">
+                    <select name="tipoImagen" id="combo_imagen" class="combo_box" required>
+                        <option value="">- Seleccione tipo de imagen -</option>
+                        <option value="Radiografía de toráx"><label>Radiografía de toráx</label></option>
+                        <option value="Tomografía computarizada"><label>Tomografía computarizada</label></option>
+                    </select>
+                </div>
+            </div>
+        </form>
+        <div class="modal-buttons">
+	        <button id="close">Cancelar</button>
+			<button id="save">Guardar</button>
+		</div>
+	`;
+	
+	showModal(modalHtml);
+	document.querySelector(`.input-group__input > input[value="${sexo}"]`).checked = true;
+	document.getElementById('combo_diagnostico').value = diagnostico;
+	document.getElementById('combo_imagen').value = tipoImagen;
+}
+
+function deleteRow(elements) {
+	for(element of elements) {
+		dt.removeSelected(element.id);
+		dt.items = dt.items.filter(item => item.id !== element.id);
+	}
+}
+
+function requestDeleteImagesRepositorio(dataDelete) {
+	fetch('http://localhost:8090/covid/admin/deleteImagesRepositorio', {
 			method: 'DELETE',
 			body: dataDelete
 		})
@@ -76,14 +352,7 @@ function requestDeleteImages(dataDelete) {
 		});
 }
 
-function deleteRow(elements) {
-	for(element of elements) {
-		dt.removeSelected(element.id);
-		dt.items = dt.items.filter(item => item.id !== element.id);
-	}
-}
-
-function deleteAction(){
+function deleteActionRepositorio(){
     const elements = dt.getSelected();
     const json = '{item:'+JSON.stringify(elements)+'}';
     console.log(json);
@@ -91,11 +360,48 @@ function deleteAction(){
     const formData = new FormData();
     formData.append('nameImages', json);
 
-    requestDeleteImages(formData);
+    requestDeleteImagesRepositorio(formData);
+}
+
+function requestDeleteImagesDetecciones(dataDelete) {
+	fetch('http://localhost:8090/covid/admin/deleteImagesDetecciones', {
+			method: 'DELETE',
+			body: dataDelete
+		})
+		.then(function (response) {
+			return response.json();
+		})
+		.then(function (elements) {
+			console.log(elements);
+			let actualPage = dt.pagination.actual - 1;
+			deleteRow(elements);
+			dt.maketable();
+			let liButtons = dt.element.querySelectorAll('.pages li');
+			if(liButtons[actualPage] === undefined) {
+				liButtons[liButtons.length - 1].firstChild.click();
+			} else {
+				liButtons[actualPage].firstChild.click();
+			}
+		})
+		.catch(function (err) {
+			 console.log(err);
+		});
+}
+
+function deleteActionDetecciones() {
+	const elements = dt.getSelected();
+    const json = '{item:'+JSON.stringify(elements)+'}';
+    console.log(json);
+
+    const formData = new FormData();
+    formData.append('nameImages', json);
+
+    requestDeleteImagesDetecciones(formData);
 }
 
 class DataTable{
-
+	
+	selectInput;
     element; // Representa toda la tabla
     headers;
     items;
@@ -105,9 +411,9 @@ class DataTable{
     numberOfEntries; // Número de entradas que se desea mostrar por página
     headerButtons; // Acciones en la tabla
 
-    constructor(selector, headerButtons){
+    constructor(selector, headerButtons, selectInput){
+		this.selectInput = selectInput;
         this.element = document.querySelector(selector);
-
         this.headers = [];
         this.items = [];
         this.pagination = {total: 0, // Número de items que tiene la tabla
@@ -199,6 +505,12 @@ class DataTable{
                     <ul id="header-buttons-container">
                     </ul>
                 </div>
+                <div class="select">
+                	<select class="select-input" id="select-input">
+                		<option value="Repositorio">Repositorio</option>
+                		<option value="Detecciones">Detecciones</option>
+                	</select>
+                </div>
             </div>
             <table class="datatable">
                 <thead>
@@ -226,6 +538,15 @@ class DataTable{
     }
 
     renderHeaders(){
+		const select = document.getElementById('select-input');
+		select.value = this.selectInput;
+		select.addEventListener('change', (e) => {
+			selectInput = e.target.value;
+			if(selectInput === "Repositorio") requestGetImagesRepository();
+			else requestGetImagesDetection();
+			
+		});
+
         this.element.querySelector('thead tr').innerHTML = '';
         this.headers.forEach(header => {
             this.element.querySelector('thead tr').innerHTML += `<th>${header}</th>`;
@@ -388,4 +709,24 @@ class DataTable{
     getSelected(){
         return this.selected;
     }
+}
+
+// Ventana modal
+const modalContainer = document.getElementById('modal-container');
+const modalBody = document.getElementById('modal-body');
+
+const showModal = function(modalHtml) {
+	modalBody.innerHTML = modalHtml;
+	modalContainer.classList.add('show');
+	window.addEventListener('click', closeModal);
+	document.getElementById('close').addEventListener('click', () => {
+		modalContainer.classList.remove('show');
+	});
+}
+	
+const closeModal = function(e){
+	if(e.target === modalContainer){
+		modalContainer.classList.remove('show');
+		window.removeEventListener('click', closeModal);
+	}
 }
