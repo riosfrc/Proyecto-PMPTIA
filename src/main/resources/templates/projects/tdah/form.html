@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/projects/tdah/css/estilos.css}">
+    <script th:src="@{/projects/tdah/js/jspdf.min.js}"></script> 
     <title>Document</title>
 </head>
 
@@ -25,6 +26,10 @@
             </ul>
         </nav>
         <h1 class="title-form">PERFIL DEL PACIENTE</h1>
+        <div class="buttons">
+        	<button id= "pdf-button"><i class="fas fa-download" id="download"></i> Descargar pdf </button>
+        </div>
+        
         <div class="section">
             <div class="section__name section__datos-personales section__name--selected">Datos del paciente</div>
             <div class="section__name section__antecedentes-personales-no-patologicos">Antecedentes personales nopatológicos</div>
@@ -36,56 +41,56 @@
             <div class="section__name section__aspecto-de-personalidad-emocionales">Aspectos de personalidad y/o emocionales</div>
             <div class="section__name section__registro-sesiones">Reg. de sesiones</div>
         </div>
-        <form class="tdah-form" id="formulario" method="POST" th:action="@{/tdah/form/save}" th:object="${paciente}">
+        <form class="tdah-form" id="formulario">
             <!-- Datos personales -->
             <div class="tdah-form__datos-personales" id="datos-personales">
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Nombre:</label>
-                        <input class="input-group__input" type="text" th:field="*{nombre}">
+                        <input class="input-group__input nombre" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Fecha de registro:</label>
-                        <input class="input-group__input" type="date" th:field="*{fechaResgistro}">
+                        <input class="input-group__input fecha_registro" type="date">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Sexo:</label>
                         <div class="input-group__input">
-                            <input type="radio" value="Masculino" name="sexo" th:field="*{sexo}"> Masculino
-                            <input type="radio" value="Femenino" name="sexo" th:field="*{sexo}"> Femenino
+                            <input type="radio" name="genero" value="Masculino" > Masculino
+                            <input type="radio" name="genero" value="Femenino" > Femenino
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Fecha de nacimiento:</label>
-                        <input class="input-group__input" type="date" th:field="*{fechaNacimiento}">
+                        <input class="input-group__input fecha_nacimiento" type="date">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Lugar de nacimiento:</label>
-                        <input class="input-group__input" type="text" th:field="*{lugarNacimiento}">
+                        <input class="input-group__input lugar_nacimiento" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Lateralidad:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input lateralidad" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Antecedentes de zurdería:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input antecedentes_zur" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Escolaridad:</label>
-                        <select class="input-group__input" id="escolarida_paciente" style="height: 26px">
+                        <select class="input-group__input escolaridad_niño" id="escolarida_paciente" style="height: 26px">
                             <option value="">- Seleccione una opción -</option>
                             <option value="Primaria">Primaria</option>
                             <option value="Secundaria">Secundaria</option>
                             <option value="Preparatoria">Preparatoria</option>
                             <option value="Universidad">Universidad</option>
-                            <option value="Maestría">Maestría</option>
+                            <option value="Maestria">Maestría</option>
                             <option value="Doctorado">Doctorado</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Familiar responsable:</label>
-                        <select class="input-group__input" id="familiar_responable" style="height: 26px">
+                        <select class="input-group__input familiar_responable" id="familiar_responable" style="height: 26px">
                             <option value="">- Seleccione una opción -</option>
                             <option value="Madre">Madre</option>
                             <option value="Padre">Padre</option>
@@ -100,39 +105,39 @@
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Nombre del padre:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input nombre_Padre" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Edad:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input edad_Padre" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Ocupación:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input ocupacion_padre" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Escolaridad:</label>
-                        <select class="input-group__input" id="escolaridad_padre" style="height: 26px">
+                        <select class="input-group__input escolaridad_Padre" id="escolaridad_padre" style="height: 26px">
                             <option value="">- Seleccione una opción -</option>
-                            <option value="">Primaria</option>
-                            <option value="">Secundaria</option>
-                            <option value="">Preparatoria</option>
-                            <option value="">Universidad</option>
-                            <option value="">Maestría</option>
-                            <option value="">Doctorado</option>
+                            <option value="Primaria">Primaria</option>
+                            <option value="Secundaria">Secundaria</option>
+                            <option value="Preparatoria">Preparatoria</option>
+                            <option value="Universidad">Universidad</option>
+                            <option value="Maestria">Maestría</option>
+                            <option value="Doctorado">Doctorado</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Ciudad:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input ciudad_padre" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Teléfono:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input telefono_padre" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Teléfono de oficina:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input telefono_padre_oficina" type="text">
                     </div>
                     <div class="input-group"></div>
                 </div>
@@ -142,39 +147,39 @@
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Nombre de la madre:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input nombre_Madre" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Edad:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input edad_Madre" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Ocupación:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input ocupacion_Madre" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Escolaridad:</label>
-                        <select class="input-group__input" id="escolaridad_madre" style="height: 26px">
+                        <select class="input-group__input escolaridad_Madre" id="escolaridad_madre" style="height: 26px">
                             <option value="">- Seleccione una opción -</option>
-                            <option value="">Primaria</option>
-                            <option value="">Secundaria</option>
-                            <option value="">Preparatoria</option>
-                            <option value="">Universidad</option>
-                            <option value="">Maestría</option>
-                            <option value="">Doctorado</option>
+                            <option value="Primaria">Primaria</option>
+                            <option value="Secundaria">Secundaria</option>
+                            <option value="Preparatoria">Preparatoria</option>
+                            <option value="Universidad">Universidad</option>
+                            <option value="Maestria">Maestría</option>
+                            <option value="Doctorado">Doctorado</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Ciudad:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input ciudad_Madre" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Teléfono:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input telefono_Madre" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Teléfono de oficina:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input telefono_Madre_oficina" type="text">
                     </div>
                     <div class="input-group"></div>
                 </div>
@@ -185,17 +190,17 @@
                     <div class="input-group input-group--color1">
                         <label class="input-group__label" for="">Estado civil de los padres:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="estado-civil"> Soltero
-                            <input type="radio" name="estado-civil"> Casado
+                            <input type="radio" name="estado_civil" value="Soltero"> Soltero
+                            <input type="radio" name="estado_civil" value="Casado"> Casado
                         </div>
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label" for="">Desde:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input casados_desde" type="text">
                     </div>
                     <div class="input-group input-group--color1"></div>
                     <div class="input-group--btn input-group--color1">
-                        <button type="submit" class="input-group--btn__guardar boton_datos">Guardar</button>
+                        <button type="button" class="input-group--btn__guardar boton_datos">Guardar</button>
                     </div>
                 </div>
 
@@ -209,52 +214,52 @@
                     <div class="input-group">
                         <label class="input-group__label" for="">Vive en: </label>
                         <div class="input-group__input">
-                            <input type="radio" name="hogar"> Casa
-                            <input type="radio" name="hogar"> Departamento
-                            <input type="radio" name="hogar"> Cuarto
-                            <div class="input--small"><label for=""><input type="radio" name="hogar"> Otro:</label>
-                                <div><input type="text"></div>
+                            <input type="radio" name="hogar" value="Casa"> Casa
+                            <input type="radio" name="hogar" value="Departamento"> Departamento
+                            <input type="radio" name="hogar" value="Cuarto"> Cuarto
+                            <div class="input--small"><label for=""><input type="radio" name="hogar" value="Otro"> Otro:</label>
+                                <div><input type="text" class="otro_vive_en"></div>
                             </div>
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">El lugar es:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="lugar"> Propio
-                            <input type="radio" name="lugar"> Rentado
-                            <input type="radio" name="lugar"> Prestado
+                            <input type="radio" name="lugar_dondeviven" value="Propio"> Propio
+                            <input type="radio" name="lugar_dondeviven" value="Rentado"> Rentado
+                            <input type="radio" name="lugar_dondeviven" value="Prestado"> Prestado
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Con cuáles servicios cuenta?:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input servicios_cuenta" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Lugar que ocupa el niño en la familia:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input lugar_ocupado_niño" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Tiene habitación propia o la comparte?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="habitación"> Propia
-                            <input type="radio" name="habitación"> Compartida
+                            <input type="radio" name="habitacion" value="Propia"> Propia
+                            <input type="radio" name="habitacion" value="Compartida"> Compartida
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿De dónde es originaria su familia?:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input donde_es_familia" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Ingreso familiar mensual:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input ingreso_familiar_mensual" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Quiénes contribuyen?:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input quienes_contribuyen" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">El niño depende económicamente de: </label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input economicamente_niño" type="text">
                     </div>
                 </div>
 
@@ -263,7 +268,7 @@
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Número de personas que viven en la casa:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input personas_casa" type="text">
                     </div>
                     <div class="input-group-table">
                         <label class="input-group-table__label" for="">Familiares que viven en la casa:</label>
@@ -277,11 +282,11 @@
                                 <th>Ocupación</th>
                                 </tr>
                                 <tr>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" name="Parentesco1"></td>
+                                    <td><input type="text" name="Nombre1"></td>
+                                    <td><input type="text" name="Edad1" ></td>
+                                    <td><input type="text" name="Escolaridad1" ></td>
+                                    <td><input type="text" name="Ocupacion1" ></td>
                                 </tr>
                                 <tr>
                                     <td><input type="text"></td>
@@ -321,58 +326,58 @@
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Juegos o actividades preferidas y/o preferidos:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input juegos_actividades_preferidas" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Juguetes preferidos:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input juguetes_preferidos" type="text">
                     </div>
-                    <div class="input-group">
-                        <label class="input-group__label" for="">Descripción del tiempo libre y pasatiempos:</label>
-                        <input class="input-group__input" type="text">
+                    <div class="input-group"><!-- EMPIEZA AQUÍ -->
+                        <label class="input-group__label " for="">Descripción del tiempo libre y pasatiempos:</label>
+                        <input class="input-group__input tiempolibre" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Realiza actividades extraescolares?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="actividades"> Sí
-                            <input type="radio" name="actividades"> No
+                            <input type="radio" name="actividades" value="SI"> Sí
+                            <input type="radio" name="actividades" value="NO"> No
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Tiene amigos?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="amigos"> Sí
-                            <input type="radio" name="amigos"> No
+                            <input type="radio" name="amigos" value="SI"> Sí
+                            <input type="radio" name="amigos"value="NO"> No
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Cuántos?:</label>
-                        <select class="input-group__input" id="cuantos_amigostiene" style="height: 26px">
-                            <option value="">- Seleccione una opción -</option>
-                            <option value="">1 a 2</option>
-                            <option value="">3 a 4</option>
-                            <option value="">5 ó mas</option>
+                        <select class="input-group__input cantidadamigos" id="cuantos_amigostiene" style="height: 26px">
+                            <option value="0">- Seleccione una opción -</option>
+                            <option value="1_a_2">1 a 2</option>
+                            <option value="3_a_4">3 a 4</option>
+                            <option value="5_o_mas">5 ó mas</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿De dónde los conoce?:</label>
-                        <select class="input-group__input" id="donde_conoce" style="height: 26px">
-                            <option value="">- Seleccione una opción -</option>
-                            <option value="">Escuela</option>
-                            <option value="">Vecindario</option>
-                            <option value="">Externos</option>
+                        <select class="input-group__input donde_se_conocen" id="donde_conoce" style="height: 26px">
+                            <option value="Ninguno">- Seleccione una opción -</option>
+                            <option value="Escuela">Escuela</option>
+                            <option value="Vecindario">Vecindario</option>
+                            <option value="Externos">Externos</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Sale con ellos?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="salirAmigos"> Sí
-                            <input type="radio" name="salirAmigos"> No
+                            <input type="radio" name="salirAmigos" value="SI"> Sí
+                            <input type="radio" name="salirAmigos"value="NO"> No
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Con qué frecuencia sale con sus amigos?:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input frecuencia" type="text">
                     </div>
                     <div class="input-group--btn input-group--color1">
                         <button type="button" class="input-group--btn__guardar boton_nopatologicos">Guardar</button>
@@ -391,29 +396,29 @@
                         <div class="input-group-table__input">
                             <table width="40%">
                                 <tr>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Meningitis"></td>
                                     <td> Meningitis</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Asma"></td>
                                     <td> Asma</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Poliomielitis"></td>
                                     <td> Poliomielitis</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Encefalitis"></td>
                                     <td> Encefalitis</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Varicela"></td>
                                     <td> Varicela</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Apnea"></td>
                                     <td> Apnea</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Cancer"></td>
                                     <td> Cáncer</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Sarampion"></td>
                                     <td> Sarampión</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Epilepsia"></td>
                                     <td>Epilepsia</td>
                                 </tr>
                             </table>
@@ -423,26 +428,26 @@
                     <div class="division"></div>
                     <div class="input-group ">
                         <label class="input-group__label">Otra:</label>
-                        <input class="input-group__input" type="text" name="Otra">
+                        <input class="input-group__input otra1" type="text" name="Otra">
                     </div>
                     <div class="input-group ">
                         <label class="input-group__label">¿Actualmente está enfermo?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="estaEnfermo"> Sí
-                            <input type="radio" name="estaEnfermo"> No
+                            <input type="radio" name="estaEnfermo" value="SI"> Sí
+                            <input type="radio" name="estaEnfermo" value="No"> No
                         </div>
                     </div>
                     <div class="input-group ">
                         <label class="input-group__label">Tratamiento:</label>
-                        <input class="input-group__input" type="text" name="Tratamiento">
+                        <input class="input-group__input tratamiento1" type="text" name="Tratamiento">
                     </div>
                 </div>
                 <div class="division"></div>
                 <div class="group input-group--color1">
-                    <div class="input-group ">
+                    <div class="input-group "> 
                         <label class="input-group__label">Ha tenido:</label>
                         <div class="input-group__input">
-                            <input type="checkbox" name="Rad1"> Golpes en la médula espinal<br>
+                            <input type="checkbox" name="Rad0"> Golpes en la médula espinal<br>
                             <input type="checkbox" name="Rad1"> Golpes en la cabeza <br>
                             <input type="checkbox" name="Rad3"> Tumores<br>
                             <input type="checkbox" name="Rad2"> Alergias
@@ -450,42 +455,42 @@
                     </div>
                     <div class="input-group ">
                         <label class="input-group__label">Especificar:</label>
-                        <input class="input-group__input" type="text" name="Especificar">
+                        <input class="input-group__input Especificar1" type="text" name="Especificar1">
                     </div>
                     <div class="input-group ">
                         <label class="input-group__label">Enfermedades neorológicas
                             (parálisis,hidrocefálea,etc):</label>
-                        <input class="input-group__input" type="text" name="Enfermedades">
+                        <input class="input-group__input Enfermedades_neorológicas" type="text" name="Enfermedades">
                     </div>
                     <div class="input-group ">
                         <label class="input-group__label">Alteraciones psicológicas o psiquiátras
                             (depresión,etc):</label>
-                        <input class="input-group__input" type="text" name="Alteraciones">
+                        <input class="input-group__input Alteraciones_psicológicas" type="text" name="Alteraciones">
                     </div>
                 </div>
                 <div class="group input-group--color1">
                     <div class="input-group ">
                         <label class="input-group__label">¿Presenta secuelas?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="secuelas"> Sí
-                            <input type="radio" name="secuelas"> No
+                            <input type="radio" name="secuelas" value="si"> Sí
+                            <input type="radio" name="secuelas" value="No"> No
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">¿De qué tipo?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input tipo" type="text" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Ha tenido:</label>
                         <div class="input-group__input">
-                            <input type="checkbox" name=""> Temperatura mayor a los 40°<br>
-                            <input type="checkbox" name=""> Convulsiones<br>
-                            <input type="checkbox" name=""> Perdida de la conciencia<br>
+                            <input type="checkbox" name="Temperatura"> Temperatura mayor a los 40°<br>
+                            <input type="checkbox" name="Convulsiones"> Convulsiones<br>
+                            <input type="checkbox" name="Perdida_conciencia"> Perdida de la conciencia<br>
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Especificar:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input especificar_secuelas" type="text" name="">
                     </div>
                 </div>
                 <div class="division"></div>
@@ -495,56 +500,56 @@
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">Visión:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input vision" type="text" name="">
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">¿Usa o requiere lentes?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="Lentes"> Sí
-                            <input type="radio" name="Lentes"> No
+                            <input type="radio" name="Lentes" value="SI"> Sí
+                            <input type="radio" name="Lentes" value="NO"> No
                         </div>
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">¿Desde cuándo?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input desde_cuando" type="text" name="">
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">Motricidad:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input motricidad" type="text" name="">
                     </div>
                     <div class="input-group ">
                         <label class="input-group__label">¿Usa o requiere aparatos ortopédicos?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="aparatosOrtopedicos"> Sí
-                            <input type="radio" name="aparatosOrtopedicos"> No
+                            <input type="radio" name="aparatosOrtopedicos" value="Requiere"> Sí
+                            <input type="radio" name="aparatosOrtopedicos" value="Norequiere"> No
                         </div>
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">¿Desde cuándo?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input desde_cuando1" type="text" name="">
                     </div>
                 </div>
                 <div class="division"></div>
                 <div class="group input-group--color1">
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">Medicamentos que toma actualmente:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input medicamentos" type="text" name="">
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">Posología:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input posologia" type="text" name="">
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">¿Desde cuándo?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input desde_cuando2" type="text" name="">
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">¿Para qué la toma?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input razon_de_tomarlo" type="text" name="">
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">Reacciones adversas:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input reacciones" type="text" name="">
                     </div>
                     <div class="input-group--btn input-group--color1">
                         <button type="button" class="input-group--btn__guardar boton_patologicos">Guardar</button>
@@ -554,35 +559,35 @@
             </div>
 
             <!-- Antecedentes pre-peri y postnatales-->
-            <div class="tdah-form__antecedentes-pre-per</div>i-y-postnatales" id="antecedentes-pre-peri-y-postnatales">
+            <div class="tdah-form__antecedentes-pre-peri-y-postnatales" id="antecedentes-pre-peri-y-postnatales">
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label">Edad de la madre al nacer el niño/a:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input edad_madre" type="text" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Edad del padre al nacer el niño/a:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input edad_padre" type="text" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Padres:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="situacion"> Juntos
-                            <input type="radio" name="situacion"> Separados
+                            <input type="radio" name="situacion" value="Juntos"> Juntos
+                            <input type="radio" name="situacion" value="Separados"> Separados
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Duración del embarazo:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input duracion_embarazo" type="text" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">¿Fué un embarazo deseado y planeado?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="embarazoDeseado"> Sí
-                            <input type="radio" name="embarazoDeseado"> No
+                            <input type="radio" name="embarazoDeseado" value="Deseado"> Sí
+                            <input type="radio" name="embarazoDeseado" value="Nodeseado"> No
                         </div>
                     </div>
-                </div>
+                </div>  <!--AQUI TERMINA-->
 
                 <div class="division"></div>
 
@@ -591,41 +596,41 @@
                         <label class="input-group-table__label">¿Durante el embarazo presentó lo siguiente? (anotar en
                             qué mes y los datos pertinentes):</label>
                     </div>
-                    <div class="input-group">
+                    <div class="input-group"> <!-- Empiza la pagina 3 -->
                         <label class="input-group__label">Problemas o enfermedades emocionales:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input problemas_o_enfermedades" type="text" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Enfermedades médicas:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input enfermedades_medicas" type="text" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Consumo de medicamentos:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input consumo_medicamentos" type="text" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Amenaza de aborto:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input amenaza_aborto" type="text" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Desnutrición:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input desnutricion " type="text" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Exposición a Rx:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input exposicion_rx" type="text" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Ultrasonidos:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input ultrasonidos_app" type="text" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Consumo de drogas (alcohol, cigarros, etc.):</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input consumo_drogas" type="text" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Otro:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input otro_app" type="text" name="">
                     </div>
                     <div class="input-group--btn">
                         <button type="button" class="input-group--btn__guardar boton_antecedentes_pre">Guardar</button>
@@ -640,20 +645,20 @@
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Peso al nacer (kg):</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input peso_al_nacer" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Talla (cm):</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input talla_hd" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Calificación APGAR (apariencia, pulso, gedto,
                             actividad, respiración):</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input calificacion_apgar " type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Especificaciones:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input especificaciones_hd" type="text">
                     </div>
                 </div>
 
@@ -662,42 +667,42 @@
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Tipo de nacimiento:</label>
-                        <select class="input-group__input" id="tipo_nacimiento" style="height: 26px">
-                            <option value="">- Seleccione una opción -</option>
-                            <option value=""> Parto normal</option>
-                            <option value=""> Parto inducido</option>
-                            <option value=""> Psicoprofilaxis</option>
-                            <option value=""> Cesárea programada</option>
-                            <option value=""> Cesárea no programada</option>
-                            <option value=""> Anestesia</option>
-                            <option value=""> Fórceps</option>
+                        <select class="input-group__input tipo_nacimiento" id="tipo_nacimiento" style="height: 26px">
+                            <option         >- Seleccione una opción -</option>
+                            <option value="Parto normal"> Parto normal</option>
+                            <option value="Parto inducido"> Parto inducido</option>
+                            <option value="Psicoprofilaxis"> Psicoprofilaxis</option>
+                            <option value="Cesárea programada"> Cesárea programada</option>
+                            <option value="Cesárea no programada"> Cesárea no programada</option>
+                            <option value="Anestesia"> Anestesia</option>
+                            <option value="Fórceps"> Fórceps</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Lloró inmediatamente al nacer?:</label>
-                        <div class="input-group__input">
-                            <input type="radio" name="Lloro"> Sí
-                            <input type="radio" name="Lloro"> No
+                        <div class="input-group__input ">
+                            <input type="radio" name="Lloro" value="Sí"> Sí
+                            <input type="radio" name="Lloro" value="No"> No
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Respiró inmediatamente al nacer?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="Respiro"> Sí
-                            <input type="radio" name="Respiro"> No
+                            <input type="radio" name="Respiro" value="Sí" > Sí
+                            <input type="radio" name="Respiro" value="No" > No
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Estuvo en incubadora?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="Incubadora"> Sí
-                            <input type="radio" name="Incubadora"> No
+                            <input type="radio" name="Incubadora" value="Sí"> Sí
+                            <input type="radio" name="Incubadora" value="No"> No
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Complicaciones al momento de su nacimiento (sufrimiento
                             fetal, hipoxia, etc.):</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input Complicacione_nacimiento" type="text">
                     </div>
                 </div>
 
@@ -708,31 +713,31 @@
                     <label class="input-group__label" for="">Edad a la que...</label>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label" for="">Sostuvo la cabeza (2 o 3m):</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input sostuvo_cabeza" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Subió y bajo escaleras (18m):</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input subio_bajo_esca" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Se sentó (6m):</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input sento" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Dijo palabras (18m):</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input dijo_palabras" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Se sostuvo en pie (9m):</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input sostuvo_enpie" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Caminó solo (12m):</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input camino_solo" type="text">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">(Indagar enuresis y envopresis):</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input indagar" type="text">
                     </div>
                     <div class="input-group--btn input-group--color1">
                         <button type="button" class="input-group--btn__guardar boton_historia_desarrollo">Guardar</button>
@@ -750,56 +755,56 @@
                         <div class="input-group-table__input">
                             <table class="tabla-antecedentes-escolares">
                                 <tr>
-                                    <td><input type="checkbox" name=""> Guardería</td>
-                                    <td><input type="radio" name="tipo1"> Pública</td>
-                                    <td><input type="radio" name="tipo1"> Privada</td>
+                                    <td><input type="checkbox" name="Guarderia"> Guardería</td>
+                                    <td><input type="radio" name="tipo1" value="Publica" > Pública</td>
+                                    <td><input type="radio" name="tipo1" value="Privada"> Privada</td>
                                     <td> Años cursados: </td>
-                                    <td><input type="text" name=""></td>
+                                    <td><input type="text" name="" class="Años_cursados1"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name=""> Preescolar</td>
-                                    <td><input type="radio" name="tipo2"> Pública</td>
-                                    <td><input type="radio" name="tipo2"> Privada</td>
+                                    <td><input type="checkbox" name="Preescolar"> Preescolar</td>
+                                    <td><input type="radio" name="tipo2" value="Publica" > Pública</td>
+                                    <td><input type="radio" name="tipo2" value="Privada" > Privada</td>
                                     <td> Años cursados:</td>
-                                    <td><input type="text" name=""></td>
+                                    <td><input type="text" name="" class="Años_cursados2"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name=""> Primaria</td>
-                                    <td><input type="radio" name="tipo3"> Pública</td>
-                                    <td><input type="radio" name="tipo3"> Privada</td>
+                                    <td><input type="checkbox" name="Primaria"> Primaria</td>
+                                    <td><input type="radio" name="tipo3" value="Publica" > Pública</td>
+                                    <td><input type="radio" name="tipo3" value="Privada" > Privada</td>
                                     <td> Años cursados:</td>
-                                    <td><input type="text" name=""></td>
+                                    <td><input type="text" name="" class="Años_cursados3"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name=""> Educacíon especial</td>
-                                    <td><input type="radio" name="tipo4"> Pública</td>
-                                    <td><input type="radio" name="tipo4"> Privada</td>
+                                    <td><input type="checkbox" name="Educacion_especial"> Educacíon especial</td>
+                                    <td><input type="radio" name="tipo4" value="Publica" > Pública</td>
+                                    <td><input type="radio" name="tipo4" value="Privada" > Privada</td>
                                     <td> Años cursados:</td>
-                                    <td><input type="text" name=""></td>
+                                    <td><input type="text" name="" class="Años_cursados4"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name=""> Estimulación temprana</td>
+                                    <td><input type="checkbox" name="Estimulacion_temprana"> Estimulación temprana</td>
                                     <td></td>
                                     <td></td>
                                     <td> Años cursados:</td>
-                                    <td><input type="text" name=""></td>
+                                    <td><input type="text" name="Años_cursados" class="Años_cursados5"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name=""> Clases de regularizaión</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name=""> Escuela de idiomas</td>
+                                    <td><input type="checkbox" name="Clases_regularizacion"> Clases de regularizaión</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name=""> Terapia de lenguaje, de conducta,<br>
+                                    <td><input type="checkbox" name="Escuela_idiomas"> Escuela de idiomas</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="Terapia_lenguaje"> Terapia de lenguaje, de conducta,<br>
                                         emocinales, psicomotricidad, etc.</td>
                                     <td></td>
                                     <td></td>
@@ -816,111 +821,112 @@
                 <div class="group input-group--color1">
                     <div class="input-group ">
                         <label class="input-group__label" for="">Años de estudio: </label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input años_estudio" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">Curso escolar actual: </label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input curso_actual" type="text" name="">
                     </div>
 
-                    <div class="input-group ">
+                    <div class="input-group "> <!--Dejo aqui -->
                         <label class="input-group__label" for="">¿Ha perdido algun grado escolar?: </label>
                         <div class="input-group__input">
-                            <input type="radio" name="Escolar"> Sí
-                            <input type="radio" name="Escolar"> No
+                            <input type="radio" name="Escolar" value="Sí"> Sí
+                            <input type="radio" name="Escolar" value="No"> No
                         </div>
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Por qué?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input porque_ae" type="text" name="">
                     </div>
+                  
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Falta mucho a clases?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="faltaClases"> Sí
-                            <input type="radio" name="faltaClases"> No
+                            <input type="radio" name="faltaClases" value="Si"> Sí
+                            <input type="radio" name="faltaClases" value="No"> No
                         </div>
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Por qué?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input porque_falta_clases" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Ha cambiado de escuela?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="Cambioescuela"> Sí
-                            <input type="radio" name="Cambioescuela"> No
+                            <input type="radio" name="Cambioescuela" value="Si"> Sí
+                            <input type="radio" name="Cambioescuela" value="No"> No
                         </div>
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Por qué?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input porque_cambio_escuela" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Le gusta ir a la escuela?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="gustaEscuela"> Sí
-                            <input type="radio" name="gustaEscuela"> No
+                            <input type="radio" name="gustaEscuela" value="Si"> Sí
+                            <input type="radio" name="gustaEscuela" value="No"> No
                         </div>
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Por qué?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input porque_gusta_escuela" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Recibe constantes quejas de los maestros?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="Quejas"> Sí
-                            <input type="radio" name="Quejas"> No
+                            <input type="radio" name="Quejas" value="Si"> Sí
+                            <input type="radio" name="Quejas" value="No"> No
                         </div>
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Por qué?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input porque_quejas_escuela" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">Qué opinan los maestros del aprendizaje y
                             comportamiento del niño?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input opinion_maestros" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿A qué se deben los problemas en la escuela según el
                             niño?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input problemas_segun_niño" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Aprende con facilidad?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="Aprende"> Sí
-                            <input type="radio" name="Aprende"> No
+                            <input type="radio" name="Aprende_con_facilidad" value="Si"> Sí
+                            <input type="radio" name="Aprende_con_facilidad" value="No"> No
                         </div>
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">Actividades que se le facilitan:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input actividades_se_le_facilitan" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">Actividades que se le dificultan:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input actividades_se_le_dificultan" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">Promedio actual: </label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input promedio_actual" type="text" name="">
                     </div>
                 </div>
 
@@ -931,14 +937,14 @@
                     <div class="input-group">
                         <label class="input-group__label" for="">El niño presenta algún problema en: </label>
                         <div class="input-group__input">
-                            <input type="checkbox" name=""> Lenguaje<br>
-                            <input type="checkbox" name=""> Lectura<br>
-                            <input type="checkbox" name=""> Escritura<br>
-                            <input type="checkbox" name=""> Matemáticas<br>
-                            <input type="checkbox" name=""> Motricidad<br>
-                            <div class="input--small"><label for=""><input type="checkbox" name="problemas">
+                            <input type="checkbox" name="Lenguaje"> Lenguaje<br>
+                            <input type="checkbox" name="Lectura"> Lectura<br>
+                            <input type="checkbox" name="Escritura"> Escritura<br>
+                            <input type="checkbox" name="Matematicas"> Matemáticas<br>
+                            <input type="checkbox" name="Motricidad"> Motricidad<br>
+                            <div class="input--small"><label for=""><input type="checkbox" name="Otro_problema">
                                     Otro:</label>
-                                <div><input type="text"></div>
+                                <div><input class="otro_problema"type="text"></div>
                             </div>
                         </div>
                     </div>
@@ -949,15 +955,15 @@
                 <div class="group input-group--color1">
                     <div class="input-group input-group--color1">
                         <label class="input-group__label" for="">¿A qué edad comenzó a leer?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input comenzo_leer" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Cómo lee?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="lee"> Rapido
-                            <input type="radio" name="lee"> Normal
-                            <input type="radio" name="lee"> No lee
+                            <input type="radio" name="Como_lee" value="Rapido"> Rapido
+                            <input type="radio" name="Como_lee" value="Normal"> Normal
+                            <input type="radio" name="Como_lee" value="No lee"> No lee
                         </div>
                     </div>
 
@@ -965,16 +971,16 @@
                     <div class="input-group ">
                         <label class="input-group__label" for="">Cuando lee:</label>
                         <div class="input-group__input">
-                            <input type="checkbox" name=""> Omite alguna letra<br>
-                            <input type="checkbox" name=""> Titubéa<br>
-                            <input type="checkbox" name=""> Confunde letras<br>
-                            <input type="checkbox" name=""> Dice una letra por otra<br>
-                            <input type="checkbox" name=""> Se salta renglones<br>
-                            <input type="checkbox" name=""> Se equivoca de línea<br>
-                            <input type="checkbox" name=""> Repite sílabas o palabras<br>
-                            <input type="checkbox" name=""> Cambia palabras
-                            <div class="input--small"><label for=""><input type="checkbox" name=""> Otro:</label>
-                                <div><input type="text"></div>
+                            <input type="checkbox" name="Omite_letra"> Omite alguna letra<br>
+                            <input type="checkbox" name="Titubea"> Titubéa<br>
+                            <input type="checkbox" name="Confunde_letras"> Confunde letras<br>
+                            <input type="checkbox" name="Dice_letra_porOtra"> Dice una letra por otra<br>
+                            <input type="checkbox" name="Salta_renglones"> Se salta renglones<br>
+                            <input type="checkbox" name="Equivoca_linea"> Se equivoca de línea<br>
+                            <input type="checkbox" name="Repite_silabas"> Repite sílabas o palabras<br>
+                            <input type="checkbox" name="Cambia_palabras"> Cambia palabras
+                            <div class="input--small"><label for=""><input type="checkbox" name="Otro_cuandoLee"> Otro:</label>
+                                <div><input class="otro_lee"type="text"></div>
                             </div>
                         </div>
                     </div>
@@ -986,36 +992,36 @@
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿A qué edad comenzó a escribrir?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input edad_escribir" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Le cuesta trabajo escribir?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="Escribir"> Sí
-                            <input type="radio" name="Esribir"> No
+                            <input type="radio" name="Escribir" value="Si"> Sí
+                            <input type="radio" name="Escribir" value="No"> No
                         </div>
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Por que?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input escribir_2" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">Al escribir: </label>
                         <div class="input-group__input">
-                            <input type="checkbox" name=""> Confunde letras<br>
-                            <input type="checkbox" name=""> Deletrea letras<br>
-                            <input type="checkbox" name=""> Escribe con lentitud<br>
-                            <input type="checkbox" name=""> Tiene mala ortografía<br>
-                            <input type="checkbox" name=""> Es incomprensible<br>
+                            <input type="checkbox" name="Confunde_letrasE"> Confunde letras<br>
+                            <input type="checkbox" name="Deletrea_letras"> Deletrea letras<br>
+                            <input type="checkbox" name="Escribe_lentitud"> Escribe con lentitud<br>
+                            <input type="checkbox" name="Mala_ortografia"> Tiene mala ortografía<br>
+                            <input type="checkbox" name="Incomprensible_escribir"> Es incomprensible<br>
                         </div>
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">Otro: </label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input otro_3" type="text" name="">
                     </div>
                 </div>
 
@@ -1024,48 +1030,48 @@
                 <div class="group input-group--color1">
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿A qué edad comenzó a contar?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input contar" type="text" name="">
                     </div>
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿A qué edad comenzó a hacer operaciones
                             sencillas?:</label>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input operaciones_sencillas" type="text" name="">
                     </div>
 
                     <div class="input-group-table ">
                         <div class="input-group-table__input">
                             <table width="90%">
                                 <tr>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Escribe_mal_numeros"></td>
                                     <td> Escribe mal los números</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="No_reconoce_los_numeros"></td>
                                     <td> No reconoce los números</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Confunde_los_signos"></td>
                                     <td> Confunde los signos</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="En_dictado"></td>
                                     <td> En dictado confunde los números</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Acomoda_mal_cifras"></td>
                                     <td> Acomoda mal las cifras</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Le_cuesta_operaciones"></td>
                                     <td> Le cuesta trabajo hacer operaciones linealmente</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Le_cuesta_operaciones_verticalmente"></td>
                                     <td> Le cuesta trabajo hacer la operaciones verticalmente</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="No_sabe_sumar"></td>
                                     <td> No sabe sumar</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="No_sabe_restar"></td>
                                     <td> No sabe restar</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="No_sabe_multiplicar"></td>
                                     <td> Nos sabe multiplicar</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="No_sabe_dividir"></td>
                                     <td> No sabe dividir</td>
                                     <td> Otro:</td>
-                                    <td><input type="text" name=""></td>
+                                    <td><input class="otro_operaciones" type="text"></td>
                                 </tr>
                             </table>
                         </div>
@@ -1080,43 +1086,43 @@
                         <div class="input-group-table__input">
                             <table width=70%>
                                 <tr>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Caminar"></td>
                                     <td> Caminar</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Correr"></td>
                                     <td> Correr</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Subir_escaleras"></td>
                                     <td> Subir escaleras</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Sujetar"></td>
                                     <td> Sujetar</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Lanzas_objetos"></td>
                                     <td> Lanzar objetos</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Jugar_cosas_grandes"></td>
                                     <td> Jugar c/ cosas grandes</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Abotonarse"></td>
                                     <td> Abotonarse</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Vestirse"></td>
                                     <td> Vestirse</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Amarrarse_agujetas"></td>
                                     <td> Amarrarse las agujetas</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Recortar"></td>
                                     <td> Recortar</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Escribir_torpe"></td>
                                     <td> Escribir</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Iluminar_torpe"></td>
                                     <td> Iluminar</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Otro_torpe"></td>
                                     <td>
                                         <div class="input--small"><label for=""> Otro:</label>
-                                            <div><input type="text"></div>
+                                            <div><input class="otro_torpe2" type="text"></div>
                                         </div>
                                     </td>
                                 </tr>
@@ -1134,50 +1140,50 @@
 
                     <div class="input-group">
                         <div class="input-group__label">
-                            <input type="checkbox" name="">
+                            <input type="checkbox" name="Decir_oraciones">
                             <label for="">Decir oraciones completas (3 elementos):</label>
                         </div>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input oraciones" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <div class="input-group__label">
-                            <input type="checkbox" name="">
+                            <input type="checkbox" name="Comprender_lo_dice">
                             <label for="">Comprender lo que dice:</label>
                         </div>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input comprender" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <div class="input-group__label">
-                            <input type="checkbox" name="">
+                            <input type="checkbox" name="Habla_menos_niños">
                             <label for="">Hablar menos que los otros niños:</label>
                         </div>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input habla_menos" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <div class="input-group__label">
-                            <input type="checkbox" name="">
+                            <input type="checkbox" name="Habla_mas_niños">
                             <label for="">Hablar más que los otros niños:</label>
                         </div>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input habla_mas" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <div class="input-group__label">
-                            <input type="checkbox" name="">
+                            <input type="checkbox" name="Tiene_dificultad_letras">
                             <label for="">Tiene dificultad para decir algunas letras:</label>
                         </div>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input dificultad_para_letras" type="text" name="">
                     </div>
 
                     <div class="input-group ">
                         <div class="input-group__label">
-                            <input type="checkbox" name="">
+                            <input type="checkbox" name="Otro_dificultad_letras">
                             <label for="">Otro: </label>
                         </div>
-                        <input class="input-group__input" type="text" name="">
+                        <input class="input-group__input otro_letras" type="text" name="">
                     </div>
 
                     <div class="input-group--btn input-group--color1"></div>
@@ -1187,7 +1193,6 @@
                 </div>
                 <div class="division"></div>
             </div>
-
             <!-- Dinamica familiar -->
             <div class="tdah-form__dinamica-familiar" id="dinamica-familiar">
 
@@ -1198,7 +1203,7 @@
                     </div>
 
                     <div class="input-group">
-                        <textarea class="input-group__input" name="" id="" cols="30" rows="5"></textarea>
+                        <textarea class="input-group__input Descripcion_actividades" name="" id="" cols="30" rows="5"></textarea>
                     </div>
                 </div>
 
@@ -1211,17 +1216,17 @@
 
                     <div class="input-group">
                         <label class="input-group__label" for="">Madre:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input tiempo_madre" type="text">
                     </div>
 
                     <div class="input-group">
                         <label class="input-group__label" for="">Padre:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input tiempo_padre" type="text">
                     </div>
 
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Con qué miembro de la familia se lleva mejor?:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input miembro_familia_mejor" type="text">
                     </div>
                 </div>
 
@@ -1235,27 +1240,27 @@
                         <div class="input-group-table__input">
                             <table width=70%>
                                 <tr>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Divorcio"></td>
                                     <td> Divorcio</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Cambio_escuela"></td>
                                     <td> Cambio de escuela</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Cambio_vivienda"></td>
                                     <td> Cambio de vivienda</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Problemas_financieros"></td>
                                     <td> Problemas financieros</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Enfermedades1"></td>
                                     <td> Enfermedades</td>
-                                    <td><input type="checkbox" name=""></td>
-                                    <td> Pérdida de trabajo</td>
+                                    <td><input type="checkbox" name="Problemas_legales"></td>
+                                    <td> Problemas legales</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="separaciones1"></td>
                                     <td> Separaciones</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Perdida_trabajo"></td>
                                     <td> Pérdida de trabajo</td>
                                     <td></td>
                                     <td></td>
@@ -1268,19 +1273,19 @@
                         <label class="input-group__label" for="">¿Algún suceso familiar ha afectado especialmente al
                             niño(a)?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="Suceso"> Sí
-                            <input type="radio" name="Suceso"> No
+                            <input type="radio" name="Algun_suceso" value="Si"> Sí
+                            <input type="radio" name="Algun_suceso" value="No"> No
                         </div>
                     </div>
 
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Cuál?:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input suceso_familiar" type="text">
                     </div>
 
                     <div class="input-group">
                         <label class="input-group__label" for="">¿De qué manera?:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input manera_suceso_familiar" type="text">
                     </div>
 
                     <div class="input-group--btn input-group--color1">
@@ -1298,29 +1303,29 @@
                         <div class="input-group-table__input">
                             <table width=50%>
                                 <tr>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Miedoso"></td>
                                     <td> Miedoso</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Berrinchudo"></td>
                                     <td> Berrinchudo</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Celoso"></td>
                                     <td> Celoso</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Rebelde"></td>
                                     <td> Rebelde</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Se_autolesiona"></td>
                                     <td> Se autolesiona</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Agresivo"></td>
                                     <td> Agresivo </td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Aislado"></td>
                                     <td> Aislado</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Nervioso"></td>
                                     <td> Nervioso</td>
-                                    <td><input type="checkbox" name=""></td>
+                                    <td><input type="checkbox" name="Desapegado"></td>
                                     <td> Desapegado </td>
                                 </tr>
                             </table>
@@ -1328,7 +1333,7 @@
                     </div>
                     <div class="input-group-table input-group--color1">
                         <label class="input-group-table__label">Descripción de personalidad del niño:</label>
-                        <textarea class="input-group-table__input" name="" id="" cols="20" rows="5"></textarea>
+                        <textarea class="input-group-table__input descripcion_personalidad_niño" name="" id="" cols="20" rows="5"></textarea>
                     </div>
                     <div class="input-group"></div>
                     <div class="input-group--btn input-group--color1">
@@ -1385,14 +1390,17 @@
                 <br>
             </div>
         </form>
+        
     </div>
     <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
     <script th:src="@{/projects/tdah/js/form.js}"></script>
     <script th:src="@{/generics/js/nav.js}"></script>
 	<script th:src="@{/projects/tdah/js/grabadorpantalla.js}"></script>
-	<!-- <script th:src="@{/projects/tdah/js/validaciones.js}"></script>
-	<script th:src="@{/projects/tdah/js/script-validaciones.js}"></script>
-	<script th:src="@{/projects/tdah/js/combobox-validaciones.js}"></script> -->
+	<script th:src="@{/projects/tdah/js/Pdf generador.js}"></script> 
+	<script th:src="@{/projects/tdah/js/jspdf.min.js}"></script>
+	<!-- <script th:src="@{/projects/tdah/js/validaciones.js}"></script> -->
+	<!-- <script th:src="@{/projects/tdah/js/script-validaciones.js}"></script> -->
+	<!-- <script th:src="@{/projects/tdah/js/combobox-validaciones.js}"></script> -->
 </body>
 
 </html>

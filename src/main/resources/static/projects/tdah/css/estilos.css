@@ -507,6 +507,38 @@ aside{
     font-size: 1.55em;
 }
 
+.buttons{
+	width: 1111px;
+	display: flex;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	justify-content: flex-end;
+	padding-right: 22px;
+}
+
+.buttons .fa-download{
+	color: #444;
+	font-size: 16px;
+}
+
+#pdf-button{
+	padding: 5px 8px;
+	border: 1px solid #333;
+	background: #fff;
+	color: #333;
+	cursor: pointer;
+}
+
+#pdf-button:hover{
+	background: #333;
+	color: #fff;
+}
+
+
+#pdf-button:hover .fa-download{
+	color: #fff;
+}
+
 .section{
     display: flex;
     flex-wrap: wrap;
@@ -778,22 +810,22 @@ input[type="text"], input[type="date"]{
 	width: 110px;
 }
 
-.fa-video,
-.fa-download,
-.fa-video-slash,
-.fa-circle,
-.fa-stop-circle{
+.cajita1 .fa-video,
+.cajita1 .fa-download,
+.cajita1 .fa-video-slash,
+.cajita1.fa-circle,
+.cajita1 .fa-stop-circle{
 	color: #444;
 	font-size: 48px;
 	cursor: pointer;
 	transition: 0.2s ease;
 }
 
-.fa-video:hover,
-.fa-download:hover,
-.fa-video-slash:hover,
-.fa-circle:hover,
-.fa-stop-circle:hover{
+.cajita1 .fa-video:hover,
+.cajita1 .fa-download:hover,
+.cajita1 .fa-video-slash:hover,
+.cajita1 .fa-circle:hover,
+.cajita1 .fa-stop-circle:hover{
 	font-size: 51px;
 }
 
