@@ -117,42 +117,37 @@ function addRows(data) {
 	dt.parse(nameImages);
 }
 
-function requestGetImagesRepository() {
-	fetch('http://localhost:8090/covid/admin/getImagesRepository', {
-			method: 'GET',
-		})
-		.then(function (response) {
-			 return response.json();
-		})
-		.then(function (data) {
-			 addRows(data);
-		})
-		.catch(function (err) {
-			 console.log(err);
-		});
+async function requestGetImagesRepository() {
+		try {
+        const response = await fetch('http://localhost:8090/covid/admin/getImagesRepository', {
+            method: 'GET',
+        });
+        const data = await response.json();
+        addRows(data);
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 requestGetImagesRepository();
 
-function requestGetImagesDetection() {
-	fetch('http://localhost:8090/covid/admin/getImagesDetection', {
-			method: 'GET',
-		})
-		.then(function (response) {
-			 return response.json();
-		})
-		.then(function (data) {
-			 addRows(data);
-		})
-		.catch(function (err) {
-			 console.log(err);
-		});
+async function requestGetImagesDetection() {
+	try {
+        const response = await fetch('http://localhost:8090/covid/admin/getImagesDetection', {
+            method: 'GET',
+        });
+        const data = await response.json();
+        addRows(data);
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 function editActionRepositorio(){
 	const elements = dt.getSelected();
 	const valuesElement = elements[0].values;
 	let img = valuesElement[0];
+	let nombreImagen = img.split("/")[img.split("/").length - 2].replace(/['"]/g, '');
 	let tipoImagen = valuesElement[1];
 	let enfermedad = valuesElement[2];
 	let faseEnfermedad = valuesElement[3];
@@ -165,6 +160,7 @@ function editActionRepositorio(){
 		<h1>Editar Imagen Seleccionada</h1>
 		${img}
 		<form id="form">
+				<input type="hidden" name="nombreImagen" value="${nombreImagen}" required>
                 <div class="input-group"> 
                     <label class="input-group__label" for="">Edad del paciente*:<abbr title="Este campo es obligatorio" aria-label="requeried"></abbr></label>
                     <div class="input-group__input">
@@ -198,7 +194,6 @@ function editActionRepositorio(){
                     <label class="input-group__label">Enfermedad*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
                     <div class="input-group__input">
                         <select name="enfermedad" id="combo_enfermedad" class="combo_box" required>
-                            <option value="">- Seleccione enfermedad -</option>
                             <option value="COVID-19">COVID-19</option>
                             <option value="Neumonía viral">Neumonía Viral</option>
                             <option value="Neumonía bacteriana">Neumonía Bacteriana</option>
@@ -211,7 +206,6 @@ function editActionRepositorio(){
                 <label class="input-group__label">Fase de la enfermedad*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
                 <div class="input-group__input">
                        <select name="faseEnfermedad" id="combo_faseEnfermedad" class="combo_box" required>
-                        <option value="">- Seleccione opcion -</option>
                         <option value="Moderada">Moderada</option>
                         <option value="Severa">Severa</option>
                         <option value="Crítica">Crítica</option>
@@ -224,17 +218,17 @@ function editActionRepositorio(){
                 <label class="input-group__label">Tipo de imagen*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
                 <div class="input-group__input">
                     <select name="tipoImagen" id="combo_imagen" class="combo_box" required>
-                        <option value="">- Seleccione tipo de imagen -</option>
                         <option value="Radiografía de toráx"><label>Radiografía de toráx</label></option>
                         <option value="Tomografía computarizada"><label>Tomografía computarizada</label></option>
                     </select>
                 </div>
             </div>
+               
+            <div class="modal-buttons">
+		        <button id="close">Cancelar</button>
+				<button id="save">Guardar</button>
+			</div>
         </form>
-        <div class="modal-buttons">
-	        <button id="close">Cancelar</button>
-			<button id="save">Guardar</button>
-		</div>
 		`;
 	showModal(modalHtml);
 	document.querySelector(`.input-group__input > input[value="${sexo}"]`).checked = true;
@@ -243,10 +237,44 @@ function editActionRepositorio(){
 	document.getElementById('combo_imagen').value = tipoImagen;
 }
 
+function requestUpdateImageRepositorio(){
+	let dataUpdate = new FormData();
+	dataUpdate.append("nombreImagen", document.querySelector('input[name="nombreImagen"]').value)
+	dataUpdate.append("edad", document.querySelector('input[name="edad"]').value);
+	dataUpdate.append("peso", document.querySelector('input[name="peso"]').value);
+	let sexoValue = "";
+	if(document.getElementById('masculino').checked) sexoValue = document.getElementById('masculino').value;
+	if(document.getElementById('femenino').checked) sexoValue = document.getElementById('femenino').value;
+	dataUpdate.append("sexo", sexoValue);
+	dataUpdate.append("saturacionOxigeno", document.querySelector('input[name="saturacionOxigeno"]').value);
+	dataUpdate.append("enfermedad", document.querySelector('select[name="enfermedad"]').value);
+	dataUpdate.append("faseEnfermedad", document.querySelector('select[name="faseEnfermedad"]').value);
+	dataUpdate.append("tipoImagen", document.querySelector('select[name="tipoImagen"]').value);
+	
+	fetch('http://localhost:8090/covid/admin/updateImageRepository', {
+		method: 'PUT',
+		body: dataUpdate
+	})
+	.then(res => {
+		res.text();
+	})
+	.then(async data => {
+		console.log(data);
+		let actualPage = dt.pagination.actual - 1;
+		await requestGetImagesRepository();
+		let liButtons = dt.element.querySelectorAll('.pages li');
+		liButtons[actualPage].firstElementChild.click();
+	})
+	.catch(err => {
+		console.error(err);
+	});
+}
+
 function editActionDetecciones(){
 	const elements = dt.getSelected();
 	const valuesElement = elements[0].values;
 	let imgEntrada = valuesElement[0];
+	let nombreImagen = imgEntrada.split("/")[imgEntrada.split("/").length - 2].replace(/['"]/g, '');
 	let imgSalida = valuesElement[1];
 	let diagnostico = valuesElement[2];
 	let tipoImagen = valuesElement[3];
@@ -260,36 +288,36 @@ function editActionDetecciones(){
 		${imgEntrada}
 		${imgSalida}
 		<form id="form">
+			<input type="hidden" name="nombreImagen" value="${nombreImagen}" required>
         	<div class="input-group"> 
-                <label class="input-group__label" for="">Edad del paciente*:</label>
+                <label class="input-group__label" for="">Edad del paciente*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
                 <div class="input-group__input">
-                    <input type="text" name="edad" value="${edad}" maxlength="2">
+                    <input type="text" name="edad" value="${edad}" maxlength="2" required>
                 </div>
             </div>
             <div class="input-group">
-                <label class="input-group__label" for="">Peso del paciente (kg)*:</label>
+                <label class="input-group__label" for="">Peso del paciente (kg)*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
                 <div class="input-group__input">
-                    <input type="text" name="peso" value="${peso}" maxlength="5">
+                    <input type="text" name="peso" value="${peso}" maxlength="5" required>
                 </div>
             </div>
             <div class="input-group">
-                <label class="input-group__label" for="">Sexo del paciente*:</label>
+                <label class="input-group__label" for="">Sexo del paciente*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
                 <div class="input-group__input">
                     <input type="radio" name="sexo" id="masculino" value="Masculino"> Masculino
                     <input type="radio" name="sexo" id="femenino" value="Femenino"> Femenino
                 </div>
             </div>
             <div class="input-group"> 
-                <label class="input-group__label" for="">Confiabilidad (%)*:</label>
+                <label class="input-group__label" for="">Confiabilidad (%)*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
                 <div class="input-group__input">
-                    <input type="text" name="edad" value="${confiabilidad}" maxlength="3">
+                    <input type="text" name="confiabilidad" value="${confiabilidad}" maxlength="6" required>
                 </div>
             </div>
             <div class="input-group">
                     <label class="input-group__label">Diagnóstico*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
                     <div class="input-group__input">
                         <select name="enfermedad" id="combo_diagnostico" class="combo_box" required>
-                            <option value="">- Seleccione enfermedad -</option>
                             <option value="COVID-19">COVID-19</option>
                             <option value="Neumonía viral">Neumonía Viral</option>
                             <option value="Neumonía bacteriana">Neumonía Bacteriana</option>
@@ -301,23 +329,54 @@ function editActionDetecciones(){
                 <label class="input-group__label">Tipo de imagen*:<abbr title="Este campo es obligatorio" aria-label="required"></abbr></label>
                 <div class="input-group__input">
                     <select name="tipoImagen" id="combo_imagen" class="combo_box" required>
-                        <option value="">- Seleccione tipo de imagen -</option>
                         <option value="Radiografía de toráx"><label>Radiografía de toráx</label></option>
                         <option value="Tomografía computarizada"><label>Tomografía computarizada</label></option>
                     </select>
                 </div>
             </div>
+            <div class="modal-buttons">
+		        <button id="close">Cancelar</button>
+				<button id="save">Guardar</button>
+			</div>
         </form>
-        <div class="modal-buttons">
-	        <button id="close">Cancelar</button>
-			<button id="save">Guardar</button>
-		</div>
 	`;
 	
 	showModal(modalHtml);
 	document.querySelector(`.input-group__input > input[value="${sexo}"]`).checked = true;
 	document.getElementById('combo_diagnostico').value = diagnostico;
 	document.getElementById('combo_imagen').value = tipoImagen;
+}
+
+function requestUpdateImageDetecciones(){
+	let formData = new FormData();
+	formData.append("nombreImagen", document.querySelector('input[name="nombreImagen"]').value);
+	formData.append("edad", document.querySelector('input[name="edad"]').value);
+	formData.append("peso", document.querySelector('input[name="peso"]').value);
+	let sexoValue = "";
+	if(document.getElementById('masculino').checked) sexoValue = document.getElementById('masculino').value;
+	if(document.getElementById('femenino').checked) sexoValue = document.getElementById('femenino').value;
+	formData.append("sexo", sexoValue);
+	formData.append("confiabilidad", document.querySelector('input[name="confiabilidad"]').value);
+	formData.append("enfermedad", document.querySelector('select[name="enfermedad"]').value);
+	formData.append("tipoImagen", document.querySelector('select[name="tipoImagen"]').value);
+	
+	fetch('http://localhost:8090/covid/admin/updateImageDetection', {
+		method: 'PUT',
+		body: formData
+	})
+	.then(res => {
+		res.text();
+	})
+	.then(async data => {
+		console.log(data);
+		let actualPage = dt.pagination.actual - 1;
+		await requestGetImagesDetection();
+		let liButtons = dt.element.querySelectorAll('.pages li');
+		liButtons[actualPage].firstElementChild.click();
+	})
+	.catch(err => {
+		console.error(err);
+	});
 }
 
 function deleteRow(elements) {
@@ -721,6 +780,13 @@ const showModal = function(modalHtml) {
 	window.addEventListener('click', closeModal);
 	document.getElementById('close').addEventListener('click', () => {
 		modalContainer.classList.remove('show');
+	});
+	const form = document.getElementById('form');
+	form.addEventListener('submit', e => {
+		e.preventDefault();
+		modalContainer.classList.remove('show');
+		if(selectInput === 'Repositorio') requestUpdateImageRepositorio();
+		if(selectInput === 'Detecciones') requestUpdateImageDetecciones();
 	});
 }
 	

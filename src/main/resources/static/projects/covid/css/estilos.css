@@ -804,6 +804,11 @@ form input[type="text"]:focus, select:focus{
     text-align: center;
 }
 
+.modal-body form input[type="text"]:focus,
+.modal-body form select:focus {
+    outline: 2px solid #5ec2fc;
+}
+
 .modal-body .icon-modal {
 	max-width: 100%;
 	font-size: 55px;

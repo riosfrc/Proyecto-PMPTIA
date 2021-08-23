@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,7 +55,7 @@ public class CovidRestController {
 	ImagenMapaRepository imagenMapaRepository;
 	
 	@PostMapping("/covid/form/save")
-	public String save(@RequestParam("file[]") MultipartFile[] images,
+	public String saveImagesRepository(@RequestParam("file[]") MultipartFile[] images,
 					   @Valid @RequestParam("edad") String edad,
 					   @Valid @RequestParam("peso") String peso,
 					   @Valid @RequestParam("sexo") String sexo,
@@ -76,12 +77,12 @@ public class CovidRestController {
 				Path currentPath = Paths.get(".");
 				Path absolutePath = currentPath.toAbsolutePath();
 				String extension = image.getOriginalFilename();
-				String fileName = fileNameGenerator("R", tipoImagen, enfermedad, paciente.getIdPacienteRepositorio(), fecha, extension);
-				FileOutputStream fos = new FileOutputStream(absolutePath + "/src/main/resources/static/projects/covid/uploads/" + fileName);
+				String filename = filenameGenerator("R", tipoImagen, enfermedad, paciente.getIdPacienteRepositorio(), fecha, extension);
+				FileOutputStream fos = new FileOutputStream(absolutePath + "/src/main/resources/static/projects/covid/uploads/" + filename);
 				fos.write(image.getBytes());
 				fos.close();
 				// save the image information to the database
-				ImagenRepositorio imagen = new ImagenRepositorio(fileName, "/projects/covid/uploads/", tipoImagen, fecha, paciente);
+				ImagenRepositorio imagen = new ImagenRepositorio(filename, "/projects/covid/uploads/", tipoImagen, fecha, paciente);
 				imagenRepositorioRepository.save(imagen);
 				count++;
 			}
@@ -97,7 +98,7 @@ public class CovidRestController {
 	
 	@GetMapping("/covid/admin/getImagesRepository")
 	public ResponseEntity<?> getImagesRepository() throws JSONException {
-		List<ImagenRepositorio> images = imagenRepositorioRepository.findAll();
+		List<ImagenRepositorio> images = imagenRepositorioRepository.findAllBySort();
 		List<JSONObject> jsonResponse = new ArrayList<JSONObject>();
 		
 		for(ImagenRepositorio image : images) {
@@ -122,7 +123,7 @@ public class CovidRestController {
 	
 	
 	@DeleteMapping("/covid/admin/deleteImagesRepositorio")
-	public ResponseEntity<?> deleteImagesRepositorio(@RequestParam("nameImages") String nameImages) throws JSONException {
+	public ResponseEntity<?> deleteImagesRepository(@RequestParam("nameImages") String nameImages) throws JSONException {
 		Path currentPath = Paths.get(".");
 		Path absolutePath = currentPath.toAbsolutePath();
 		String relativePath = "/src/main/resources/static/projects/covid/uploads/";
@@ -157,15 +158,78 @@ public class CovidRestController {
 	}
 	
 	
+	@PutMapping("/covid/admin/updateImageRepository")
+	public ResponseEntity<?> updateImageRepository(@RequestParam("nombreImagen") String nombreImagen,
+												   @RequestParam("edad") String edad,
+			   									   @RequestParam("peso") String peso,
+			   									   @RequestParam("sexo") String sexo,
+			   									   @RequestParam("saturacionOxigeno") String saturacionOxigeno,
+			   									   @RequestParam("enfermedad") String enfermedad,
+			   									   @RequestParam("faseEnfermedad") String faseEnfermedad,
+			   									   @RequestParam("tipoImagen") String tipoImagen) {
+		ImagenRepositorio imagenRepositorio = imagenRepositorioRepository.findByName(nombreImagen);
+		PacienteRepositorio pacienteRepositorio = imagenRepositorio.getPaciente();
+		
+		// Update the patient "PacienteRepositorio" in the database with the new data
+		pacienteRepositorio.setEdad(edad);
+		pacienteRepositorio.setPeso(peso);
+		pacienteRepositorio.setSexo(sexo);
+		pacienteRepositorio.setSaturacionOxigeno(saturacionOxigeno);
+		pacienteRepositorio.setEnfermedad(enfermedad);
+		pacienteRepositorio.setFaseEnfermedad(faseEnfermedad);
+		pacienteRepositorioRepository.save(pacienteRepositorio);
+		
+		Path currentPath = Paths.get(".");
+		Path absolutePath = currentPath.toAbsolutePath();
+		String relativePath = "/src/main/resources/static/projects/covid/uploads/";
+		
+		List<ImagenRepositorio> imagenes = pacienteRepositorio.getImagenes();
+		
+		for(ImagenRepositorio imagen : imagenes) {
+			if(!imagen.getNombre().equals(nombreImagen)) {
+				String extension = imagen.getNombre().substring(imagen.getNombre().lastIndexOf(".") + 1);
+				// Generate a new image name with updated data for each patient "PacienteRepositorio" image "ImagenRepositorio"
+				String newFilename = filenameGenerator("R", imagen.getTipo(), enfermedad, pacienteRepositorio.getIdPacienteRepositorio(), imagen.getFecha(), extension, imagen.getIdImagenRepositorio());
+				
+				// Rename the image "ImagenRepositorio" stored in the uploads folder
+				File oldImageRepositorio = new File(absolutePath + relativePath + imagen.getNombre());
+				File newImageRepositorio = new File(absolutePath + relativePath + newFilename);
+				oldImageRepositorio.renameTo(newImageRepositorio);
+				
+				// Update the image "ImagenRepositorio" in the database with the new name
+				ImagenRepositorio imagenRepo = imagenRepositorioRepository.findByName(imagen.getNombre());
+				imagenRepo.setNombre(newFilename);
+				imagenRepositorioRepository.save(imagenRepo);
+			}
+		}
+		
+		String extension = nombreImagen.substring(nombreImagen.lastIndexOf(".") + 1);
+		// Generate a new image name with updated data for the image "ImagenRepositorio"
+		String newFilename = filenameGenerator("R", tipoImagen, enfermedad, pacienteRepositorio.getIdPacienteRepositorio(), imagenRepositorio.getFecha(), extension, imagenRepositorio.getIdImagenRepositorio());
+		
+		// Rename the image "ImagenRepositorio" stored in the uploads folder
+		File oldImageRepositorio = new File(absolutePath + relativePath + nombreImagen);
+		File newImageRepositorio = new File(absolutePath + relativePath + newFilename);
+		oldImageRepositorio.renameTo(newImageRepositorio);
+		
+		// Update the image "ImagenRepositorio" in the database with the new data
+		imagenRepositorio.setTipo(tipoImagen);
+		imagenRepositorio.setNombre(newFilename);
+		imagenRepositorioRepository.save(imagenRepositorio);
+		
+		return new ResponseEntity<>("Se actualizó la imagen correctamente", HttpStatus.OK);
+	}
+	
+	
 	@PostMapping("/covid/diagnostico/save")
-	public String Save(@RequestParam("file[]") MultipartFile[] images,
+	public String saveImagesDetection(@RequestParam("file[]") MultipartFile[] images,
 			   		   @Valid @RequestParam("edad") String edad,
 			   		   @Valid @RequestParam("peso") String peso,
 			   		   @Valid @RequestParam("sexo") String sexo,
 			   		   @Valid @RequestParam("tipoImagen") String tipoImagen) {
 		try {
 			String diseaseDetected = "COVID-19";
-			String reliability = "90";
+			String reliability = "90.00";
 			// save the patient information to the database
 			PacienteDeteccion pacienteDeteccion = new PacienteDeteccion(edad, peso, sexo, diseaseDetected, reliability);
 			pacienteDeteccionRepository.save(pacienteDeteccion);
@@ -176,26 +240,26 @@ public class CovidRestController {
 			int count = 0;
 			for(MultipartFile image : images) {
 				String extension = image.getOriginalFilename();
-				String fileName = "";
+				String filename = "";
 				Path currentPath = Paths.get(".");
 				Path absolutePath = currentPath.toAbsolutePath();
 				
 				// store uploaded image in the specified directory
-				fileName = fileNameGenerator("D", tipoImagen, diseaseDetected, pacienteDeteccion.getIdPacienteDeteccion(), fecha, extension);
-				FileOutputStream uploadedImageFos = new FileOutputStream(absolutePath + "/src/main/resources/static/projects/covid/detection/" + fileName);
+				filename = filenameGenerator("D", tipoImagen, diseaseDetected, pacienteDeteccion.getIdPacienteDeteccion(), fecha, extension);
+				FileOutputStream uploadedImageFos = new FileOutputStream(absolutePath + "/src/main/resources/static/projects/covid/detection/" + filename);
 				uploadedImageFos.write(image.getBytes());
 				uploadedImageFos.close();
 				// save uploaded image information to the database
-				ImagenDeteccion imagenDeteccion = new ImagenDeteccion(fileName, "/projects/covid/detection/", tipoImagen, fecha, pacienteDeteccion);
+				ImagenDeteccion imagenDeteccion = new ImagenDeteccion(filename, "/projects/covid/detection/", tipoImagen, fecha, pacienteDeteccion);
 				imagenDeteccionRepository.save(imagenDeteccion);
 				
 				// store result image in the specified directory
-				fileName = fileNameGenerator("M", tipoImagen, diseaseDetected, pacienteDeteccion.getIdPacienteDeteccion(), fecha, extension);
-				FileOutputStream resultImageFos = new FileOutputStream(absolutePath + "/src/main/resources/static/projects/covid/detection/" + fileName);
+				filename = filenameGenerator("M", tipoImagen, diseaseDetected, pacienteDeteccion.getIdPacienteDeteccion(), fecha, extension);
+				FileOutputStream resultImageFos = new FileOutputStream(absolutePath + "/src/main/resources/static/projects/covid/detection/" + filename);
 				resultImageFos.write(image.getBytes());
 				resultImageFos.close();
 				// save result image information to the database
-				ImagenMapa imagenMapa = new ImagenMapa(fileName, "/projects/covid/detection/", imagenDeteccion);
+				ImagenMapa imagenMapa = new ImagenMapa(filename, "/projects/covid/detection/", imagenDeteccion);
 				imagenMapaRepository.save(imagenMapa);
 				
 				count++;
@@ -209,8 +273,34 @@ public class CovidRestController {
 	}
 	
 	
+	@GetMapping("/covid/admin/getImagesDetection")
+	public ResponseEntity<?> getImagesDetection() throws JSONException {
+		List<ImagenDeteccion> images = imagenDeteccionRepository.findAllBySort();
+		List<JSONObject> jsonResponse = new ArrayList<JSONObject>();
+		
+		for(ImagenDeteccion image : images) {
+			// Create a new jsonitem for each image in the database
+			JSONObject jsonItem = new JSONObject();
+			PacienteDeteccion paciente = image.getPacienteDeteccion();
+			jsonItem.put("edad", paciente.getEdad());
+			jsonItem.put("prediagnostico", paciente.getEnfermedadDetectada());
+			jsonItem.put("confiabilidad", paciente.getConfiabilidad());
+			jsonItem.put("peso", paciente.getPeso());
+			jsonItem.put("sexo", paciente.getSexo());
+			jsonItem.put("fecha", image.getFecha());
+			jsonItem.put("tipoImagen", image.getTipo());
+			jsonItem.put("rutaImagen", image.getRuta());
+			jsonItem.put("nombreImagenDeteccion", image.getNombre());
+			jsonItem.put("nombreImagenMapa", image.getImagenMapa().getNombre());
+			jsonResponse.add(jsonItem);
+		}
+		
+		return new ResponseEntity<>(jsonResponse.toString(), HttpStatus.OK);
+	}
+	
+	
 	@DeleteMapping("/covid/admin/deleteImagesDetecciones")
-	public ResponseEntity<?> deleteImagesDetecciones(@RequestParam("nameImages") String nameImages) throws JSONException {
+	public ResponseEntity<?> deleteImagesDetection(@RequestParam("nameImages") String nameImages) throws JSONException {
 		Path currentPath = Paths.get(".");
 		Path absolutePath = currentPath.toAbsolutePath();
 		String relativePath = "/src/main/resources/static/projects/covid/detection/";
@@ -250,32 +340,95 @@ public class CovidRestController {
 	}
 	
 	
-	@GetMapping("/covid/admin/getImagesDetection")
-	public ResponseEntity<?> getImagesDetection() throws JSONException {
-		List<ImagenDeteccion> images = imagenDeteccionRepository.findAll();
-		List<JSONObject> jsonResponse = new ArrayList<JSONObject>();
+	@PutMapping("/covid/admin/updateImageDetection")
+	public ResponseEntity<?> updateImageDetection(@RequestParam("nombreImagen") String nombreImagen,
+												   @RequestParam("edad") String edad,
+			   									   @RequestParam("peso") String peso,
+			   									   @RequestParam("sexo") String sexo,
+			   									   @RequestParam("confiabilidad") String confiabilidad,
+			   									   @RequestParam("enfermedad") String enfermedad,
+			   									   @RequestParam("tipoImagen") String tipoImagen) {
+		ImagenDeteccion imagenDeteccion = imagenDeteccionRepository.findByName(nombreImagen);
+		ImagenMapa imagenMapa = imagenDeteccion.getImagenMapa();
+		PacienteDeteccion pacienteDeteccion = imagenDeteccion.getPacienteDeteccion();
 		
-		for(ImagenDeteccion image : images) {
-			// Create a new jsonitem for each image in the database
-			JSONObject jsonItem = new JSONObject();
-			PacienteDeteccion paciente = image.getPacienteDeteccion();
-			jsonItem.put("edad", paciente.getEdad());
-			jsonItem.put("prediagnostico", paciente.getEnfermedadDetectada());
-			jsonItem.put("confiabilidad", paciente.getConfiabilidad());
-			jsonItem.put("peso", paciente.getPeso());
-			jsonItem.put("sexo", paciente.getSexo());
-			jsonItem.put("fecha", image.getFecha());
-			jsonItem.put("tipoImagen", image.getTipo());
-			jsonItem.put("rutaImagen", image.getRuta());
-			jsonItem.put("nombreImagenDeteccion", image.getNombre());
-			jsonItem.put("nombreImagenMapa", image.getImagenMapa().getNombre());
-			jsonResponse.add(jsonItem);
+		// Update the patient "PacienteDeteccion" in the database with the new data
+		pacienteDeteccion.setEdad(edad);
+		pacienteDeteccion.setPeso(peso);
+		pacienteDeteccion.setSexo(sexo);
+		pacienteDeteccion.setConfiabilidad(confiabilidad);
+		pacienteDeteccion.setEnfermedadDetectada(enfermedad);
+		pacienteDeteccionRepository.save(pacienteDeteccion);
+		
+		Path currentPath = Paths.get(".");
+		Path absolutePath = currentPath.toAbsolutePath();
+		String relativePath = "/src/main/resources/static/projects/covid/detection/";
+		
+		List<ImagenDeteccion> imagenes = pacienteDeteccion.getImagenDeteccion();
+		
+		for(ImagenDeteccion imagen : imagenes) {
+			if(!imagen.getNombre().equals(nombreImagen)) {				
+				String extension = imagen.getNombre().substring(imagen.getNombre().lastIndexOf(".") + 1);
+				// Generate a new image name with updated data for each patient "PacienteDeteccion" image "ImagenDeteccion"
+				String newFilename = filenameGenerator("D", imagen.getTipo(), enfermedad, pacienteDeteccion.getIdPacienteDeteccion(), imagen.getFecha(), extension, imagen.getIdImagenDeteccion());
+				
+				// Rename the image "ImagenDeteccion" stored in the detection folder
+				File oldImageDeteccion = new File(absolutePath + relativePath + imagen.getNombre());
+				File newImageDeteccion = new File(absolutePath + relativePath + newFilename);
+				oldImageDeteccion.renameTo(newImageDeteccion);
+				
+				// Update the image "ImagenDeteccion" in the database with the new name
+				ImagenDeteccion imagenDet = imagenDeteccionRepository.findByName(imagen.getNombre());
+				imagenDet.setNombre(newFilename);
+				imagenDeteccionRepository.save(imagenDet);
+				
+				ImagenMapa imagenMap = imagen.getImagenMapa();
+				// Generate a new image name with updated data for each patient image "ImagenMapa"
+				newFilename = filenameGenerator("M", imagen.getTipo(), enfermedad, pacienteDeteccion.getIdPacienteDeteccion(), imagen.getFecha(), extension, imagenMap.getIdImagenMapa());
+				
+				// Rename the image "ImagenMapa" stored in the detection folder
+				File oldImageMapa = new File(absolutePath + relativePath + imagenMap.getNombre());
+				File newImageMapa = new File(absolutePath + relativePath + newFilename);
+				oldImageMapa.renameTo(newImageMapa);
+				
+				// Update the image "ImagenMapa" in the database with the new name
+				imagenMap.setNombre(newFilename);
+				imagenMapaRepository.save(imagenMap);
+			}
 		}
 		
-		return new ResponseEntity<>(jsonResponse.toString(), HttpStatus.OK);
+		String extension = nombreImagen.substring(nombreImagen.lastIndexOf(".") + 1);
+		// Generate a new image name with updated data for the image "ImagenDeteccion"
+		String newFilename = filenameGenerator("D", tipoImagen, enfermedad, pacienteDeteccion.getIdPacienteDeteccion(), imagenDeteccion.getFecha(), extension, imagenDeteccion.getIdImagenDeteccion());
+		
+		// Rename the image "ImagenDeteccion" stored in the detection folder
+		File oldImageDeteccion = new File(absolutePath + relativePath + nombreImagen);
+		File newImageDeteccion = new File(absolutePath + relativePath + newFilename);
+		oldImageDeteccion.renameTo(newImageDeteccion);
+		
+		// Update the image "ImagenDeteccion" in the database with the new data
+		imagenDeteccion.setTipo(tipoImagen);
+		imagenDeteccion.setNombre(newFilename);
+		imagenDeteccionRepository.save(imagenDeteccion);
+		
+		// Generate a new image name with updated data for the image "ImagenMapa"
+		newFilename = filenameGenerator("M", tipoImagen, enfermedad, pacienteDeteccion.getIdPacienteDeteccion(), imagenDeteccion.getFecha(), extension, imagenMapa.getIdImagenMapa());
+		
+		// Rename the image "ImagenMapa" stored in the detection folder
+		File oldImageMapa = new File(absolutePath + relativePath + imagenMapa.getNombre());
+		File newImageMapa = new File(absolutePath + relativePath + newFilename);
+		oldImageMapa.renameTo(newImageMapa);
+		
+		// Update the image "ImagenMapa" in the database with the new name
+		imagenMapa.setNombre(newFilename);
+		imagenMapaRepository.save(imagenMapa);
+		
+		return new ResponseEntity<>("Se actualizó la imagen correctamente", HttpStatus.OK);
 	}
 	
-	public String fileNameGenerator(String clase, String tipo, String enfermedad, String idPaciente, String fecha, String extensión) {
+	
+	
+	public String filenameGenerator(String clase, String tipo, String enfermedad, String idPaciente, String fecha, String extension, String...paramId) {
 		String acronimoTipo = "";
 		String acronimoEnfermedad = "";
 		String acronimoFecha = "";
@@ -294,28 +447,36 @@ public class CovidRestController {
 		
 		acronimoFecha = fecha.replace("/", "");
 		
-		if(clase == "R") {
-			List<ImagenRepositorio> imagenes =  imagenRepositorioRepository.findAll();
-			if(imagenes.size() != 0) {
-				String idImagen = imagenes.get(imagenes.size() - 1).getIdImagenRepositorio();
-				id = Long.parseLong(idImagen.replace("R_IMAGEN_", "")) + 1;
+		if(paramId.length == 0) {
+			if(clase == "R") {
+				List<ImagenRepositorio> imagenes =  imagenRepositorioRepository.findAll();
+				if(imagenes.size() != 0) {
+					String idImagen = imagenes.get(imagenes.size() - 1).getIdImagenRepositorio();
+					id = Long.parseLong(idImagen.replace("R_IMAGEN_", "")) + 1;
+				}
+			}
+			if(clase == "D") {
+				List<ImagenDeteccion> imagenes =  imagenDeteccionRepository.findAll();
+				if(imagenes.size() != 0) {
+					String idImagen = imagenes.get(imagenes.size() - 1).getIdImagenDeteccion();
+					id = Long.parseLong(idImagen.replace("D_IMAGEN_", "")) + 1;
+				}
+			}
+			if(clase == "M") {
+				List<ImagenMapa> imagenes =  imagenMapaRepository.findAll();
+				if(imagenes.size() != 0) {
+					String idImagen = imagenes.get(imagenes.size() - 1).getIdImagenMapa();
+					id = Long.parseLong(idImagen.replace("M_IMAGEN_", "")) + 1;
+				}
 			}
 		}
-		if(clase == "D") {
-			List<ImagenDeteccion> imagenes =  imagenDeteccionRepository.findAll();
-			if(imagenes.size() != 0) {
-				String idImagen = imagenes.get(imagenes.size() - 1).getIdImagenDeteccion();
-				id = Long.parseLong(idImagen.replace("D_IMAGEN_", "")) + 1;
+		if(paramId.length > 0) {
+			if (!(paramId[0] instanceof String)) { 
+				throw new IllegalArgumentException("...");
 			}
-		}
-		if(clase == "M") {
-			List<ImagenMapa> imagenes =  imagenMapaRepository.findAll();
-			if(imagenes.size() != 0) {
-				String idImagen = imagenes.get(imagenes.size() - 1).getIdImagenMapa();
-				id = Long.parseLong(idImagen.replace("M_IMAGEN_", "")) + 1;
-			}
+			id = Long.parseLong(paramId[0].substring(paramId[0].lastIndexOf("_") + 1));
 		}
 		
-		return clase + "_" + acronimoTipo + "_" + acronimoEnfermedad + "_" + idPaciente + "_" + acronimoFecha + "_" + id.toString() + "." + extensión;
+		return clase + "_" + acronimoTipo + "_" + acronimoEnfermedad + "_" + idPaciente + "_" + acronimoFecha + "_" + id.toString() + "." + extension;
 	}
 }

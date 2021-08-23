@@ -36,32 +36,32 @@
             <div class="section__name section__aspecto-de-personalidad-emocionales">Aspectos de personalidad y/o emocionales</div>
             <div class="section__name section__registro-sesiones">Reg. de sesiones</div>
         </div>
-        <form class="tdah-form" id="formulario" method="POST" th:action="@{/tdah/form/save}" th:object="${patient}">
+        <form class="tdah-form" id="formulario" method="POST" th:action="@{/tdah/form/save}" th:object="${paciente}">
             <!-- Datos personales -->
             <div class="tdah-form__datos-personales" id="datos-personales">
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Nombre:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input" type="text" th:field="*{nombre}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Fecha de registro:</label>
-                        <input class="input-group__input" type="date">
+                        <input class="input-group__input" type="date" th:field="*{fechaResgistro}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Sexo:</label>
                         <div class="input-group__input">
-                            <input type="radio" value="Masculino" name="sexo"> Masculino
-                            <input type="radio" value="Femenino" name="sexo"> Femenino
+                            <input type="radio" value="Masculino" name="sexo" th:field="*{sexo}"> Masculino
+                            <input type="radio" value="Femenino" name="sexo" th:field="*{sexo}"> Femenino
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Fecha de nacimiento:</label>
-                        <input class="input-group__input" type="date">
+                        <input class="input-group__input" type="date" th:field="*{fechaNacimiento}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Lugar de nacimiento:</label>
-                        <input class="input-group__input" type="text">
+                        <input class="input-group__input" type="text" th:field="*{lugarNacimiento}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Lateralidad:</label>
