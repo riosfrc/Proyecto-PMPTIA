@@ -8,33 +8,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.extern.slf4j.Slf4j;
 import mx.cenidet.projects.tdah.entities.Paciente;
-import mx.cenidet.projects.tdah.repositories.PacienteRepository;
+import mx.cenidet.projects.tdah.services.PatientService;
 
 @Controller
 @Slf4j
-public class TdahController {
+public class PatientController {
 	
 	@Autowired
-	PacienteRepository pacienteRepository;
+	PatientService patientService;
 	
-	
-	@GetMapping("/tdah/form") // URL del botón
+	@GetMapping("/tdah/patient/new")
 	public String registerPatient(Paciente paciente, Model model) {
-		
 		model.addAttribute("paciente", paciente);
-		
 		log.info("The form was entered");
-		return "projects/tdah/form"; // archivo html
+		return "projects/tdah/form";
 	}
 	
+	@GetMapping("/tdah/patient/{idPaciente}")
+	public String editPatient(Paciente paciente, Model model) {
+		paciente = patientService.find(paciente);
+		model.addAttribute("paciente", paciente);
+		return "projects/tdah/form";
+	}
 	
 	@PostMapping("/tdah/form/save")
 	public String savePatient(Paciente paciente) {
-		
-		pacienteRepository.save(paciente);
-		
+		patientService.save(paciente);
 		log.info("Saved patient: " + paciente.toString());
-		return "projects/tdah/perfil";
+		return "redirect:/tdah/patient/" + paciente.getIdPaciente();
 	}
-
 }

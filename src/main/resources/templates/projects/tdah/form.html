@@ -18,21 +18,21 @@
             <ul>
                 <li><a href="#"><i class="fas fa-home"></i></a></li>
                 <li><i class="fas fa-angle-right"></i></li>
-                <li><a href="index.html">TDAH</a></li>
+                <li><a href="/tdah/index">TDAH</a></li>
                 <li><i class="fas fa-angle-right"></i></li>
-                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="/tdah/profile">Perfil</a></li>
                 <li><i class="fas fa-angle-right"></i></li>
-                <li><a href="form.html">Formulario</a></li>
+                <li><a href="/tdah/patient/new">Formulario</a></li>
             </ul>
         </nav>
         <h1 class="title-form">PERFIL DEL PACIENTE</h1>
         <div class="buttons">
-        	<button id= "pdf-button"><i class="fas fa-download" id="download"></i> Descargar pdf </button>
+        	<button id= "pdf-button"><i class="fas fa-download"></i> Descargar PDF</button>
         </div>
         
         <div class="section">
             <div class="section__name section__datos-personales section__name--selected">Datos del paciente</div>
-            <div class="section__name section__antecedentes-personales-no-patologicos">Antecedentes personales nopatológicos</div>
+            <div class="section__name section__antecedentes-personales-no-patologicos">Antecedentes personales no patológicos</div>
             <div class="section__name section__antecedentes-personales-patologicos">Antecedentes personales patológicos</div>
             <div class="section__name section__antecedentes-pre-peri-y-postnatales">Antecedentes pre-peri y postnatales</div>
             <div class="section__name section__historia-del-desarrollo">Historia del desarrollo</div>
@@ -41,44 +41,48 @@
             <div class="section__name section__aspecto-de-personalidad-emocionales">Aspectos de personalidad y/o emocionales</div>
             <div class="section__name section__registro-sesiones">Reg. de sesiones</div>
         </div>
-        <form class="tdah-form" id="formulario">
-            <!-- Datos personales -->
+        <form class="tdah-form" id="formulario" method="POST" th:action="@{/tdah/form/save}" th:object="${paciente}">
+             <!-- Datos personales -->
             <div class="tdah-form__datos-personales" id="datos-personales">
                 <div class="group input-group--color1">
                     <div class="input-group">
-                        <label class="input-group__label" for="">Nombre:</label>
-                        <input class="input-group__input nombre" type="text">
+                        <label class="input-group__label" for="">Nombre(s):</label>
+                        <input class="input-group__input nombre" type="text" th:field="*{nombre}">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Apellido(s):</label>
+                        <input class="input-group__input nombre" type="text" th:field="*{apellido}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Fecha de registro:</label>
-                        <input class="input-group__input fecha_registro" type="date">
+                        <input class="input-group__input fecha_registro" type="date" th:field="*{fechaResgistro}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Sexo:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="genero" value="Masculino" > Masculino
-                            <input type="radio" name="genero" value="Femenino" > Femenino
+                            <input type="radio" name="genero" value="Masculino" th:field="*{sexo}"> Masculino
+                            <input type="radio" name="genero" value="Femenino" th:field="*{sexo}"> Femenino
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Fecha de nacimiento:</label>
-                        <input class="input-group__input fecha_nacimiento" type="date">
+                        <input class="input-group__input fecha_nacimiento" type="date" th:field="*{fechaNacimiento}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Lugar de nacimiento:</label>
-                        <input class="input-group__input lugar_nacimiento" type="text">
+                        <input class="input-group__input lugar_nacimiento" type="text" th:field="*{lugarNacimiento}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Lateralidad:</label>
-                        <input class="input-group__input lateralidad" type="text">
+                        <input class="input-group__input lateralidad" type="text" th:field="*{lateralidad}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Antecedentes de zurdería:</label>
-                        <input class="input-group__input antecedentes_zur" type="text">
+                        <input class="input-group__input antecedentes_zur" type="text" th:field="*{antecedentesZurderia}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Escolaridad:</label>
-                        <select class="input-group__input escolaridad_niño" id="escolarida_paciente" style="height: 26px">
+                        <select class="input-group__input escolaridad_niño" id="escolarida_paciente" style="height: 26px" th:field="*{escolaridad}">
                             <option value="">- Seleccione una opción -</option>
                             <option value="Primaria">Primaria</option>
                             <option value="Secundaria">Secundaria</option>
@@ -90,7 +94,7 @@
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Familiar responsable:</label>
-                        <select class="input-group__input familiar_responable" id="familiar_responable" style="height: 26px">
+                        <select class="input-group__input familiar_responable" id="familiar_responable" style="height: 26px"  th:field="*{familiarResponsable}">
                             <option value="">- Seleccione una opción -</option>
                             <option value="Madre">Madre</option>
                             <option value="Padre">Padre</option>
@@ -105,19 +109,19 @@
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Nombre del padre:</label>
-                        <input class="input-group__input nombre_Padre" type="text">
+                        <input class="input-group__input nombre_Padre" type="text"  th:field="*{pacientePadres.padre.nombre}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Edad:</label>
-                        <input class="input-group__input edad_Padre" type="text">
+                        <input class="input-group__input edad_Padre" type="text" th:field="*{pacientePadres.padre.edad}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Ocupación:</label>
-                        <input class="input-group__input ocupacion_padre" type="text">
+                        <input class="input-group__input ocupacion_padre" type="text" th:field="*{pacientePadres.padre.ocupacion}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Escolaridad:</label>
-                        <select class="input-group__input escolaridad_Padre" id="escolaridad_padre" style="height: 26px">
+                        <select class="input-group__input escolaridad_Padre" id="escolaridad_padre" style="height: 26px" th:field="*{pacientePadres.padre.escolaridad}">
                             <option value="">- Seleccione una opción -</option>
                             <option value="Primaria">Primaria</option>
                             <option value="Secundaria">Secundaria</option>
@@ -129,15 +133,15 @@
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Ciudad:</label>
-                        <input class="input-group__input ciudad_padre" type="text">
+                        <input class="input-group__input ciudad_padre" type="text" th:field="*{pacientePadres.padre.ciudad}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Teléfono:</label>
-                        <input class="input-group__input telefono_padre" type="text">
+                        <input class="input-group__input telefono_padre" type="text" th:field="*{pacientePadres.padre.telefono}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Teléfono de oficina:</label>
-                        <input class="input-group__input telefono_padre_oficina" type="text">
+                        <input class="input-group__input telefono_padre_oficina" type="text" th:field="*{pacientePadres.padre.telefonoOfi}">
                     </div>
                     <div class="input-group"></div>
                 </div>
@@ -147,19 +151,19 @@
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Nombre de la madre:</label>
-                        <input class="input-group__input nombre_Madre" type="text">
+                        <input class="input-group__input nombre_Madre" type="text" th:field="*{pacientePadres.madre.nombre}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Edad:</label>
-                        <input class="input-group__input edad_Madre" type="text">
+                        <input class="input-group__input edad_Madre" type="text" th:field="*{pacientePadres.madre.edad}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Ocupación:</label>
-                        <input class="input-group__input ocupacion_Madre" type="text">
+                        <input class="input-group__input ocupacion_Madre" type="text" th:field="*{pacientePadres.madre.ocupacion}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Escolaridad:</label>
-                        <select class="input-group__input escolaridad_Madre" id="escolaridad_madre" style="height: 26px">
+                        <select class="input-group__input escolaridad_Madre" id="escolaridad_madre" style="height: 26px" th:field="*{pacientePadres.madre.escolaridad}">
                             <option value="">- Seleccione una opción -</option>
                             <option value="Primaria">Primaria</option>
                             <option value="Secundaria">Secundaria</option>
@@ -171,15 +175,15 @@
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Ciudad:</label>
-                        <input class="input-group__input ciudad_Madre" type="text">
+                        <input class="input-group__input ciudad_Madre" type="text" th:field="*{pacientePadres.madre.ciudad}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Teléfono:</label>
-                        <input class="input-group__input telefono_Madre" type="text">
+                        <input class="input-group__input telefono_Madre" type="text" th:field="*{pacientePadres.madre.telefono}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Teléfono de oficina:</label>
-                        <input class="input-group__input telefono_Madre_oficina" type="text">
+                        <input class="input-group__input telefono_Madre_oficina" type="text" th:field="*{pacientePadres.madre.telefonoOfi}">
                     </div>
                     <div class="input-group"></div>
                 </div>
@@ -190,17 +194,17 @@
                     <div class="input-group input-group--color1">
                         <label class="input-group__label" for="">Estado civil de los padres:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="estado_civil" value="Soltero"> Soltero
-                            <input type="radio" name="estado_civil" value="Casado"> Casado
+                            <input type="radio" name="estado_civil" value="Soltero" th:field="*{pacientePadres.estadoCivil}"> Soltero
+                            <input type="radio" name="estado_civil" value="Casado" th:field="*{pacientePadres.estadoCivil}"> Casado
                         </div>
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label" for="">Desde:</label>
-                        <input class="input-group__input casados_desde" type="text">
+                        <input class="input-group__input casados_desde" type="text" th:field="*{pacientePadres.tiempo}">
                     </div>
                     <div class="input-group input-group--color1"></div>
                     <div class="input-group--btn input-group--color1">
-                        <button type="button" class="input-group--btn__guardar boton_datos">Guardar</button>
+                        <button type="submit" class="input-group--btn__guardar boton_datos">Guardar</button>
                     </div>
                 </div>
 
@@ -214,9 +218,9 @@
                     <div class="input-group">
                         <label class="input-group__label" for="">Vive en: </label>
                         <div class="input-group__input">
-                            <input type="radio" name="hogar" value="Casa"> Casa
-                            <input type="radio" name="hogar" value="Departamento"> Departamento
-                            <input type="radio" name="hogar" value="Cuarto"> Cuarto
+                            <input type="radio" name="hogar" value="Casa" th:field="*{apnp.viveEn}"> Casa
+                            <input type="radio" name="hogar" value="Departamento" th:field="*{apnp.viveEn}"> Departamento
+                            <input type="radio" name="hogar" value="Cuarto" th:field="*{apnp.viveEn}"> Cuarto
                             <div class="input--small"><label for=""><input type="radio" name="hogar" value="Otro"> Otro:</label>
                                 <div><input type="text" class="otro_vive_en"></div>
                             </div>
@@ -225,41 +229,41 @@
                     <div class="input-group">
                         <label class="input-group__label" for="">El lugar es:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="lugar_dondeviven" value="Propio"> Propio
-                            <input type="radio" name="lugar_dondeviven" value="Rentado"> Rentado
-                            <input type="radio" name="lugar_dondeviven" value="Prestado"> Prestado
+                            <input type="radio" name="lugar_dondeviven" value="Propio" th:field="*{apnp.lugarEs}"> Propio
+                            <input type="radio" name="lugar_dondeviven" value="Rentado" th:field="*{apnp.lugarEs}"> Rentado
+                            <input type="radio" name="lugar_dondeviven" value="Prestado" th:field="*{apnp.lugarEs}"> Prestado
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Con cuáles servicios cuenta?:</label>
-                        <input class="input-group__input servicios_cuenta" type="text">
+                        <input class="input-group__input servicios_cuenta" type="text" th:field="*{apnp.serviciosCuenta}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Lugar que ocupa el niño en la familia:</label>
-                        <input class="input-group__input lugar_ocupado_niño" type="text">
+                        <input class="input-group__input lugar_ocupado_niño" type="text" th:field="*{apnp.ocupaNiñoFamilia}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Tiene habitación propia o la comparte?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="habitacion" value="Propia"> Propia
-                            <input type="radio" name="habitacion" value="Compartida"> Compartida
+                            <input type="radio" name="habitacion" value="Propia" th:field="*{apnp.tieneHabitacion}"> Propia
+                            <input type="radio" name="habitacion" value="Compartida" th:field="*{apnp.tieneHabitacion}"> Compartida
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿De dónde es originaria su familia?:</label>
-                        <input class="input-group__input donde_es_familia" type="text">
+                        <input class="input-group__input donde_es_familia" type="text" th:field="*{apnp.originariaFamilia}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Ingreso familiar mensual:</label>
-                        <input class="input-group__input ingreso_familiar_mensual" type="text">
+                        <input class="input-group__input ingreso_familiar_mensual" type="text" th:field="*{apnp.ingresoFamiliar}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Quiénes contribuyen?:</label>
-                        <input class="input-group__input quienes_contribuyen" type="text">
+                        <input class="input-group__input quienes_contribuyen" type="text" th:field="*{apnp.quienesContribuyen}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">El niño depende económicamente de: </label>
-                        <input class="input-group__input economicamente_niño" type="text">
+                        <input class="input-group__input economicamente_niño" type="text" th:field="*{apnp.niñoDependeEconomicamente}">
                     </div>
                 </div>
 
@@ -268,7 +272,7 @@
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Número de personas que viven en la casa:</label>
-                        <input class="input-group__input personas_casa" type="text">
+                        <input class="input-group__input personas_casa" type="text" th:field="*{apnp.personasVivenCasa}">
                     </div>
                     <div class="input-group-table">
                         <label class="input-group-table__label" for="">Familiares que viven en la casa:</label>
@@ -282,39 +286,39 @@
                                 <th>Ocupación</th>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" name="Parentesco1"></td>
-                                    <td><input type="text" name="Nombre1"></td>
-                                    <td><input type="text" name="Edad1" ></td>
-                                    <td><input type="text" name="Escolaridad1" ></td>
-                                    <td><input type="text" name="Ocupacion1" ></td>
+                                    <td><input type="text" th:field="*{apnp.parentesco1}" name="Parentesco1"></td>
+                                    <td><input type="text" th:field="*{apnp.nombre1}" name="Nombre1"></td>
+                                    <td><input type="text" th:field="*{apnp.edad1}" name="Edad1" ></td>
+                                    <td><input type="text" th:field="*{apnp.escolaridad1}" name="Escolaridad1" ></td>
+                                    <td><input type="text" th:field="*{apnp.ocupacion1}" name="Ocupacion1" ></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" th:field="*{apnp.parentesco2}" name="Parentesco2"></td>
+                                    <td><input type="text" th:field="*{apnp.nombre2}" name="Nombre2"></td>
+                                    <td><input type="text" th:field="*{apnp.edad2}" name="Edad2"></td>
+                                    <td><input type="text" th:field="*{apnp.escolaridad2}" name="Escolaridad2"></td>
+                                    <td><input type="text" th:field="*{apnp.ocupacion2}" name="Ocupacion2"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" th:field="*{apnp.parentesco3}" name="Parentesco3"></td>
+                                    <td><input type="text" th:field="*{apnp.nombre3}" name="Nombre3"></td>
+                                    <td><input type="text" th:field="*{apnp.edad3}" name="Edad3"></td>
+                                    <td><input type="text" th:field="*{apnp.escolaridad3}" name="Escolaridad3"></td>
+                                    <td><input type="text" th:field="*{apnp.ocupacion3}" name="Ocupacion3"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" th:field="*{apnp.parentesco4}" name="Parentesco4"></td>
+                                    <td><input type="text" th:field="*{apnp.nombre4}" name="Nombre4"></td>
+                                    <td><input type="text" th:field="*{apnp.edad4}" name="Edad4"></td>
+                                    <td><input type="text" th:field="*{apnp.escolaridad4}" name="Escolaridad4"></td>
+                                    <td><input type="text" th:field="*{apnp.ocupacion4}" name="Ocupacion4"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" th:field="*{apnp.parentesco5}" name="Parentesco5"></td>
+                                    <td><input type="text" th:field="*{apnp.nombre5}" name="Nombre5"></td>
+                                    <td><input type="text" th:field="*{apnp.edad5}" name="Edad5"></td>
+                                    <td><input type="text" th:field="*{apnp.escolaridad5}" name="Escolaridad5"></td>
+                                    <td><input type="text" th:field="*{apnp.ocupacion5}" name="Ocupacion5"></td>
                                 </tr>
                             </table>
                         </div>
@@ -326,33 +330,33 @@
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Juegos o actividades preferidas y/o preferidos:</label>
-                        <input class="input-group__input juegos_actividades_preferidas" type="text">
+                        <input class="input-group__input juegos_actividades_preferidas" type="text" th:field="*{apnp.actividadesPreferidas}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Juguetes preferidos:</label>
-                        <input class="input-group__input juguetes_preferidos" type="text">
+                        <input class="input-group__input juguetes_preferidos" type="text" th:field="*{apnp.juguetePreferido}">
                     </div>
                     <div class="input-group"><!-- EMPIEZA AQUÍ -->
                         <label class="input-group__label " for="">Descripción del tiempo libre y pasatiempos:</label>
-                        <input class="input-group__input tiempolibre" type="text">
+                        <input class="input-group__input tiempolibre" type="text" th:field="*{apnp.descripcionTiempoLibre}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Realiza actividades extraescolares?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="actividades" value="SI"> Sí
-                            <input type="radio" name="actividades" value="NO"> No
+                            <input type="radio" name="actividades" value="SI" th:field="*{apnp.actividadesExtraescolares}"> Sí
+                            <input type="radio" name="actividades" value="NO" th:field="*{apnp.actividadesExtraescolares}"> No
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Tiene amigos?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="amigos" value="SI"> Sí
-                            <input type="radio" name="amigos"value="NO"> No
+                            <input type="radio" name="amigos" value="SI" th:field="*{apnp.tieneAmigos}"> Sí
+                            <input type="radio" name="amigos"value="NO" th:field="*{apnp.tieneAmigos}"> No
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Cuántos?:</label>
-                        <select class="input-group__input cantidadamigos" id="cuantos_amigostiene" style="height: 26px">
+                        <select class="input-group__input cantidadamigos" id="cuantos_amigostiene" style="height: 26px" th:field="*{apnp.cuantosAmigos}">
                             <option value="0">- Seleccione una opción -</option>
                             <option value="1_a_2">1 a 2</option>
                             <option value="3_a_4">3 a 4</option>
@@ -361,7 +365,7 @@
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿De dónde los conoce?:</label>
-                        <select class="input-group__input donde_se_conocen" id="donde_conoce" style="height: 26px">
+                        <select class="input-group__input donde_se_conocen" id="donde_conoce" style="height: 26px" th:field="*{apnp.dondeConoce}">
                             <option value="Ninguno">- Seleccione una opción -</option>
                             <option value="Escuela">Escuela</option>
                             <option value="Vecindario">Vecindario</option>
@@ -371,13 +375,13 @@
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Sale con ellos?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="salirAmigos" value="SI"> Sí
-                            <input type="radio" name="salirAmigos"value="NO"> No
+                            <input type="radio" name="salirAmigos" value="SI" th:field="*{apnp.saleConEllos}"> Sí
+                            <input type="radio" name="salirAmigos"value="NO" th:field="*{apnp.saleConEllos}"> No
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Con qué frecuencia sale con sus amigos?:</label>
-                        <input class="input-group__input frecuencia" type="text">
+                        <input class="input-group__input frecuencia" type="text" th:field="*{apnp.frecuenciaSale}">
                     </div>
                     <div class="input-group--btn input-group--color1">
                         <button type="button" class="input-group--btn__guardar boton_nopatologicos">Guardar</button>
@@ -396,29 +400,29 @@
                         <div class="input-group-table__input">
                             <table width="40%">
                                 <tr>
-                                    <td><input type="checkbox" name="Meningitis"></td>
+                                    <td><input type="checkbox" name="Meningitis" th:field="*{app.meningitis}"></td>
                                     <td> Meningitis</td>
-                                    <td><input type="checkbox" name="Asma"></td>
+                                    <td><input type="checkbox" name="Asma" th:field="*{app.asma}"></td>
                                     <td> Asma</td>
-                                    <td><input type="checkbox" name="Poliomielitis"></td>
+                                    <td><input type="checkbox" name="Poliomielitis" th:field="*{app.poliomielitis}"></td>
                                     <td> Poliomielitis</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name="Encefalitis"></td>
+                                    <td><input type="checkbox" name="Encefalitis" th:field="*{app.encefalitis}"></td>
                                     <td> Encefalitis</td>
-                                    <td><input type="checkbox" name="Varicela"></td>
+                                    <td><input type="checkbox" name="Varicela" th:field="*{app.varicela}"></td>
                                     <td> Varicela</td>
-                                    <td><input type="checkbox" name="Apnea"></td>
+                                    <td><input type="checkbox" name="Apnea" th:field="*{app.apnea}"></td>
                                     <td> Apnea</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name="Cancer"></td>
+                                    <td><input type="checkbox" name="Cancer" th:field="*{app.cancer}"></td>
                                     <td> Cáncer</td>
-                                    <td><input type="checkbox" name="Sarampion"></td>
+                                    <td><input type="checkbox" name="Sarampion" th:field="*{app.sarampion}"></td>
                                     <td> Sarampión</td>
-                                    <td><input type="checkbox" name="Epilepsia"></td>
+                                    <td><input type="checkbox" name="Epilepsia" th:field="*{app.epilepsia}"></td>
                                     <td>Epilepsia</td>
                                 </tr>
                             </table>
@@ -428,18 +432,18 @@
                     <div class="division"></div>
                     <div class="input-group ">
                         <label class="input-group__label">Otra:</label>
-                        <input class="input-group__input otra1" type="text" name="Otra">
+                        <input class="input-group__input otra1" type="text" name="Otra" th:field="*{app.otraEnfermedadPresentada}">
                     </div>
                     <div class="input-group ">
                         <label class="input-group__label">¿Actualmente está enfermo?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="estaEnfermo" value="SI"> Sí
-                            <input type="radio" name="estaEnfermo" value="No"> No
+                            <input type="radio" name="estaEnfermo" value="SI" th:field="*{app.actualmenteEnfermo}"> Sí
+                            <input type="radio" name="estaEnfermo" value="No" th:field="*{app.actualmenteEnfermo}"> No
                         </div>
                     </div>
                     <div class="input-group ">
                         <label class="input-group__label">Tratamiento:</label>
-                        <input class="input-group__input tratamiento1" type="text" name="Tratamiento">
+                        <input class="input-group__input tratamiento1" type="text" name="Tratamiento" th:field="*{app.tratamientoActualmenteEnfermo}">
                     </div>
                 </div>
                 <div class="division"></div>
@@ -447,50 +451,48 @@
                     <div class="input-group "> 
                         <label class="input-group__label">Ha tenido:</label>
                         <div class="input-group__input">
-                            <input type="checkbox" name="Rad0"> Golpes en la médula espinal<br>
-                            <input type="checkbox" name="Rad1"> Golpes en la cabeza <br>
-                            <input type="checkbox" name="Rad3"> Tumores<br>
-                            <input type="checkbox" name="Rad2"> Alergias
+                            <input type="checkbox" name="Rad0" th:field="*{app.golpesMedulaEspinal}"> Golpes en la médula espinal<br>
+                            <input type="checkbox" name="Rad1" th:field="*{app.golpesCabeza}"> Golpes en la cabeza <br>
+                            <input type="checkbox" name="Rad3" th:field="*{app.tumores}"> Tumores<br>
+                            <input type="checkbox" name="Rad2" th:field="*{app.alergias}"> Alergias
                         </div>
                     </div>
                     <div class="input-group ">
                         <label class="input-group__label">Especificar:</label>
-                        <input class="input-group__input Especificar1" type="text" name="Especificar1">
+                        <input class="input-group__input Especificar1" type="text" name="Especificar1" th:field="*{app.especificarGolpes}">
                     </div>
                     <div class="input-group ">
                         <label class="input-group__label">Enfermedades neorológicas
                             (parálisis,hidrocefálea,etc):</label>
-                        <input class="input-group__input Enfermedades_neorológicas" type="text" name="Enfermedades">
+                        <input class="input-group__input Enfermedades_neorológicas" type="text" name="Enfermedades" th:field="*{app.enfermedadesNeurologicas}">
                     </div>
                     <div class="input-group ">
                         <label class="input-group__label">Alteraciones psicológicas o psiquiátras
                             (depresión,etc):</label>
-                        <input class="input-group__input Alteraciones_psicológicas" type="text" name="Alteraciones">
+                        <input class="input-group__input Alteraciones_psicológicas" type="text" name="Alteraciones" th:field="*{app.alteracionPsicologicas}">
                     </div>
-                </div>
-                <div class="group input-group--color1">
                     <div class="input-group ">
                         <label class="input-group__label">¿Presenta secuelas?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="secuelas" value="si"> Sí
-                            <input type="radio" name="secuelas" value="No"> No
+                            <input type="radio" name="secuelas" value="si" th:field="*{app.secuelas}"> Sí
+                            <input type="radio" name="secuelas" value="No" th:field="*{app.secuelas}"> No
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">¿De qué tipo?:</label>
-                        <input class="input-group__input tipo" type="text" name="">
+                        <input class="input-group__input tipo" type="text" name="" th:field="*{app.secuelasTipo}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Ha tenido:</label>
                         <div class="input-group__input">
-                            <input type="checkbox" name="Temperatura"> Temperatura mayor a los 40°<br>
-                            <input type="checkbox" name="Convulsiones"> Convulsiones<br>
-                            <input type="checkbox" name="Perdida_conciencia"> Perdida de la conciencia<br>
+                            <input type="checkbox" name="Temperatura" th:field="*{app.temperaturaMayor40}"> Temperatura mayor a los 40°<br>
+                            <input type="checkbox" name="Convulsiones" th:field="*{app.convulsiones}"> Convulsiones<br>
+                            <input type="checkbox" name="Perdida_conciencia" th:field="*{app.perdidaConciencia}"> Perdida de la conciencia<br>
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Especificar:</label>
-                        <input class="input-group__input especificar_secuelas" type="text" name="">
+                        <input class="input-group__input especificar_secuelas" type="text" name="" th:field="*{app.espacificar}">
                     </div>
                 </div>
                 <div class="division"></div>
@@ -500,56 +502,56 @@
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">Visión:</label>
-                        <input class="input-group__input vision" type="text" name="">
+                        <input class="input-group__input vision" type="text" name="" th:field="*{app.problemasVision}">
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">¿Usa o requiere lentes?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="Lentes" value="SI"> Sí
-                            <input type="radio" name="Lentes" value="NO"> No
+                            <input type="radio" name="Lentes" value="SI" th:field="*{app.usaLentes}"> Sí
+                            <input type="radio" name="Lentes" value="NO" th:field="*{app.usaLentes}"> No
                         </div>
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">¿Desde cuándo?:</label>
-                        <input class="input-group__input desde_cuando" type="text" name="">
+                        <input class="input-group__input desde_cuando" type="text" name="" th:field="*{app.usaLentesDesde}">
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">Motricidad:</label>
-                        <input class="input-group__input motricidad" type="text" name="">
+                        <input class="input-group__input motricidad" type="text" name="" th:field="*{app.motricidad}">
                     </div>
                     <div class="input-group ">
                         <label class="input-group__label">¿Usa o requiere aparatos ortopédicos?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="aparatosOrtopedicos" value="Requiere"> Sí
-                            <input type="radio" name="aparatosOrtopedicos" value="Norequiere"> No
+                            <input type="radio" name="aparatosOrtopedicos" value="Requiere" th:field="*{app.requiereAparatosOrtipedicos}"> Sí
+                            <input type="radio" name="aparatosOrtopedicos" value="Norequiere" th:field="*{app.requiereAparatosOrtipedicos}"> No
                         </div>
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">¿Desde cuándo?:</label>
-                        <input class="input-group__input desde_cuando1" type="text" name="">
+                        <input class="input-group__input desde_cuando1" type="text" name="" th:field="*{app.requiereAparatosOrtipedicosDesde}">
                     </div>
                 </div>
                 <div class="division"></div>
                 <div class="group input-group--color1">
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">Medicamentos que toma actualmente:</label>
-                        <input class="input-group__input medicamentos" type="text" name="">
+                        <input class="input-group__input medicamentos" type="text" name="" th:field="*{app.actualmenteTomaMedicamentos}">
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">Posología:</label>
-                        <input class="input-group__input posologia" type="text" name="">
+                        <input class="input-group__input posologia" type="text" name="" th:field="*{app.posologia}">
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">¿Desde cuándo?:</label>
-                        <input class="input-group__input desde_cuando2" type="text" name="">
+                        <input class="input-group__input desde_cuando2" type="text" name="" th:field="*{app.tomaMedicamentosDesde}">
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">¿Para qué la toma?:</label>
-                        <input class="input-group__input razon_de_tomarlo" type="text" name="">
+                        <input class="input-group__input razon_de_tomarlo" type="text" name="" th:field="*{app.tomaMedicamentosPara}">
                     </div>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label">Reacciones adversas:</label>
-                        <input class="input-group__input reacciones" type="text" name="">
+                        <input class="input-group__input reacciones" type="text" name="" th:field="*{app.reaccionesAdversas}">
                     </div>
                     <div class="input-group--btn input-group--color1">
                         <button type="button" class="input-group--btn__guardar boton_patologicos">Guardar</button>
@@ -563,31 +565,31 @@
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label">Edad de la madre al nacer el niño/a:</label>
-                        <input class="input-group__input edad_madre" type="text" name="">
+                        <input class="input-group__input edad_madre" type="text" th:field="*{apyp.edadMadreNacer}" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Edad del padre al nacer el niño/a:</label>
-                        <input class="input-group__input edad_padre" type="text" name="">
+                        <input class="input-group__input edad_padre" type="text" th:field="*{apyp.edadPadreNacer}" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Padres:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="situacion" value="Juntos"> Juntos
-                            <input type="radio" name="situacion" value="Separados"> Separados
+                            <input type="radio" name="situacion" value="Juntos" th:field="*{apyp.padres}"> Juntos
+                            <input type="radio" name="situacion" value="Separados" th:field="*{apyp.padres}"> Separados
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Duración del embarazo:</label>
-                        <input class="input-group__input duracion_embarazo" type="text" name="">
+                        <input class="input-group__input duracion_embarazo" type="text" th:field="*{apyp.duracionEmbarazo}" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">¿Fué un embarazo deseado y planeado?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="embarazoDeseado" value="Deseado"> Sí
-                            <input type="radio" name="embarazoDeseado" value="Nodeseado"> No
+                            <input type="radio" name="embarazoDeseado" value="Deseado" th:field="*{apyp.embarazoDeseado}"> Sí
+                            <input type="radio" name="embarazoDeseado" value="Nodeseado" th:field="*{apyp.embarazoDeseado}"> No
                         </div>
                     </div>
-                </div>  <!--AQUI TERMINA-->
+                </div>
 
                 <div class="division"></div>
 
@@ -598,39 +600,39 @@
                     </div>
                     <div class="input-group"> <!-- Empiza la pagina 3 -->
                         <label class="input-group__label">Problemas o enfermedades emocionales:</label>
-                        <input class="input-group__input problemas_o_enfermedades" type="text" name="">
+                        <input class="input-group__input problemas_o_enfermedades" type="text" th:field="*{apyp.problemasEmocionales}" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Enfermedades médicas:</label>
-                        <input class="input-group__input enfermedades_medicas" type="text" name="">
+                        <input class="input-group__input enfermedades_medicas" type="text" th:field="*{apyp.enfermedadesMedicas}" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Consumo de medicamentos:</label>
-                        <input class="input-group__input consumo_medicamentos" type="text" name="">
+                        <input class="input-group__input consumo_medicamentos" type="text" th:field="*{apyp.consumoMedicamentos}" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Amenaza de aborto:</label>
-                        <input class="input-group__input amenaza_aborto" type="text" name="">
+                        <input class="input-group__input amenaza_aborto" type="text" th:field="*{apyp.amenazaAborto}" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Desnutrición:</label>
-                        <input class="input-group__input desnutricion " type="text" name="">
+                        <input class="input-group__input desnutricion " type="text" th:field="*{apyp.desnutricion}" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Exposición a Rx:</label>
-                        <input class="input-group__input exposicion_rx" type="text" name="">
+                        <input class="input-group__input exposicion_rx" type="text" th:field="*{apyp.exposicionRx}" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Ultrasonidos:</label>
-                        <input class="input-group__input ultrasonidos_app" type="text" name="">
+                        <input class="input-group__input ultrasonidos_app" type="text" th:field="*{apyp.ultrasonido}" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Consumo de drogas (alcohol, cigarros, etc.):</label>
-                        <input class="input-group__input consumo_drogas" type="text" name="">
+                        <input class="input-group__input consumo_drogas" type="text" th:field="*{apyp.consumoDrogas}" name="">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label">Otro:</label>
-                        <input class="input-group__input otro_app" type="text" name="">
+                        <input class="input-group__input otro_app" type="text" th:field="*{apyp.otroProblema}" name="">
                     </div>
                     <div class="input-group--btn">
                         <button type="button" class="input-group--btn__guardar boton_antecedentes_pre">Guardar</button>
@@ -639,26 +641,26 @@
 
                 <div class="division"></div>
             </div>
-
+            
             <!-- Historia del desarrollo -->
             <div class="tdah-form__historia-del-desarrollo" id="historia-del-desarrollo">
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Peso al nacer (kg):</label>
-                        <input class="input-group__input peso_al_nacer" type="text">
+                        <input class="input-group__input peso_al_nacer" type="text" th:field="*{hd.pesoNacimiento}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Talla (cm):</label>
-                        <input class="input-group__input talla_hd" type="text">
+                        <input class="input-group__input talla_hd" type="text" th:field="*{hd.talla}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Calificación APGAR (apariencia, pulso, gedto,
                             actividad, respiración):</label>
-                        <input class="input-group__input calificacion_apgar " type="text">
+                        <input class="input-group__input calificacion_apgar " type="text" th:field="*{hd.calificacionApgar}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Especificaciones:</label>
-                        <input class="input-group__input especificaciones_hd" type="text">
+                        <input class="input-group__input especificaciones_hd" type="text" th:field="*{hd.calificacionApgarEspecificaciones}">
                     </div>
                 </div>
 
@@ -667,8 +669,8 @@
                 <div class="group input-group--color1">
                     <div class="input-group">
                         <label class="input-group__label" for="">Tipo de nacimiento:</label>
-                        <select class="input-group__input tipo_nacimiento" id="tipo_nacimiento" style="height: 26px">
-                            <option         >- Seleccione una opción -</option>
+                        <select class="input-group__input tipo_nacimiento" id="tipo_nacimiento" style="height: 26px" th:field="*{hd.tipoNacimiento}">
+                            <option value="">- Seleccione una opción -</option>
                             <option value="Parto normal"> Parto normal</option>
                             <option value="Parto inducido"> Parto inducido</option>
                             <option value="Psicoprofilaxis"> Psicoprofilaxis</option>
@@ -681,28 +683,28 @@
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Lloró inmediatamente al nacer?:</label>
                         <div class="input-group__input ">
-                            <input type="radio" name="Lloro" value="Sí"> Sí
-                            <input type="radio" name="Lloro" value="No"> No
+                            <input type="radio" name="Lloro" value="Sí" th:field="*{hd.lloroInmediatamente}"> Sí
+                            <input type="radio" name="Lloro" value="No" th:field="*{hd.lloroInmediatamente}"> No
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Respiró inmediatamente al nacer?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="Respiro" value="Sí" > Sí
-                            <input type="radio" name="Respiro" value="No" > No
+                            <input type="radio" name="Respiro" value="Sí" th:field="*{hd.respiroInmediatamente}"> Sí
+                            <input type="radio" name="Respiro" value="No" th:field="*{hd.respiroInmediatamente}"> No
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">¿Estuvo en incubadora?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="Incubadora" value="Sí"> Sí
-                            <input type="radio" name="Incubadora" value="No"> No
+                            <input type="radio" name="Incubadora" value="Sí" th:field="*{hd.estuvoIncubadora}"> Sí
+                            <input type="radio" name="Incubadora" value="No" th:field="*{hd.estuvoIncubadora}"> No
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Complicaciones al momento de su nacimiento (sufrimiento
                             fetal, hipoxia, etc.):</label>
-                        <input class="input-group__input Complicacione_nacimiento" type="text">
+                        <input class="input-group__input Complicacione_nacimiento" type="text" th:field="*{hd.complicacionesNacimiento}">
                     </div>
                 </div>
 
@@ -713,31 +715,31 @@
                     <label class="input-group__label" for="">Edad a la que...</label>
                     <div class="input-group input-group--color1">
                         <label class="input-group__label" for="">Sostuvo la cabeza (2 o 3m):</label>
-                        <input class="input-group__input sostuvo_cabeza" type="text">
+                        <input class="input-group__input sostuvo_cabeza" type="text" th:field="*{hd.edadSostuvoCabeza}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Subió y bajo escaleras (18m):</label>
-                        <input class="input-group__input subio_bajo_esca" type="text">
+                        <input class="input-group__input subio_bajo_esca" type="text" th:field="*{hd.edadSubioEscalera}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Se sentó (6m):</label>
-                        <input class="input-group__input sento" type="text">
+                        <input class="input-group__input sento" type="text" th:field="*{hd.edadSentar}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Dijo palabras (18m):</label>
-                        <input class="input-group__input dijo_palabras" type="text">
+                        <input class="input-group__input dijo_palabras" type="text" th:field="*{hd.edadDijoPalabras}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Se sostuvo en pie (9m):</label>
-                        <input class="input-group__input sostuvo_enpie" type="text">
+                        <input class="input-group__input sostuvo_enpie" type="text" th:field="*{hd.edadSostuvoPie}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Caminó solo (12m):</label>
-                        <input class="input-group__input camino_solo" type="text">
+                        <input class="input-group__input camino_solo" type="text" th:field="*{hd.edadCaminoSolo}">
                     </div>
                     <div class="input-group">
-                        <label class="input-group__label" for="">(Indagar enuresis y envopresis):</label>
-                        <input class="input-group__input indagar" type="text">
+                        <label class="input-group__label" for="">Indagar enuresis y encopresis:</label>
+                        <input class="input-group__input indagar" type="text" th:field="*{hd.edadIndagarEnuresis}">
                     </div>
                     <div class="input-group--btn input-group--color1">
                         <button type="button" class="input-group--btn__guardar boton_historia_desarrollo">Guardar</button>
@@ -746,65 +748,168 @@
                 <div class="division"></div>
             </div>
 
-            <!-- Antecedentes escolares -->
+            <!-- Dinamica familiar -->
+            <div class="tdah-form__dinamica-familiar" id="dinamica-familiar">
+
+                <div class="group input-group--color1">
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Descripción de la dinámica familiar (quién está con él,
+                            actividades semanales, etc):</label>
+                    </div>
+
+                    <div class="input-group">
+                        <textarea class="input-group__input Descripcion_actividades" name="" id="" cols="30" rows="5" th:field="*{df.descripcionFamiliar}"></textarea>
+                    </div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+                    <div class="input-group-table">
+                        <div class="input-group-table__label">Tiempo que le dedica al niño(a):</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Madre:</label>
+                        <input class="input-group__input tiempo_madre" type="text" th:field="*{df.tiempoDedicadoMadre}">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-group__label" for="">Padre:</label>
+                        <input class="input-group__input tiempo_padre" type="text" th:field="*{df.tiempoDedicadoPadre}">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Con qué miembro de la familia se lleva mejor?:</label>
+                        <input class="input-group__input miembro_familia_mejor" type="text" th:field="*{df.miembroFamiliarMejor}">
+                    </div>
+                </div>
+
+                <div class="division"></div>
+
+                <div class="group input-group--color1">
+
+                    <div class="input-group-table">
+                        <label class="input-group-table__label" for="">En los últimos dos años su familia ha
+                            experimentado:</label>
+                        <div class="input-group-table__input">
+                            <table width=70%>
+                                <tr>
+                                    <td><input type="checkbox" th:field="*{df.divorcio}" name="Divorcio"></td>
+                                    <td> Divorcio</td>
+                                    <td><input type="checkbox" th:field="*{df.cambioEscuela}" name="Cambio_escuela"></td>
+                                    <td> Cambio de escuela</td>
+                                    <td><input type="checkbox" th:field="*{df.cambioVivienda}" name="Cambio_vivienda"></td>
+                                    <td> Cambio de vivienda</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" th:field="*{df.problemasFinancieros}" name="Problemas_financieros"></td>
+                                    <td> Problemas financieros</td>
+                                    <td><input type="checkbox" th:field="*{df.enfermedades}" name="Enfermedades1"></td>
+                                    <td> Enfermedades</td>
+                                    <td><input type="checkbox" th:field="*{df.problemasLegales}" name="Problemas_legales"></td>
+                                    <td> Problemas legales</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input type="checkbox" th:field="*{df.separaciones}" name="separaciones1"></td>
+                                    <td> Separaciones</td>
+                                    <td><input type="checkbox" th:field="*{df.perdidaTrabajo}" name="Perdida_trabajo"></td>
+                                    <td> Pérdida de trabajo</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Algún suceso familiar ha afectado especialmente al
+                            niño(a)?:</label>
+                        <div class="input-group__input">
+                            <input type="radio" name="Algun_suceso" value="Si" th:field="*{df.sucesoFamiliar}"> Sí
+                            <input type="radio" name="Algun_suceso" value="No" th:field="*{df.sucesoFamiliar}"> No
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿Cuál?:</label>
+                        <input class="input-group__input suceso_familiar" type="text" th:field="*{df.cualSuceso}">
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-group__label" for="">¿De qué manera?:</label>
+                        <input class="input-group__input manera_suceso_familiar" type="text" th:field="*{df.manera}">
+                    </div>
+
+                    <div class="input-group--btn input-group--color1">
+                        <button type="button" class="input-group--btn__guardar boton_dinamica">Guardar</button>
+                    </div>
+                </div>
+                <div class="division"></div>
+            </div>
+
+			<!-- Antecedentes escolares -->
             <div class="tdah-form__antecedentes-escolares" id="antecedentes-escolares">
 
                 <div class="group input-group--color1">
                     <div class="input-group-table">
                         <label class="input-group-table__label" for="">Estuvo o está el niño en (especificar):</label>
-                        <div class="input-group-table__input">
+                        <div class="input-group-table__input">                                                            
+                       
                             <table class="tabla-antecedentes-escolares">
                                 <tr>
-                                    <td><input type="checkbox" name="Guarderia"> Guardería</td>
-                                    <td><input type="radio" name="tipo1" value="Publica" > Pública</td>
-                                    <td><input type="radio" name="tipo1" value="Privada"> Privada</td>
+                                    <td><input type="checkbox" name="Guarderia" th:field="*{ae.guarderia}"> Guardería</td>
+                                    <td><input type="radio" name="tipo1" value="Publica" th:field="*{ae.guarderiaPuPri}"> Pública</td>
+                                    <td><input type="radio" name="tipo1" value="Privada" th:field="*{ae.guarderiaPuPri}"> Privada</td>
                                     <td> Años cursados: </td>
-                                    <td><input type="text" name="" class="Años_cursados1"></td>
+                                    <td><input type="text" name="" class="Años_cursados1" th:field="*{ae.añosCursadosGuarderia}"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name="Preescolar"> Preescolar</td>
-                                    <td><input type="radio" name="tipo2" value="Publica" > Pública</td>
-                                    <td><input type="radio" name="tipo2" value="Privada" > Privada</td>
+                                    <td><input type="checkbox" name="Preescolar" th:field="*{ae.prescolar}"> Preescolar</td>
+                                    <td><input type="radio" name="tipo2" value="Publica" th:field="*{ae.prescolarPuPri}"> Pública</td>
+                                    <td><input type="radio" name="tipo2" value="Privada" th:field="*{ae.prescolarPuPri}"> Privada</td>
                                     <td> Años cursados:</td>
-                                    <td><input type="text" name="" class="Años_cursados2"></td>
+                                    <td><input type="text" name="" class="Años_cursados2" th:field="*{ae.añosCursadosPrescolar}"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name="Primaria"> Primaria</td>
-                                    <td><input type="radio" name="tipo3" value="Publica" > Pública</td>
-                                    <td><input type="radio" name="tipo3" value="Privada" > Privada</td>
+                                    <td><input type="checkbox" name="Primaria" th:field="*{ae.primaria}"> Primaria</td>
+                                    <td><input type="radio" name="tipo3" value="Publica" th:field="*{ae.primariaPuPri}"> Pública</td>
+                                    <td><input type="radio" name="tipo3" value="Privada" th:field="*{ae.primariaPuPri}"> Privada</td>
                                     <td> Años cursados:</td>
-                                    <td><input type="text" name="" class="Años_cursados3"></td>
+                                    <td><input type="text" name="" class="Años_cursados3" th:field="*{ae.añosCursadosPrimaria}"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name="Educacion_especial"> Educacíon especial</td>
-                                    <td><input type="radio" name="tipo4" value="Publica" > Pública</td>
-                                    <td><input type="radio" name="tipo4" value="Privada" > Privada</td>
+                                    <td><input type="checkbox" name="Educacion_especial" th:field="*{ae.educacionEspecial}"> Educacíon especial</td>
+                                    <td><input type="radio" name="tipo4" value="Publica" th:field="*{ae.educacionEspecialPuPri}"> Pública</td>
+                                    <td><input type="radio" name="tipo4" value="Privada" th:field="*{ae.educacionEspecialPuPri}"> Privada</td>
                                     <td> Años cursados:</td>
-                                    <td><input type="text" name="" class="Años_cursados4"></td>
+                                    <td><input type="text" name="" class="Años_cursados4" th:field="*{ae.añosCursadosEducacionEspecial}"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name="Estimulacion_temprana"> Estimulación temprana</td>
+                                    <td><input type="checkbox" name="Estimulacion_temprana" th:field="*{ae.estimulacionTemprana}"> Estimulación temprana</td>
                                     <td></td>
                                     <td></td>
                                     <td> Años cursados:</td>
-                                    <td><input type="text" name="Años_cursados" class="Años_cursados5"></td>
+                                    <td><input type="text" name="Años_cursados" class="Años_cursados5" th:field="*{ae.añosCursados}"></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name="Clases_regularizacion"> Clases de regularizaión</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="Escuela_idiomas"> Escuela de idiomas</td>
+                                    <td><input type="checkbox" name="Clases_regularizacion" th:field="*{ae.clasesDeRegularizacion}"> Clases de regularizaión</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td><input type="checkbox" name="Terapia_lenguaje"> Terapia de lenguaje, de conducta,<br>
+                                    <td><input type="checkbox" name="Escuela_idiomas" th:field="*{ae.escuelaDeIdiomas}"> Escuela de idiomas</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" name="Terapia_lenguaje" th:field="*{ae.terapiaDeLenguaje}"> Terapia de lenguaje, de conducta,<br>
                                         emocinales, psicomotricidad, etc.</td>
                                     <td></td>
                                     <td></td>
@@ -821,112 +926,112 @@
                 <div class="group input-group--color1">
                     <div class="input-group ">
                         <label class="input-group__label" for="">Años de estudio: </label>
-                        <input class="input-group__input años_estudio" type="text" name="">
+                        <input class="input-group__input años_estudio" type="text" name="" th:field="*{ae.añosDeEstudio}">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">Curso escolar actual: </label>
-                        <input class="input-group__input curso_actual" type="text" name="">
+                        <input class="input-group__input curso_actual" type="text" name="" th:field="*{ae.cursoEscolarActual}">
                     </div>
 
                     <div class="input-group "> <!--Dejo aqui -->
                         <label class="input-group__label" for="">¿Ha perdido algun grado escolar?: </label>
                         <div class="input-group__input">
-                            <input type="radio" name="Escolar" value="Sí"> Sí
-                            <input type="radio" name="Escolar" value="No"> No
+                            <input type="radio" name="Escolar" value="Sí" th:field="*{ae.perdioAñoEscolar}"> Sí
+                            <input type="radio" name="Escolar" value="No" th:field="*{ae.perdioAñoEscolar}"> No
                         </div>
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Por qué?:</label>
-                        <input class="input-group__input porque_ae" type="text" name="">
+                        <input class="input-group__input porque_ae" type="text" name="" th:field="*{ae.porquePerdioAñoEscolar}">
                     </div>
                   
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Falta mucho a clases?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="faltaClases" value="Si"> Sí
-                            <input type="radio" name="faltaClases" value="No"> No
+                            <input type="radio" name="faltaClases" value="Si" th:field="*{ae.faltaAClases}"> Sí
+                            <input type="radio" name="faltaClases" value="No" th:field="*{ae.faltaAClases}"> No
                         </div>
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Por qué?:</label>
-                        <input class="input-group__input porque_falta_clases" type="text" name="">
+                        <input class="input-group__input porque_falta_clases" type="text" name="" th:field="*{ae.porqueFaltaAClases}">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Ha cambiado de escuela?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="Cambioescuela" value="Si"> Sí
-                            <input type="radio" name="Cambioescuela" value="No"> No
+                            <input type="radio" name="Cambioescuela" value="Si" th:field="*{ae.aCambiadoDeEscuela}"> Sí
+                            <input type="radio" name="Cambioescuela" value="No" th:field="*{ae.aCambiadoDeEscuela}"> No
                         </div>
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Por qué?:</label>
-                        <input class="input-group__input porque_cambio_escuela" type="text" name="">
+                        <input class="input-group__input porque_cambio_escuela" type="text" name="" th:field="*{ae.porqueCambiaEscuela}">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Le gusta ir a la escuela?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="gustaEscuela" value="Si"> Sí
-                            <input type="radio" name="gustaEscuela" value="No"> No
+                            <input type="radio" name="gustaEscuela" value="Si" th:field="*{ae.gustaEscuela}"> Sí
+                            <input type="radio" name="gustaEscuela" value="No" th:field="*{ae.gustaEscuela}"> No
                         </div>
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Por qué?:</label>
-                        <input class="input-group__input porque_gusta_escuela" type="text" name="">
+                        <input class="input-group__input porque_gusta_escuela" type="text" name="" th:field="*{ae.porqueLeGustaEscuela}">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Recibe constantes quejas de los maestros?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="Quejas" value="Si"> Sí
-                            <input type="radio" name="Quejas" value="No"> No
+                            <input type="radio" name="Quejas" value="Si" th:field="*{ae.quejasDeLosMaestros}"> Sí
+                            <input type="radio" name="Quejas" value="No" th:field="*{ae.quejasDeLosMaestros}"> No
                         </div>
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Por qué?:</label>
-                        <input class="input-group__input porque_quejas_escuela" type="text" name="">
+                        <input class="input-group__input porque_quejas_escuela" type="text" name="" th:field="*{ae.porqueQuejasDeLosMaestros}">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">Qué opinan los maestros del aprendizaje y
                             comportamiento del niño?:</label>
-                        <input class="input-group__input opinion_maestros" type="text" name="">
+                        <input class="input-group__input opinion_maestros" type="text" name="" th:field="*{ae.opinionMaestrosDeAprendizaje}">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿A qué se deben los problemas en la escuela según el
                             niño?:</label>
-                        <input class="input-group__input problemas_segun_niño" type="text" name="">
+                        <input class="input-group__input problemas_segun_niño" type="text" name="" th:field="*{ae.porqueLosproblemasEnEscuela}">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Aprende con facilidad?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="Aprende_con_facilidad" value="Si"> Sí
-                            <input type="radio" name="Aprende_con_facilidad" value="No"> No
+                            <input type="radio" name="Aprende_con_facilidad" value="Si" th:field="*{ae.aprendeFacil}"> Sí
+                            <input type="radio" name="Aprende_con_facilidad" value="No" th:field="*{ae.aprendeFacil}"> No
                         </div>
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">Actividades que se le facilitan:</label>
-                        <input class="input-group__input actividades_se_le_facilitan" type="text" name="">
+                        <input class="input-group__input actividades_se_le_facilitan" type="text" name="" th:field="*{ae.actividadesFaciles}">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">Actividades que se le dificultan:</label>
-                        <input class="input-group__input actividades_se_le_dificultan" type="text" name="">
+                        <input class="input-group__input actividades_se_le_dificultan" type="text" name="" th:field="*{ae.actividadesDificiles}">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">Promedio actual: </label>
-                        <input class="input-group__input promedio_actual" type="text" name="">
+                        <input class="input-group__input promedio_actual" type="text" name="" th:field="*{ae.promedioActual}">
                     </div>
                 </div>
 
@@ -937,14 +1042,14 @@
                     <div class="input-group">
                         <label class="input-group__label" for="">El niño presenta algún problema en: </label>
                         <div class="input-group__input">
-                            <input type="checkbox" name="Lenguaje"> Lenguaje<br>
-                            <input type="checkbox" name="Lectura"> Lectura<br>
-                            <input type="checkbox" name="Escritura"> Escritura<br>
-                            <input type="checkbox" name="Matematicas"> Matemáticas<br>
-                            <input type="checkbox" name="Motricidad"> Motricidad<br>
+                            <input type="checkbox" name="Lenguaje" th:field="*{ae.lenguaje}"> Lenguaje<br>
+                            <input type="checkbox" name="Lectura" th:field="*{ae.lectura}"> Lectura<br>
+                            <input type="checkbox" name="Escritura" th:field="*{ae.escritura}"> Escritura<br>
+                            <input type="checkbox" name="Matematicas" th:field="*{ae.matematicas}"> Matemáticas<br>
+                            <input type="checkbox" name="Motricidad" th:field="*{ae.motricidad}"> Motricidad<br>
                             <div class="input--small"><label for=""><input type="checkbox" name="Otro_problema">
                                     Otro:</label>
-                                <div><input class="otro_problema"type="text"></div>
+                                <div><input class="otro_problema"type="text" th:field="*{ae.otroProblema}"></div>
                             </div>
                         </div>
                     </div>
@@ -955,15 +1060,15 @@
                 <div class="group input-group--color1">
                     <div class="input-group input-group--color1">
                         <label class="input-group__label" for="">¿A qué edad comenzó a leer?:</label>
-                        <input class="input-group__input comenzo_leer" type="text" name="">
+                        <input class="input-group__input comenzo_leer" type="text" name="" th:field="*{ae.edadParaLeer}">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Cómo lee?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="Como_lee" value="Rapido"> Rapido
-                            <input type="radio" name="Como_lee" value="Normal"> Normal
-                            <input type="radio" name="Como_lee" value="No lee"> No lee
+                            <input type="radio" name="Como_lee" value="Rapido" th:field="*{ae.comoLee}"> Rapido
+                            <input type="radio" name="Como_lee" value="Normal" th:field="*{ae.comoLee}"> Normal
+                            <input type="radio" name="Como_lee" value="No lee" th:field="*{ae.comoLee}"> No lee
                         </div>
                     </div>
 
@@ -971,16 +1076,16 @@
                     <div class="input-group ">
                         <label class="input-group__label" for="">Cuando lee:</label>
                         <div class="input-group__input">
-                            <input type="checkbox" name="Omite_letra"> Omite alguna letra<br>
-                            <input type="checkbox" name="Titubea"> Titubéa<br>
-                            <input type="checkbox" name="Confunde_letras"> Confunde letras<br>
-                            <input type="checkbox" name="Dice_letra_porOtra"> Dice una letra por otra<br>
-                            <input type="checkbox" name="Salta_renglones"> Se salta renglones<br>
-                            <input type="checkbox" name="Equivoca_linea"> Se equivoca de línea<br>
-                            <input type="checkbox" name="Repite_silabas"> Repite sílabas o palabras<br>
-                            <input type="checkbox" name="Cambia_palabras"> Cambia palabras
+                            <input type="checkbox" name="Omite_letra" th:field="*{ae.omiteLetra}"> Omite alguna letra<br>
+                            <input type="checkbox" name="Titubea" th:field="*{ae.titubea}"> Titubéa<br>
+                            <input type="checkbox" name="Confunde_letras" th:field="*{ae.confundeLetras}"> Confunde letras<br>
+                            <input type="checkbox" name="Dice_letra_porOtra" th:field="*{ae.diceLetraPorOtra}"> Dice una letra por otra<br>
+                            <input type="checkbox" name="Salta_renglones" th:field="*{ae.saltaRenglones}"> Se salta renglones<br>
+                            <input type="checkbox" name="Equivoca_linea" th:field="*{ae.equivocaDeLinea}"> Se equivoca de línea<br>
+                            <input type="checkbox" name="Repite_silabas" th:field="*{ae.repitePalabras}"> Repite sílabas o palabras<br>
+                            <input type="checkbox" name="Cambia_palabras" th:field="*{ae.cambiaPalabras}"> Cambia palabras
                             <div class="input--small"><label for=""><input type="checkbox" name="Otro_cuandoLee"> Otro:</label>
-                                <div><input class="otro_lee"type="text"></div>
+                                <div><input class="otro_lee"type="text" th:field="*{ae.otroCuandoLee}"></div>
                             </div>
                         </div>
                     </div>
@@ -992,36 +1097,36 @@
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿A qué edad comenzó a escribrir?:</label>
-                        <input class="input-group__input edad_escribir" type="text" name="">
+                        <input class="input-group__input edad_escribir" type="text" name="" th:field="*{ae.comenzoAEscribir}">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Le cuesta trabajo escribir?:</label>
                         <div class="input-group__input">
-                            <input type="radio" name="Escribir" value="Si"> Sí
-                            <input type="radio" name="Escribir" value="No"> No
+                            <input type="radio" name="Escribir" value="Si" th:field="*{ae.trabajoAlEscribir}"> Sí
+                            <input type="radio" name="Escribir" value="No" th:field="*{ae.trabajoAlEscribir}"> No
                         </div>
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿Por que?:</label>
-                        <input class="input-group__input escribir_2" type="text" name="">
+                        <input class="input-group__input escribir_2" type="text" name="" th:field="*{ae.porqueSeLeDificultaEscribir}">
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">Al escribir: </label>
                         <div class="input-group__input">
-                            <input type="checkbox" name="Confunde_letrasE"> Confunde letras<br>
-                            <input type="checkbox" name="Deletrea_letras"> Deletrea letras<br>
-                            <input type="checkbox" name="Escribe_lentitud"> Escribe con lentitud<br>
-                            <input type="checkbox" name="Mala_ortografia"> Tiene mala ortografía<br>
-                            <input type="checkbox" name="Incomprensible_escribir"> Es incomprensible<br>
+                            <input type="checkbox" name="Confunde_letrasE" th:field="*{ae.confundeLetrasAlEscribir}"> Confunde letras<br>
+                            <input type="checkbox" name="Deletrea_letras" th:field="*{ae.deletreaLetras}"> Deletrea letras<br>
+                            <input type="checkbox" name="Escribe_lentitud" th:field="*{ae.ecribeConLentitud}"> Escribe con lentitud<br>
+                            <input type="checkbox" name="Mala_ortografia" th:field="*{ae.tieneMalaOrtografia}"> Tiene mala ortografía<br>
+                            <input type="checkbox" name="Incomprensible_escribir" th:field="*{ae.esIncomprensible}"> Es incomprensible<br>
                         </div>
                     </div>
 
                     <div class="input-group ">
                         <label class="input-group__label" for="">Otro: </label>
-                        <input class="input-group__input otro_3" type="text" name="">
+                        <input class="input-group__input otro_3" type="text" name="" th:field="*{ae.otroAlEscribir}">
                     </div>
                 </div>
 
@@ -1030,48 +1135,48 @@
                 <div class="group input-group--color1">
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿A qué edad comenzó a contar?:</label>
-                        <input class="input-group__input contar" type="text" name="">
+                        <input class="input-group__input contar" type="text" name="" th:field="*{ae.edadQueComenzoAContar}">
                     </div>
                     <div class="input-group ">
                         <label class="input-group__label" for="">¿A qué edad comenzó a hacer operaciones
                             sencillas?:</label>
-                        <input class="input-group__input operaciones_sencillas" type="text" name="">
+                        <input class="input-group__input operaciones_sencillas" type="text" name="" th:field="*{ae.edadParaOperacionesSencillas}">
                     </div>
 
                     <div class="input-group-table ">
                         <div class="input-group-table__input">
                             <table width="90%">
                                 <tr>
-                                    <td><input type="checkbox" name="Escribe_mal_numeros"></td>
+                                    <td><input type="checkbox" name="Escribe_mal_numeros" th:field="*{ae.escribeMalLosNumeros}"></td>
                                     <td> Escribe mal los números</td>
-                                    <td><input type="checkbox" name="No_reconoce_los_numeros"></td>
+                                    <td><input type="checkbox" name="No_reconoce_los_numeros" th:field="*{ae.noReconoceNumeros}"></td>
                                     <td> No reconoce los números</td>
-                                    <td><input type="checkbox" name="Confunde_los_signos"></td>
+                                    <td><input type="checkbox" name="Confunde_los_signos" th:field="*{ae.confundeSignos}"></td>
                                     <td> Confunde los signos</td>
-                                    <td><input type="checkbox" name="En_dictado"></td>
+                                    <td><input type="checkbox" name="En_dictado" th:field="*{ae.confundeNumeroEnDictado}"></td>
                                     <td> En dictado confunde los números</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name="Acomoda_mal_cifras"></td>
+                                    <td><input type="checkbox" name="Acomoda_mal_cifras" th:field="*{ae.acomodaMalLasCifras}"></td>
                                     <td> Acomoda mal las cifras</td>
-                                    <td><input type="checkbox" name="Le_cuesta_operaciones"></td>
+                                    <td><input type="checkbox" name="Le_cuesta_operaciones" th:field="*{ae.trabajoEnOperacionesLineales}"></td>
                                     <td> Le cuesta trabajo hacer operaciones linealmente</td>
-                                    <td><input type="checkbox" name="Le_cuesta_operaciones_verticalmente"></td>
+                                    <td><input type="checkbox" name="Le_cuesta_operaciones_verticalmente" th:field="*{ae.trabajoEnOperacionesVerticales}"></td>
                                     <td> Le cuesta trabajo hacer la operaciones verticalmente</td>
-                                    <td><input type="checkbox" name="No_sabe_sumar"></td>
+                                    <td><input type="checkbox" name="No_sabe_sumar" th:field="*{ae.noSabeSumar}"></td>
                                     <td> No sabe sumar</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name="No_sabe_restar"></td>
+                                    <td><input type="checkbox" name="No_sabe_restar" th:field="*{ae.noSabeRestar}"></td>
                                     <td> No sabe restar</td>
-                                    <td><input type="checkbox" name="No_sabe_multiplicar"></td>
+                                    <td><input type="checkbox" name="No_sabe_multiplicar" th:field="*{ae.noSabeMultiplicar}"></td>
                                     <td> Nos sabe multiplicar</td>
-                                    <td><input type="checkbox" name="No_sabe_dividir"></td>
+                                    <td><input type="checkbox" name="No_sabe_dividir" th:field="*{ae.noSabeDividir}"></td>
                                     <td> No sabe dividir</td>
                                     <td> Otro:</td>
-                                    <td><input class="otro_operaciones" type="text"></td>
+                                    <td><input class="otro_operaciones" type="text" th:field="*{ae.otroProblemaDeOperaciones}"></td>
                                 </tr>
                             </table>
                         </div>
@@ -1086,35 +1191,35 @@
                         <div class="input-group-table__input">
                             <table width=70%>
                                 <tr>
-                                    <td><input type="checkbox" name="Caminar"></td>
+                                    <td><input type="checkbox" name="Caminar" th:field="*{ae.caminar}"></td>
                                     <td> Caminar</td>
-                                    <td><input type="checkbox" name="Correr"></td>
+                                    <td><input type="checkbox" name="Correr" th:field="*{ae.correr}"></td>
                                     <td> Correr</td>
-                                    <td><input type="checkbox" name="Subir_escaleras"></td>
+                                    <td><input type="checkbox" name="Subir_escaleras" th:field="*{ae.subirEscaleras}"></td>
                                     <td> Subir escaleras</td>
-                                    <td><input type="checkbox" name="Sujetar"></td>
+                                    <td><input type="checkbox" name="Sujetar" th:field="*{ae.sujetar}"></td>
                                     <td> Sujetar</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name="Lanzas_objetos"></td>
+                                    <td><input type="checkbox" name="Lanzas_objetos" th:field="*{ae.lanzarObjetos}"></td>
                                     <td> Lanzar objetos</td>
-                                    <td><input type="checkbox" name="Jugar_cosas_grandes"></td>
+                                    <td><input type="checkbox" name="Jugar_cosas_grandes" th:field="*{ae.jugarConCosasGrandes}"></td>
                                     <td> Jugar c/ cosas grandes</td>
-                                    <td><input type="checkbox" name="Abotonarse"></td>
+                                    <td><input type="checkbox" name="Abotonarse" th:field="*{ae.abotonarse}"></td>
                                     <td> Abotonarse</td>
-                                    <td><input type="checkbox" name="Vestirse"></td>
+                                    <td><input type="checkbox" name="Vestirse" th:field="*{ae.vestirse}"></td>
                                     <td> Vestirse</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name="Amarrarse_agujetas"></td>
+                                    <td><input type="checkbox" name="Amarrarse_agujetas" th:field="*{ae.amarrarseLasAgujetas}"></td>
                                     <td> Amarrarse las agujetas</td>
-                                    <td><input type="checkbox" name="Recortar"></td>
+                                    <td><input type="checkbox" name="Recortar" th:field="*{ae.recortar}"></td>
                                     <td> Recortar</td>
-                                    <td><input type="checkbox" name="Escribir_torpe"></td>
+                                    <td><input type="checkbox" name="Escribir_torpe" th:field="*{ae.escribir}"></td>
                                     <td> Escribir</td>
-                                    <td><input type="checkbox" name="Iluminar_torpe"></td>
+                                    <td><input type="checkbox" name="Iluminar_torpe" th:field="*{ae.iluminar}"></td>
                                     <td> Iluminar</td>
                                 </tr>
 
@@ -1122,7 +1227,7 @@
                                     <td><input type="checkbox" name="Otro_torpe"></td>
                                     <td>
                                         <div class="input--small"><label for=""> Otro:</label>
-                                            <div><input class="otro_torpe2" type="text"></div>
+                                            <div><input class="otro_torpe2" type="text" th:field="*{ae.otroProblemaGeneral}"></div>
                                         </div>
                                     </td>
                                 </tr>
@@ -1140,42 +1245,42 @@
 
                     <div class="input-group">
                         <div class="input-group__label">
-                            <input type="checkbox" name="Decir_oraciones">
+                            <input type="checkbox" name="Decir_oraciones" th:field="*{ae.decirOraciones}">
                             <label for="">Decir oraciones completas (3 elementos):</label>
                         </div>
-                        <input class="input-group__input oraciones" type="text" name="">
+                        <input class="input-group__input oraciones" type="text" name="" th:field="*{ae.decirOracionesTex}">
                     </div>
 
                     <div class="input-group ">
                         <div class="input-group__label">
-                            <input type="checkbox" name="Comprender_lo_dice">
+                            <input type="checkbox" name="Comprender_lo_dice" th:field="*{ae.comprenderLoQueDice}">
                             <label for="">Comprender lo que dice:</label>
                         </div>
-                        <input class="input-group__input comprender" type="text" name="">
+                        <input class="input-group__input comprender" type="text" name="" th:field="*{ae.comprenderLoQueDiceText}">
                     </div>
 
                     <div class="input-group ">
                         <div class="input-group__label">
-                            <input type="checkbox" name="Habla_menos_niños">
+                            <input type="checkbox" name="Habla_menos_niños" th:field="*{ae.hablarMenosQueOtros}">
                             <label for="">Hablar menos que los otros niños:</label>
                         </div>
-                        <input class="input-group__input habla_menos" type="text" name="">
+                        <input class="input-group__input habla_menos" type="text" name="" th:field="*{ae.hablarMenosQueOtrosText}">
                     </div>
 
                     <div class="input-group ">
                         <div class="input-group__label">
-                            <input type="checkbox" name="Habla_mas_niños">
+                            <input type="checkbox" name="Habla_mas_niños" th:field="*{ae.hablarMasQueOtros}">
                             <label for="">Hablar más que los otros niños:</label>
                         </div>
-                        <input class="input-group__input habla_mas" type="text" name="">
+                        <input class="input-group__input habla_mas" type="text" name="" th:field="*{ae.hablarMasQueOtrosText}">
                     </div>
 
                     <div class="input-group ">
                         <div class="input-group__label">
-                            <input type="checkbox" name="Tiene_dificultad_letras">
+                            <input type="checkbox" name="Tiene_dificultad_letras" th:field="*{ae.dificultadParaDecirLetras}">
                             <label for="">Tiene dificultad para decir algunas letras:</label>
                         </div>
-                        <input class="input-group__input dificultad_para_letras" type="text" name="">
+                        <input class="input-group__input dificultad_para_letras" type="text" name="" th:field="*{ae.dificultadParaDecirLetrasText}">
                     </div>
 
                     <div class="input-group ">
@@ -1183,7 +1288,7 @@
                             <input type="checkbox" name="Otro_dificultad_letras">
                             <label for="">Otro: </label>
                         </div>
-                        <input class="input-group__input otro_letras" type="text" name="">
+                        <input class="input-group__input otro_letras" type="text" name="" th:field="*{ae.otroProblemaLetras}">
                     </div>
 
                     <div class="input-group--btn input-group--color1"></div>
@@ -1193,6 +1298,7 @@
                 </div>
                 <div class="division"></div>
             </div>
+            
             <!-- Dinamica familiar -->
             <div class="tdah-form__dinamica-familiar" id="dinamica-familiar">
 
@@ -1295,7 +1401,7 @@
                 <div class="division"></div>
             </div>
 
-            <!-- ASPECTOS DE PERSONALIAD Y/0 EMOCIONALES -->
+             <!-- ASPECTOS DE PERSONALIAD Y/0 EMOCIONALES -->
             <div class="tdah-form__aspecto-depersonalidad-emocionales" id="aspecto-de-personalidad-emocionales">
                 <div class="group input-group--color1">
                     <div class="input-group-table input-group--color1">
@@ -1303,29 +1409,29 @@
                         <div class="input-group-table__input">
                             <table width=50%>
                                 <tr>
-                                    <td><input type="checkbox" name="Miedoso"></td>
+                                    <td><input type="checkbox" name="Miedoso"  th:field="*{apye.miedoso}"></td>
                                     <td> Miedoso</td>
-                                    <td><input type="checkbox" name="Berrinchudo"></td>
+                                    <td><input type="checkbox" name="Berrinchudo" th:field="*{apye.berrinchudo}"></td>
                                     <td> Berrinchudo</td>
-                                    <td><input type="checkbox" name="Celoso"></td>
+                                    <td><input type="checkbox" name="Celoso" th:field="*{apye.celoso}"></td>
                                     <td> Celoso</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name="Rebelde"></td>
+                                    <td><input type="checkbox" name="Rebelde" th:field="*{apye.rebelde}"></td>
                                     <td> Rebelde</td>
-                                    <td><input type="checkbox" name="Se_autolesiona"></td>
+                                    <td><input type="checkbox" name="Se_autolesiona" th:field="*{apye.autolastima}"></td>
                                     <td> Se autolesiona</td>
-                                    <td><input type="checkbox" name="Agresivo"></td>
+                                    <td><input type="checkbox" name="Agresivo" th:field="*{apye.agresivo}"></td>
                                     <td> Agresivo </td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="checkbox" name="Aislado"></td>
+                                    <td><input type="checkbox" name="Aislado" th:field="*{apye.aislado}"></td>
                                     <td> Aislado</td>
-                                    <td><input type="checkbox" name="Nervioso"></td>
+                                    <td><input type="checkbox" name="Nervioso" th:field="*{apye.nervioso}"></td>
                                     <td> Nervioso</td>
-                                    <td><input type="checkbox" name="Desapegado"></td>
+                                    <td><input type="checkbox" name="Desapegado"th:field="*{apye.desapegado}"></td>
                                     <td> Desapegado </td>
                                 </tr>
                             </table>
@@ -1333,7 +1439,7 @@
                     </div>
                     <div class="input-group-table input-group--color1">
                         <label class="input-group-table__label">Descripción de personalidad del niño:</label>
-                        <textarea class="input-group-table__input descripcion_personalidad_niño" name="" id="" cols="20" rows="5"></textarea>
+                        <textarea class="input-group-table__input descripcion_personalidad_niño" name="" id="" cols="20" rows="5" th:field="*{apye.descripcionPersonalidad}"></textarea>
                     </div>
                     <div class="input-group"></div>
                     <div class="input-group--btn input-group--color1">
