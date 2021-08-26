@@ -27,6 +27,7 @@ public class SessionService {
 	
 	private final Path ABSOLUTE_PATH = Paths.get(".").toAbsolutePath();
 	private final String RELATIVE_PATH = "/src/main/resources/static/projects/tdah/uploads/";
+	private final String SHORT_RELATIVE_PATH = "/projects/tdah/uploads/";
 	
 	public void save(MultipartFile file) throws Exception {
 		// store recording in the specified directory
@@ -39,9 +40,9 @@ public class SessionService {
 		String fecha = dtf.format(LocalDateTime.now());
 		
 		// save recording information to the database
-		Sesion sesion = new Sesion(file.getOriginalFilename(), RELATIVE_PATH, fecha);
+		Sesion sesion = new Sesion(file.getOriginalFilename(), SHORT_RELATIVE_PATH, fecha);
 		
-		Paciente paciente = new Paciente("Fernando", "Rios", "09/06/2021");
+		Paciente paciente = new Paciente("Fernando", "Rios", "09/06/2001");
 		patientService.save(paciente);
 		
 		sesion.setPaciente(paciente);

@@ -1452,56 +1452,16 @@
             <!-- REGISTRO DE SESIONES -->
             <div class="tdah-form__registro-sesiones" id="registro-sesiones">
                 <div class="contenedor">
-                    <!-- Contendor principal -->
-                    <div class="cajita1">
-                        <!--Esta es la caja donde esta la webcam del usuario y sus datos -->
-                        <div class="cajita1-left">
-                            <video id="gum" playsinline autoplay muted></video>
-                            <i class="fas fa-video-slash gum-icon"></i>
-
-                            <div class="datos">
-                                <div>
-                                    <p>Nombre: Inuyasha <br> Años: 21 años <br> Sesión: 1</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="cajita1-right">
-	                        <div class="activar-camara">
-	                        	<i class="fas fa-video" id="start"></i>
-	                        	<label class="activar-camara__label">Activar camara</label>
-                        	</div>
-                            <div class="recording">
-                                <i class="far fa-circle" id="record"></i>
-                                <label id="label-recording">Grabar</label>
-                            </div>
-                            <div class="descarga">
-	                            <i class="fas fa-download" id="download"></i>
-	                            <label class="descarga__label">Descargar</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="cajavideo">
-                        <!-- Esta es la caja de los 2 videos uno es de la tabla y otro del juego -->
-                        <video class="tablita" autoplay muted="false" loop>
-                            <source th:src="@{/projects/tdah/media/tabla.mp4}" type="video/mp4">
-                        </video>
-
-                        <video class="juego1" autoplay muted="false" loop>
-                            <source th:src="@{/projects/tdah/media/juego.mp4}" type="video/mp4">
-                        </video>
-                    </div>
-                </div>
-                <br>
+                        
+            	</div>
             </div>
         </form>
-        
     </div>
     <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
+    <script th:src="@{/projects/tdah/js/registro-sesiones.js}"></script>
     <script th:src="@{/projects/tdah/js/form.js}"></script>
     <script th:src="@{/generics/js/nav.js}"></script>
-	<script th:src="@{/projects/tdah/js/grabadorpantalla.js}"></script>
+	<!-- <script th:src="@{/projects/tdah/js/grabadorpantalla.js}"></script> -->
 	<script th:src="@{/projects/tdah/js/Pdf generador.js}"></script> 
 	<script th:src="@{/projects/tdah/js/jspdf.min.js}"></script>
 	<!-- <script th:src="@{/projects/tdah/js/validaciones.js}"></script> -->

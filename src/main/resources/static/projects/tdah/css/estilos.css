@@ -734,12 +734,13 @@ input[type="text"], input[type="date"]{
     background:  rgb(240, 186, 186);
     
 }
+
 /*********************************
 **********   SESIONES   *********
 *********************************/
 .contenedor{
-	display: grid;
-	grid-template-columns: minmax(300px,1fr); /* Esto es para el responsive muy poco que tiene, la caja se hara pequeña hasta los 300 y maximo hasta 1 fr */
+	display: flex;
+	flex-direction: column;
 }
 
 .cajita1{
@@ -747,21 +748,24 @@ input[type="text"], input[type="date"]{
 	/* box-shadow: 7px 0px 10px -12px rgba(0,0,0,0.6); */
 	display: flex;
 	flex-wrap: nowrap;  /* Para que el nombre este a lado de la web cam*/
-	grid-column: 1; /* Para acomodarlo*/
-	grid-row: 1;
     box-shadow: 0px 5px 0px 0 rgba(56, 56, 56, 0.15);
     border-radius: 10px;
+    border-bottom: 500px;
+    height: 150px;
+    width: 1105px;
     justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
 }
 
 .cajita1-left{
     display: flex;
-	flex-wrap: nowrap;  /* Para que el nombre este a lado de la web cam*/
-	grid-column: 1; /* Para acomodarlo*/
-	grid-row: 1;
+	align-items: nowrap;  /* Para que el nombre este a lado de la web cam*/
+    padding-left: 20px;
 }
 
 .cajita1-right{
+    width: 150px;
     display: flex;
     align-items: center;
     margin-right: 30px;
@@ -769,7 +773,7 @@ input[type="text"], input[type="date"]{
 }
 
 #gum{
-	width: 299px; /* Tamaño del video de la webcam*/
+	width: 299px; 
 	height: 168px;
     margin: 10px 0px;
     margin-left: 20px;
@@ -784,12 +788,12 @@ input[type="text"], input[type="date"]{
 }
 
 .tablita{
-	width: 400px; /* Tamaño video de la tabla */
+	width: 400px;
 	height: 200px;
 }
 
 .juego1{
-	width: 400px; /* Tamaño video del juego*/
+	width: 400px;
 	height: 200px;
 }
 
@@ -799,7 +803,7 @@ input[type="text"], input[type="date"]{
 	grid-column: 1;
 	grid-row: 2;
 	display: flex;
-	justify-content: center; /* Se centren y se ponga alado , si se hace mas chico aun no se hace para abajo, falta el responsive */
+	justify-content: center; /* Se centren y se ponga alado , si se hace mas chico aun no se hace para abajo, */
     background: #f1f1f1;
     box-shadow: 0px 5px 0px 0 rgba(56, 56, 56, 0.15);
     border-radius: 10px;
@@ -815,7 +819,7 @@ input[type="text"], input[type="date"]{
 .cajita1 .fa-video,
 .cajita1 .fa-download,
 .cajita1 .fa-video-slash,
-.cajita1 .fa-circle,
+.cajita1.fa-circle,
 .cajita1 .fa-stop-circle{
 	color: #444;
 	font-size: 48px;
@@ -879,6 +883,74 @@ input[type="text"], input[type="date"]{
     border-radius: 50%;
     background: red;
     border: 12px solid #fff;
+}
+.icon-descargar1{
+    
+    margin-left: 9px;
+    width: 60px;
+    height: 60px;
+    
+}
+.icon-borrar{
+    color:#444;
+    font-size: 45px;
+    margin-left: 1px;
+    width: 45px;
+    height: 60px;    
+}
+.icon-borrar:hover{
+	font-size: 48px;
+}
+.sesion{
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+}
+.numero_sesion{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+/* ------------------------- */
+/* Estilos CSS del Reproductor */
+/* ------------------------- */
+.fm-video {
+	width: "auto";
+	box-shadow: 0px 0px 6px 0px rgba(0,0,0,.5);
+}
+
+.video.vjs-control-bar {
+	background: #F4F4F4;
+	color: #d1e1ec;
+}
+
+.fm-video .vjs-play-progress,
+.fm-video .vjs-volume-level {
+	background: #1d87d8;
+}
+
+.fm-video .vjs-slider {
+	background: #2d5f85;
+}
+
+.video-js:hover .vjs-big-play-button {
+	background: rgba(0,0,0,.2);
+}
+
+.fm-video .vjs-big-play-button {
+	background: rgba(0,0,0,.2);
+	width: 80px;
+	height: 80px;
+	line-height: 80px;
+	border-radius: 100%;
+	border:none;
+    align-items: center;
+}
+
+.fm-video .vjs-big-play-button:hover {
+	background: rgba(0,0,0,.5);
 }
 
 /*********************************

@@ -60,6 +60,7 @@ public class SessionController {
 				jsonItem.put("fecha", sesion.getFecha());
 				jsonItem.put("nombrePaciente", paciente.getNombre());
 				jsonItem.put("apellidoPaciente", paciente.getApellido());
+				System.out.println("-----------------------------" + patientService.calculateAge(paciente.getFechaNacimiento()));
 				jsonItem.put("edadPaciente", patientService.calculateAge(paciente.getFechaNacimiento()));
 				jsonResponse.add(jsonItem);
 			}
