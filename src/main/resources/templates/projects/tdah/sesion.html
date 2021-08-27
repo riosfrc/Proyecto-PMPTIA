@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="sesiontdah.css">
+    <title>Sesion</title>
+</head>
+<body>
+    <header replace="layout/plantilla :: header">
+    <!--Navegador-->
+        <nav class="guide">
+               
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i></a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="index.html">TDAH</a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><i class="fas fa-angle-right"></i></li>
+                    <li><a href="form.html">Formulario</a></li>
+            </ul>
+            
+        </nav>
+    </header>
+    <!--Titulo--> 
+    <h1 class="title-h1">Apartado de sesiones</h1>   
+    <!--contiene el apartado de camara-->
+        <div class="contenedor">   
+            <aside>
+                <div class="camara">
+                    <video id="gum" playsinline autoplay muted></video>
+                   <!-- <i class="fas fa-video-slash gum-icon"></i>-->
+                </div>
+                <div class="botones">
+                    <div class="activar-camara">
+                        <i class="fas fa-video" id="start"></i>
+                        <label class="activar-camara__label">Activar camara</label>
+                    </div>
+                    <div class="recording">
+                        <i class="far fa-circle" id="record"></i>
+                            <label id="label-recording">Grabar</label>
+                    </div>
+                    <div class="descarga">
+                        <i class="fas fa-download" id="download"></i>
+                        <label class="descarga__label">Descargar</label>
+                    </div>
+            
+                </div>
+                <div class="neuronales">
+                    <video class="tabla" autoplay muted="false" loop>
+                        <source src="tabla1.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </aside>
+            <!--Contiene el apartado de juegos y redes neuronales-->
+            <section>
+                <div class="caja-derecha">
+                    <video class="juego1" autoplay muted="false" loop>
+                        <source src="juego1.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </section>
+        </div>     
+    <footer>
+        <div>
+            <p>© Copyright 2021 TecNM/CENIDET - Todos los Derechos Reservados</p>
+        </div>
+    </footer>
+</body>
+<script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
+    <script src="grabarpantalla.js"></script>
+</html>

@@ -57,7 +57,7 @@ section.addEventListener("click",(e)=>{
             e.target.classList.add("section__name--selected");
         }
         else if(e.target.classList.contains("section__registro-sesiones")){
-            registroSesiones.style.display="block";
+            registroSesiones.style.display="flex";
             e.target.classList.add("section__name--selected");
         }
     }

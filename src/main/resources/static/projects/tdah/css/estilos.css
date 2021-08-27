@@ -738,9 +738,76 @@ input[type="text"], input[type="date"]{
 /*********************************
 **********   SESIONES   *********
 *********************************/
-.contenedor{
+#registro-sesiones{
+	display: flex;
+	gap: 25px;
+}
+
+.sesiones-grabadas{
 	display: flex;
 	flex-direction: column;
+	gap: 25px;
+}
+
+.sesiones-sidebar{
+	width: 100%;
+	background: #eeee;
+	padding-top: 35px;
+	box-shadow: 0px 5px 0px 0 rgba(56, 56, 56, 0.15);
+	border-radius: 10px;
+	text-align: center;
+}
+
+.sesiones-sidebar p {
+	color: #222;
+	font-size: 19px;
+	font-weight: 500;
+}
+
+.button-new-sesion{
+	display: inline-block;
+}
+
+.button-new-sesion span{
+	margin-right: 9px;
+}
+
+.button-new-sesion a{
+	color: #fff;
+	text-decoration: none;
+	font-size: 17px;
+	padding: 10px 8px;
+	background: #009f28;
+	border-radius: 10px;
+	transition: all 0.4s ease;
+}
+
+.button-new-sesion a:hover{
+	background: #eeee;
+	color: #009f28;
+}
+
+.button-sort-sesion{
+	margin-top: 34px;
+}
+
+.button-sort-sesion button{
+	background: #0141e9;
+	width: 152px;
+	height: 39px;
+	font-size: 17px;
+	color: #fff;
+	border-radius: 10px;
+	border: none;
+	transition: all 0.4s ease;
+}
+
+.button-sort-sesion button:hover{
+	background: #0185d3;
+}
+
+.button-sort-sesion span{
+	margin-left: 7px;
 }
 
 .cajita1{
@@ -752,10 +819,9 @@ input[type="text"], input[type="date"]{
     border-radius: 10px;
     border-bottom: 500px;
     height: 150px;
-    width: 1105px;
+    width: 880px;
     justify-content: space-between;
     align-items: center;
-    padding-top: 10px;
 }
 
 .cajita1-left{
@@ -764,8 +830,18 @@ input[type="text"], input[type="date"]{
     padding-left: 20px;
 }
 
+.cajita1-left .sesion {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	margin-right: 20px;
+}
+
+.cajita1-left .info {
+	padding-top: 18px;
+}
+
 .cajita1-right{
-    width: 150px;
     display: flex;
     align-items: center;
     margin-right: 30px;
@@ -885,7 +961,6 @@ input[type="text"], input[type="date"]{
     border: 12px solid #fff;
 }
 .icon-descargar1{
-    
     margin-left: 9px;
     width: 60px;
     height: 60px;
@@ -893,13 +968,17 @@ input[type="text"], input[type="date"]{
 }
 .icon-borrar{
     color:#444;
-    font-size: 45px;
+    font-size: 40px;
     margin-left: 1px;
     width: 45px;
-    height: 60px;    
+    height: 48px;
+    margin-left: 4px;
+    cursor: pointer;
+    transition: 0.2s ease;
 }
 .icon-borrar:hover{
-	font-size: 48px;
+	font-size: 42px;
+	color: #e10000;
 }
 .sesion{
     display: flex;
@@ -910,7 +989,6 @@ input[type="text"], input[type="date"]{
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
 /* ------------------------- */
