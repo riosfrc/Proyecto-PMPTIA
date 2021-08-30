@@ -407,6 +407,17 @@ footer{
     outline: none;
 }
 
+.contenedor__login-register form select{
+	width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    background: #F2F2F2;
+    font-size: 16px;
+    outline: none;
+    cursor: pointer;
+}
+
 .contenedor__login-register form button{
     padding: 10px 40px;
     margin-top: 40px;

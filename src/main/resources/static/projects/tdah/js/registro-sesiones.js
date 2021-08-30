@@ -2,8 +2,7 @@ function addSessions(sessions) {
 	let count = 1;
 	let sessionHtml = '';
 	if(sessions.length > 0) {
-		sessions.forEach(session => {
-			sessionHtml += `
+		sessionHtml = `
 			<div class="sesiones-sidebar">
                 <div class="button-new-sesion">
             		<a href="#"><span><i class="fas fa-video"></i></span> Nueva sesión</a>
@@ -12,8 +11,10 @@ function addSessions(sessions) {
             		<button>Ordenar por <span><i class="fas fa-caret-down"></i></span></button>
             	</div>
             </div>
-			
-			<div class="sesiones-grabadas">
+            <div class="sesiones-grabadas">`;
+            
+		sessions.forEach(session => {
+			sessionHtml += `
 			    <div class="cajita1">
 			         <!--CONTIENE EL VIDEO Y DATOS DEL PACIENTE DEL LADO IZQUIERDO-->
 			        <div class="cajita1-left">
@@ -47,12 +48,12 @@ function addSessions(sessions) {
 			                <label>Borrar</label>
 			            </div>
 			        </div>             
-			    </div>
-		    </div>`;
+			    </div>`;
 		    
 		    count++;
 		});
-	
+		
+		sessionHtml += `</div>`;
 		const sessionsContainer = document.getElementById('registro-sesiones');
 		sessionsContainer.innerHTML = sessionHtml;
 		

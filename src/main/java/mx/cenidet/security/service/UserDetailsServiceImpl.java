@@ -1,12 +1,12 @@
-package mx.cenidet.projects.covid.security;
+package mx.cenidet.security.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import mx.cenidet.projects.covid.entities.Usuario;
-import mx.cenidet.projects.covid.repositories.UsuarioRepository;
+import mx.cenidet.security.entities.Usuario;
+import mx.cenidet.security.repositories.UsuarioRepository;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
 	

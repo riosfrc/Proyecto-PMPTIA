@@ -1,4 +1,4 @@
-package mx.cenidet.projects.covid.security;
+package mx.cenidet.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import mx.cenidet.security.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -45,8 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/covid/admin/**")
 					.hasAuthority("Admin")
 				.and()
-				.formLogin().loginPage("/login").defaultSuccessUrl("/covid/admin")
+				.formLogin().loginPage("/login").defaultSuccessUrl("/covid/admin").permitAll()
 				.and()
-				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
+				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
 	}
 }

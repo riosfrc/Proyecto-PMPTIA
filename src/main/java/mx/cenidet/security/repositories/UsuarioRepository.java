@@ -1,10 +1,10 @@
-package mx.cenidet.projects.covid.repositories;
+package mx.cenidet.security.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import mx.cenidet.projects.covid.entities.Usuario;
+import mx.cenidet.security.entities.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 	

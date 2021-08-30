@@ -16,12 +16,12 @@
             <div class="caja__trasera">
                 <div class="caja__trasera-login">
                     <h3>¿Ya tienes una cuenta?</h3>
-                    <p>Inicia sesión para entrar en la página</p>
+                    <p>Inicia sesión para entrar al repositorio</p>
                     <button id="btn__iniciar-sesion">Iniciar Sesión</button>
                 </div>
                 <div class="caja__trasera-register">
                     <h3>¿Aún no tienes una cuenta?</h3>
-                    <p>Registro único para especialistas</p>
+                    <p>Registro único para personas especializadas</p>
                     <button id="btn__registrarse">Regístrarse</button>
                 </div>
             </div>
@@ -29,7 +29,7 @@
             <!--Formulario de Login y registro-->
             <div class="contenedor__login-register">
                 <!--Login-->
-                <form th:action="@{/login}" method="post" class="formulario__login">
+                <form th:action="@{/login}" method="POST" class="formulario__login">
                     <h2>Iniciar Sesión</h2>
                     <input type="text" name="username" placeholder="Correo Electronico">
                     <input type="password" name="password" placeholder="Contraseña">
@@ -37,13 +37,17 @@
                 </form>
 
                 <!--registro-->
-                <form action="" class="formulario__register">
+                <form class="formulario__register">
                     <h2>Regístrarse</h2>
-                    <input type="text" placeholder="Nombre completo">
-                    <input type="text" placeholder="Correo Electronico">
-                    <input type="text" placeholder="Usuario">
-                    <input type="password" placeholder="Contraseña">
-                    <button>Regístrarse</button>
+                    <input type="text" name="nombre" placeholder="Nombre completo">
+                    <input type="text" name="correo" placeholder="Correo Electronico">
+                    <input type="password" name="contraseña" placeholder="Contraseña">
+                    <select name="rol">
+                    	<option value="">- Seleccione el repositorio -</option>
+                    	<option value="Terapeuta">Transtorno por déficit de atención e hiperactividad</option>
+                    	<option value="Robos">Detección de casos de robo a transportistas</option>
+                    </select>
+                    <button type="button" id="register-button">Regístrarse</button>
                 </form>
             </div>
         </div>

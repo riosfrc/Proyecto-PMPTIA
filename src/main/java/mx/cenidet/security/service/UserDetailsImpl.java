@@ -1,13 +1,15 @@
-package mx.cenidet.projects.covid.security;
+package mx.cenidet.security.service;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import mx.cenidet.projects.covid.entities.Usuario;
+import mx.cenidet.security.entities.Rol;
+import mx.cenidet.security.entities.Usuario;
 
 public class UserDetailsImpl implements UserDetails {
 	
@@ -21,8 +23,14 @@ public class UserDetailsImpl implements UserDetails {
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(usuario.getRol());
-		return Arrays.asList(authority);
+		List<Rol> roles = usuario.getRoles();
+		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+		
+		for(Rol rol : roles) {
+			 authorities.add(new SimpleGrantedAuthority(rol.getNombre()));
+		}
+		
+		return authorities;
 	}
 
 	@Override

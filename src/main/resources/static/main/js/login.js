@@ -9,15 +9,34 @@ var formulario_register = document.querySelector(".formulario__register");
 var contenedor_login_register = document.querySelector(".contenedor__login-register");
 var caja_trasera_login = document.querySelector(".caja__trasera-login");
 var caja_trasera_register = document.querySelector(".caja__trasera-register");
+const registerButton = document.getElementById('register-button');
 
-    //FUNCIONES
+// REQUESTS
+function requestProcessRegister() {
+	const formData = new FormData();
+	formData.append('nombre', document.querySelector('input[name = "nombre"]').value);
+	formData.append('correo', document.querySelector('input[name = "correo"]').value);
+	formData.append('contraseña', document.querySelector('input[name = "contraseña"]').value);
+	formData.append('rol', document.querySelector('select[name = "rol"]').value);
+	
+	fetch('http://localhost:8090/process_register', {
+		method:'POST',
+		body: formData
+	})
+	.then(res => res.json())
+	.then(data => {
+		console.log(data);
+	})
+	.catch(err => console.error(err))
+}
 
-function anchoPage(){
+//FUNCIONES
+function anchoPage() {
 
-    if (window.innerWidth > 850){
+    if (window.innerWidth > 850) {
         caja_trasera_register.style.display = "block";
         caja_trasera_login.style.display = "block";
-    }else{
+    } else {
         caja_trasera_register.style.display = "block";
         caja_trasera_register.style.opacity = "1";
         caja_trasera_login.style.display = "none";
@@ -30,35 +49,37 @@ function anchoPage(){
 anchoPage();
 
 
-    function iniciarSesion(){
-        if (window.innerWidth > 850){
-            formulario_login.style.display = "block";
-            contenedor_login_register.style.left = "10px";
-            formulario_register.style.display = "none";
-            caja_trasera_register.style.opacity = "1";
-            caja_trasera_login.style.opacity = "0";
-        }else{
-            formulario_login.style.display = "block";
-            contenedor_login_register.style.left = "0px";
-            formulario_register.style.display = "none";
-            caja_trasera_register.style.display = "block";
-            caja_trasera_login.style.display = "none";
-        }
-    }
+function iniciarSesion() {
+	if (window.innerWidth > 850) {
+		formulario_login.style.display = "block";
+		contenedor_login_register.style.left = "10px";
+		formulario_register.style.display = "none";
+		caja_trasera_register.style.opacity = "1";
+		caja_trasera_login.style.opacity = "0";
+		registerButton.removeEventListener('click', requestProcessRegister);
+	} else {
+		formulario_login.style.display = "block";
+		contenedor_login_register.style.left = "0px";
+		formulario_register.style.display = "none";
+		caja_trasera_register.style.display = "block";
+		caja_trasera_login.style.display = "none";
+	}
+}
 
-    function register(){
-        if (window.innerWidth > 850){
-            formulario_register.style.display = "block";
-            contenedor_login_register.style.left = "410px";
-            formulario_login.style.display = "none";
-            caja_trasera_register.style.opacity = "0";
-            caja_trasera_login.style.opacity = "1";
-        }else{
-            formulario_register.style.display = "block";
-            contenedor_login_register.style.left = "0px";
-            formulario_login.style.display = "none";
-            caja_trasera_register.style.display = "none";
-            caja_trasera_login.style.display = "block";
-            caja_trasera_login.style.opacity = "1";
-        }
+function register() {
+	if (window.innerWidth > 850) {
+		formulario_register.style.display = "block";
+		contenedor_login_register.style.left = "410px";
+		formulario_login.style.display = "none";
+		caja_trasera_register.style.opacity = "0";
+		caja_trasera_login.style.opacity = "1";
+		registerButton.addEventListener('click', requestProcessRegister);
+	} else {
+		formulario_register.style.display = "block";
+		contenedor_login_register.style.left = "0px";
+		formulario_login.style.display = "none";
+		caja_trasera_register.style.display = "none";
+		caja_trasera_login.style.display = "block";
+		caja_trasera_login.style.opacity = "1";
+	}
 }
