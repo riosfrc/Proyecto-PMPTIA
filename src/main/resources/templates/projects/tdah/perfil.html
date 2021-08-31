@@ -49,11 +49,7 @@
 	                </div>
 	                <div class="datos-group">
 	                    <label for="">Especialidad:</label>
-	                    <select name="Opciones_esp">
-	                        <option>Psicólogo</option> 
-	                        <option>Neurólogo</option> 
-	                        <option>Neuropediatra</option> 
-	                    </select>
+	                    <input type="text">
 	                </div>
 	                <div class="datos-group">
 	                </div>
@@ -71,10 +67,10 @@
 			            </a>
 			            <div class="search-patient">
 			            	<i class="fas fa-search"></i>
-			            	<input type="text">
+			            	<input type="text" id="searchTerm" onkeyup="doSearch()" placeholder="Filtrar por categoría">
 			            </div>
 	            	</div>
-		            <table>
+		            <table id="datos">
 			            <thead>
 			            	<tr>
 			            		<th>Folio</th>
@@ -115,5 +111,6 @@
 
     <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
     <script th:src="@{/generics/js/nav.js}"></script>
+    <script th:src="@{/projects/tdah/js/buscar.js}"></script>
 </body>
 </html>
