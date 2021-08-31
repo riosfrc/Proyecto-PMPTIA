@@ -64,13 +64,6 @@
 	        </div>
 	        <div class="pacientes">
 	            <h5>Datos pacientes </h5>
-	        <!-- <div>
-		            <p><i class="fas fa-user-slash"></i></p>
-		            <p>No tiene pacientes asignados.</p>
-		            <div class="btn_contenedor">
-		                <a th:href="@{/tdah/form}" class="btn">Registrar paciente</a>
-		            </div>
-	            </div> -->
 	            <div class="table-container">
 	            	<div class="header-tools">
 	            		<a class="add-patient" th:href="@{/tdah/patient/new}">
@@ -89,35 +82,31 @@
 			            		<th>Edad</th>
 			            		<th>Genero</th>
 			            		<th>Registrado</th>
+			            		<th></th>
 			            		<th>Acciones</th>
+			            		<th></th>
 			            	</tr>
 			            </thead>
 			            <tbody>
-			            	<tr>
+			            	<tr th:each="paciente : ${pacientes}">
 			            		<td>QWERTY_0102</td>
-			            		<td>Jaime Daniel Hernández Palacios</td>
-			            		<td>12</td>
-			            		<td>Masculino</td>
-			            		<td>2021-08-09</td>
-			            		<td><i class="fas fa-eye"></i> Consultar | <i class="fas fa-edit"></i> Editar | <i class="fas fa-minus-circle"></i> Eliminar</td>
+			            		<td th:text="${paciente.nombre} + ${paciente.apellido}"></td>
+			            		<td th:text="${paciente.fechaNacimiento}"></td>
+			            		<td th:text="${paciente.sexo}"></td>
+			            		<td th:text="${paciente.fechaRegistro}"></td>
+			            		<td><a class="btn sesion" th:href="@{#}">R.Sesiones</a></td>
+			            		<td><a class="btn myButton" th:href="@{/tdah/patient/edit/} + ${paciente.idPaciente}">Editar</a></td>
+			            		<td><a class="btn delete" th:href="@{/tdah/patient/delete/} + ${paciente.idPaciente}">Eliminar</a></td>
 			            	</tr>
-			            	<tr>
-			            		<td>PGGHIF_0231</td>
-			            		<td>Jessica Nuñez Garcia</td>
-			            		<td>13</td>
-			            		<td>Femenido</td>
-			            		<td>2021-07-15</td>
-			            		<td><i class="fas fa-eye"></i> Consultar | <i class="fas fa-edit"></i> Editar | <i class="fas fa-minus-circle"></i> Eliminar</td>
-			            	</tr>
-			            	<tr>
+			            </tbody>
+			            <!-- <tr>
 			            		<td>QWERTY_0102</td>
 			            		<td>Pablo Ruiz vasquez</td>
 			            		<td>10</td>
 			            		<td>Masculino</td>
 			            		<td>2021-07-30</td>
 			            		<td><i class="fas fa-eye"></i> Consultar | <i class="fas fa-edit"></i> Editar | <i class="fas fa-minus-circle"></i> Eliminar</td>
-			            	</tr>
-			            </tbody>
+			            	</tr> -->
 		            </table>
 	            </div>
 	        </div>

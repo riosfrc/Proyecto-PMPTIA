@@ -85,6 +85,6 @@ public class APP {
 	
 	private String reaccionesAdversas;
 	
-	@OneToOne(mappedBy = "app")
+	@OneToOne(mappedBy = "app", cascade = CascadeType.ALL)
 	private Paciente paciente;
 }

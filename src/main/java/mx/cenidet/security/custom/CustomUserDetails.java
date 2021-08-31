@@ -1,4 +1,4 @@
-package mx.cenidet.security.service;
+package mx.cenidet.security.custom;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,13 +11,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import mx.cenidet.security.entities.Rol;
 import mx.cenidet.security.entities.Usuario;
 
-public class UserDetailsImpl implements UserDetails {
+public class CustomUserDetails implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private Usuario usuario;
 	
-	public UserDetailsImpl(Usuario usuario) {
+	public CustomUserDetails(Usuario usuario) {
         this.usuario = usuario;
     }
 	
@@ -32,6 +32,10 @@ public class UserDetailsImpl implements UserDetails {
 		
 		return authorities;
 	}
+	
+	public boolean hasRole(String roleName) {
+        return this.usuario.hasRole(roleName);
+    }
 
 	@Override
 	public String getPassword() {

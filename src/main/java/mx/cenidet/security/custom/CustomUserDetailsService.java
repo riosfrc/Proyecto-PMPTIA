@@ -1,4 +1,4 @@
-package mx.cenidet.security.service;
+package mx.cenidet.security.custom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import mx.cenidet.security.entities.Usuario;
 import mx.cenidet.security.repositories.UsuarioRepository;
 
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
@@ -21,7 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException("Could not find user");
 		}
 		
-		return new UserDetailsImpl(usuario);
+		return new CustomUserDetails(usuario);
 	}
 	
 }

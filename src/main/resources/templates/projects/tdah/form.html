@@ -40,8 +40,21 @@
             <div class="section__name section__aspecto-de-personalidad-emocionales">Aspectos de personalidad y/o emocionales</div>
             <div class="section__name section__registro-sesiones">Reg. de sesiones</div>
         </div>
-        <form class="tdah-form" id="formulario" method="POST" th:action="@{/tdah/form/save}" th:object="${paciente}">
-             <!-- Datos personales -->
+        <form class="tdah-form" id="formulario" method="POST" th:action="@{/tdah/patient/save}" th:object="${paciente}">
+        	
+        	<input type="hidden" th:field="*{idPaciente}" name="id" id="id">
+			<input type="hidden" th:field="*{app.id}" name="idApp" id="idApp">
+			<input type="hidden" th:field="*{apnp.id}" name="idapnp" id="idapnp">
+			<input type="hidden" th:field="*{apye.id}" name="idapyep" id="idapye">
+			<input type="hidden" th:field="*{apyp.id}" name="idapyp" id="idapyp">
+			<input type="hidden" th:field="*{df.id}" name="iddf" id="iddf">
+			<input type="hidden" th:field="*{hd.id}" name="idhd" id="idhd">
+			<input type="hidden" th:field="*{pacientePadres.madre.id}" name="idmadre" id="idMadre">
+			<input type="hidden" th:field="*{pacientePadres.padre.id}" name="idmadre" id="idPadre">
+			<input type="hidden" th:field="*{ae.id}" name="idae" id="idae">
+			<input type="hidden" th:field="*{pacientePadres.id}" name="idPacientePadres" id="idPacientePadres">
+            
+            <!-- Datos personales -->
             <div class="tdah-form__datos-personales" id="datos-personales">
                 <div class="group input-group--color1">
                     <div class="input-group">
@@ -54,7 +67,7 @@
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Fecha de registro:</label>
-                        <input class="input-group__input fecha_registro" type="date" th:field="*{fechaResgistro}">
+                        <input class="input-group__input fecha_registro" type="date" th:field="*{fechaRegistro}">
                     </div>
                     <div class="input-group">
                         <label class="input-group__label" for="">Sexo:</label>

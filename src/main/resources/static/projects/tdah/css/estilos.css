@@ -497,6 +497,73 @@ aside{
     color: #fff;
 }
 
+.pacientes .myButton {
+	box-shadow:inset -14px -29px 21px -25px #29bbff;
+	background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+	background-color:#2dabf9;
+	border-radius:8px;
+	
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:11px;
+	padding:9px 20px;
+	text-decoration:none;
+	text-shadow:0px 0px 18px #263666;
+}
+.pacientes .myButton:hover {
+	background:linear-gradient(to bottom, #0688fa 5%, #2dabf9 100%);
+	background-color:#0688fa;
+}
+.pacientes .myButton:active {
+	position:relative;
+	top:1px;
+}
+.pacientes .delete {
+	box-shadow:inset -14px -11px 0px -50px #f29c93;
+	background-color:#ff1a00;
+	border-radius:10px;
+	border:1px solid #d83526;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:11px;
+	padding:9px 20px;
+	text-decoration:none;
+	text-shadow:0px 0px 0px #b23e35;
+}
+.pacientes .delete:hover {
+	
+	background-color:#e84343;
+	}
+.pacientes .delete:active {
+	position:relative;
+	top:1px;
+}
+.pacientes .sesion {
+	box-shadow:inset -14px -11px 0px -50px rgb(0, 64, 0);
+	background-color:rgb(2, 174, 63);
+	border-radius:10px;
+	border:1px solid rgb(2, 191, 63);
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:11px;
+	padding:9px 20px;
+	text-decoration:none;
+	text-shadow:0px 0px 0px rgb(0, 128, 0);
+}
+.pacientes .sesion:hover {
+	background-color:#009f28;
+}
+.pacientes .sesion:active {
+	position:relative;
+	top:1px;
+}
+
 /*********************************
 **********   FORM.HTML   *********
 *********************************/

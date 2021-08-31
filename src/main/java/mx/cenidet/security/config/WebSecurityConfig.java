@@ -1,5 +1,6 @@
 package mx.cenidet.security.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -11,15 +12,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import mx.cenidet.security.service.UserDetailsServiceImpl;
+import mx.cenidet.security.custom.CustomUserDetailsService;
+import mx.cenidet.security.custom.LoginSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
-    public UserDetailsService userDetailsService() {
-        return new UserDetailsServiceImpl();
+    public UserDetailsService customUserDetailsService() {
+        return new CustomUserDetailsService();
     }
 	
 	@Bean
@@ -30,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setUserDetailsService(customUserDetailsService());
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
@@ -46,9 +48,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers("/covid/admin/**")
 					.hasAuthority("Admin")
+				.antMatchers("/tdah/index")
+					.permitAll()
+//				.antMatchers("/tdah/profile", "/tdah/patient/**")
+//					.hasAuthority("Terapeuta")
 				.and()
-				.formLogin().loginPage("/login").defaultSuccessUrl("/covid/admin").permitAll()
+				.formLogin().loginPage("/login").successHandler(loginSuccessHandler).permitAll()
 				.and()
 				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
 	}
+	
+	@Autowired
+	private LoginSuccessHandler loginSuccessHandler;
 }

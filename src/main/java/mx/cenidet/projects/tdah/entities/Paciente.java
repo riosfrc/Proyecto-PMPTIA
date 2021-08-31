@@ -24,7 +24,7 @@ public class Paciente {
 	
 	private String sexo;
 	
-	private String fechaResgistro;
+	private String fechaRegistro;
 	
 	private String fechaNacimiento;
 	

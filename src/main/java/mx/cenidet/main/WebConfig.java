@@ -17,10 +17,10 @@ public class WebConfig implements WebMvcConfigurer {
 		registro.addViewController("/covid/deteccion").setViewName("projects/covid/deteccion");
 		registro.addViewController("/covid/admin").setViewName("projects/covid/admin");
 		registro.addViewController("/tdah/index").setViewName("projects/tdah/index");
-		registro.addViewController("/tdah/profile").setViewName("projects/tdah/perfil");
-//		registro.addViewController("/tdah/form").setViewName("projects/tdah/form");
+		// registro.addViewController("/tdah/profile").setViewName("projects/tdah/perfil");
+		// registro.addViewController("/tdah/form").setViewName("projects/tdah/form");
 		registro.addViewController("/robos/index").setViewName("projects/robos/index");
-		registro.addViewController("/robos/perfil.html").setViewName("projects/robos/perfil");
+		registro.addViewController("/robos/perfil").setViewName("projects/robos/perfil");
 		registro.addViewController("/robos/subir-imagenes.html").setViewName("projects/robos/subir-imagenes");
 		registro.addViewController("/robos/repositorio.html").setViewName("projects/robos/repositorio");
 	}

@@ -38,6 +38,13 @@
                         <li class="menu__item"><a th:href="@{/logout}" class="menu__link"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
                 	</ul>
                 </li>
+                <li sec:authorize="hasAuthority('Terapeuta')" class="menu__item container-submenu">
+                	<a th:href="@{/tdah/profile}" class="menu__link btn-submenu"> <i class="fas fa-user-circle"></i> <span>Terapeuta</span> <i class="fas fa-chevron-down"></i></a>
+                	<ul class="submenu logout">
+                		<li class="menu__item profile-link" hidden><a th:href="@{/covid/admin}" class="menu__link"> Entrar a tu perfil</a></li>
+                        <li class="menu__item"><a th:href="@{/logout}" class="menu__link"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
+                	</ul>
+                </li>
                 
                 <li class="menu__item"><a href="#" class="menu__link"><i class="fas fa-envelope"></i>Contacto</a></li>
             </ul>

@@ -1,7 +1,6 @@
 package mx.cenidet.security.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -47,4 +46,16 @@ public class Usuario {
 	public void addRole(Rol rol) {
 		this.roles.add(rol);
 	}
+	
+	public boolean hasRole(String roleName) {
+        Iterator<Rol> iterator = this.roles.iterator();
+        while (iterator.hasNext()) {
+            Rol rol = iterator.next();
+            if (rol.getNombre().equals(roleName)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }

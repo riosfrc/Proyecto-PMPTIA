@@ -29,12 +29,12 @@ public class PatientService {
 		pacienteRepository.save(paciente);
 	}
 
-	public void delete(Paciente paciente) {
-		pacienteRepository.delete(paciente);
+	public void delete(Long idPaciente) {
+		pacienteRepository.deleteById(idPaciente);
 	}
 	
 	public String calculateAge(String fechaNacimiento) {
-		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate birthDate = LocalDate.parse(fechaNacimiento, fmt);
 		LocalDate now = LocalDate.now();
 		Period period = Period.between(birthDate, now);
