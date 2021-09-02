@@ -31,21 +31,20 @@
             <div class="aside">
                 <div class="camara">
                     <video id="gum" playsinline autoplay muted></video>
-                   <!-- <i class="fas fa-video-slash gum-icon"></i>-->
                    <div class="botones">
-                        <div class="caja1">
+                        <div class="caja1" id="cameraButton">
                             <div class="activar-camara">
-                                <i class="fas fa-video" id="start"></i>
+                                <i class="fas fa-video" id="cameraIcon"></i>
                             </div>
                         </div>
-                        <div class="caja2">
+                        <div class="caja2" id="recordButton">
                             <div class="recording">
-                                <i class="far fa-circle" id="record"></i>
+                                <i class="far fa-circle" id="recordIcon"></i>
                             </div>
                         </div>
-                        <div class="caja3">
+                        <div class="caja3" id="downloadButton">
                             <div class="descarga">
-                                <i class="fas fa-download" id="download"></i>
+                                <i class="fas fa-download" id="downloadIcon"></i>
                             </div>
                         </div>
                    </div>
@@ -66,6 +65,16 @@
                 </div>
             </section>
         </div>
+        
+        <div id="modal_container" class="modal-container" th:if="${success != ''}">
+  			<div class="modal-body">
+  				<div class="icon-modal"><i class="far fa-check-circle"></i></div>
+    			<h1>Se grabó la sesión correctamente</h1>
+   	 			<p>Ha detenido la grabación, ¿qué desea hacer?</p>
+   	 			<button>Descartar</button>
+			    <button id="close">Guardar</button>
+			</div>
+		</div>
 	</div>  
    
 </body>

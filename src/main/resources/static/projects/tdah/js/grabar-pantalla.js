@@ -1,14 +1,30 @@
 let blobs;
 
-const recordButton = document.querySelector('#record');
-const downloadButton = document.querySelector('#download');
+const cameraButton = document.getElementById('cameraButton');
+const recordButton = document.getElementById('recordButton');
+const downloadButton = document.getElementById('downloadButton');
+
+const cameraIcon = document.getElementById('cameraIcon');
+const recordIcon = document.getElementById('recordIcon');
+
+function requestSessionUpload(){
+	const blob = new Blob(blobs, {type: 'video/webm'});
+	console.log(blob);
+	let formData = new FormData();
+	formData.append('file', blob, `GRABACION_${new Date().getTime()}.webm`);
+	
+	fetch('http://localhost:8090/tdah/session/upload', {
+		method: 'POST',
+		body: formData
+	})
+	.then(res => res.json())
+	.then(data => console.log(data))
+	.catch(err => console.error(err))
+}
 
 recordButton.addEventListener('click', async function(e) {
-  if(document.getElementById('label-recording').textContent === 'Grabar'){
-	  console.log('record')
-	  e.target.classList.remove('fa-circle');
-	  e.target.classList.add('fa-stop-circle');
-	  document.getElementById('label-recording').textContent = 'Detener';
+  if(recordIcon.style.color !== 'red'){
+	  console.log('record');
 	  blobs = [];
 	  const pantallaStream = await navigator.mediaDevices.getDisplayMedia({ video:true, audio: true })
 	  const usuarioStream = await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
@@ -35,26 +51,24 @@ recordButton.addEventListener('click', async function(e) {
 	  window.grabadora = new MediaRecorder(bundleStream, {mimeType: 'video/webm; codecs=vp8,opus'});
 	  window.grabadora.ondataavailable = (e) => blobs.push(e.data);
 	  window.grabadora.start();
+	  recordIcon.style.color = 'red';
   }
   else{
-	console.log('stop recording')
-    grabadora.stop();
-    document.getElementById('label-recording').textContent = 'Grabar';
+	console.log('stop recording');
+    window.grabadora.stop();
+    recordIcon.style.color = '#333';
     downloadButton.disabled = false;
-    e.target.classList.add('fa-circle');
-    e.target.classList.remove('fa-stop-circle');
+    showModal();
   }
 });
 
 downloadButton.addEventListener('click', function(){
-	const blob = new Blob(blobs, {type: 'video/webm'});
+	const blobDownload = new Blob(blobs, {type: 'video/webm'});
     const btnDescargar = document.createElement('a');
-    btnDescargar.href = window.URL.createObjectURL(blob);
+    btnDescargar.href = window.URL.createObjectURL(blobDownload);
     btnDescargar.download = `GRABACION_${new Date().getTime()}.webm`;
     btnDescargar.click();
 });
-
-
 
 function handleSuccess(stream) {
   recordButton.disabled = false;
@@ -75,13 +89,13 @@ async function init(constraints) {
   }
 }
 
-document.querySelector('#start').addEventListener('click', async (e) => {
-  if(e.target.classList.contains('fa-video')){
-     e.target.classList.remove('fa-video');
-     e.target.classList.add('fa-video-slash');
-  } else{
-	e.target.classList.add('fa-video');
-    e.target.classList.remove('fa-video-slash');
+cameraButton.addEventListener('click', async (e) => {
+  	if(cameraIcon.classList.contains('fa-video')){
+     	cameraIcon.classList.remove('fa-video');
+     	cameraIcon.classList.add('fa-video-slash');
+  	} else{
+		cameraIcon.classList.add('fa-video');
+    	cameraIcon.classList.remove('fa-video-slash');
 }
   const hasEchoCancellation = true;
   const constraints = {
@@ -94,5 +108,25 @@ document.querySelector('#start').addEventListener('click', async (e) => {
   };
   console.log('Using media constraints:', constraints);
   await init(constraints);
-  document.querySelector('.gum-icon').classList.remove('fa-video-slash');
+});
+
+// Ventana modal
+const modal_container = document.getElementById('modal_container');
+const close = document.getElementById('close');
+
+const showModal = function() {
+	modal_container.classList.add('show');
+	window.addEventListener('click', closeModal);
+};
+
+function closeModal(e) {
+	if (e.target === modal_container) {
+		modal_container.classList.remove('show');
+		window.removeEventListener('click', closeModal);
+		requestSessionUpload();
+	}
+}
+
+close.addEventListener('click', () => {
+	modal_container.classList.remove('show');
 });

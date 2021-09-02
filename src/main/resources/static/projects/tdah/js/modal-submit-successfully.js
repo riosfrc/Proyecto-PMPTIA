@@ -1,5 +1,3 @@
-console.log('modal');
-
 // Ventana modal
 const modal_container = document.getElementById('modal_container');
 const close = document.getElementById('close');

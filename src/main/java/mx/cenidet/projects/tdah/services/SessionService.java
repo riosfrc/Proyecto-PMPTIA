@@ -36,7 +36,7 @@ public class SessionService {
 		fos.close();
 		
 		// get upload date
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		String fecha = dtf.format(LocalDateTime.now());
 		
 		// save recording information to the database
