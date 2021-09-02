@@ -292,12 +292,14 @@ aside{
 
 .cabecera{
     width: 100%;
-    background: #006699;
+    background: rgb(46, 109, 164);
 }
 
 .cabecera h4{
     padding: 10px 20px;
     color: #fff;
+    font-size: 18px;
+    letter-spacing: 1px;
 }
 
 .foto-perfil{
@@ -319,8 +321,12 @@ aside{
     flex-wrap: wrap;
     flex-direction: column;
     align-content: flex-end;
-    padding-top: 45px;
+    padding-top: 41px;
     color: #345177;
+}
+
+.foto-perfil div h3{
+	margin-bottom: 7px;
 }
 
 .informacion-profesional{
@@ -580,6 +586,7 @@ aside{
 	margin: 0 auto;
 	margin-bottom: 10px;
 	justify-content: flex-end;
+	min-height: 29px;
 }
 
 .buttons .fa-download{
@@ -621,8 +628,8 @@ aside{
     border: 1px solid #fff;
 }
 
-.section__registro-sesiones{
-    padding: 10px 32.4px;
+.section__enviar-formulario{
+    padding: 10px 33.7px;
 }
 
 .section__name--selected{
@@ -729,7 +736,7 @@ aside{
     margin-left: 10px;
 }
 
-#antecedentes-personales-no-patologicos,#antecedentes-personales-patologicos,#antecedentes-pre-peri-y-postnatales,#historia-del-desarrollo,#antecedentes-escolares,#dinamica-familiar,#aspecto-de-personalidad-emocionales,#registro-sesiones{
+#antecedentes-personales-no-patologicos,#antecedentes-personales-patologicos,#antecedentes-pre-peri-y-postnatales,#historia-del-desarrollo,#antecedentes-escolares,#dinamica-familiar,#aspecto-de-personalidad-emocionales,#enviar-formulario{
     display: none;
 }
 
@@ -802,12 +809,305 @@ input[type="text"], input[type="date"]{
     
 }
 
+.enviar-formulario-content{
+	width: 100%;
+	background: #eeee;
+	padding-top: 15px;
+	box-shadow: 0px 5px 0px 0 rgba(56, 56, 56, 0.15);
+	border-radius: 10px;
+	text-align: center;
+}
+
+.enviar-formulario-content .aviso{
+	color: #cb2929;
+	font-size: 21.5px;
+	font-weight: 500;
+	margin-top: 10px;
+}
+
+.enviar-formulario-content .aviso-text{
+	color: #252525;
+	font-size: 18px;
+	font-weight: 500;
+	margin-top: 13px;
+	line-height: 26px;
+}
+
+.enviar-formulario-content button{
+	color: #fff;
+	font-size: 17px;
+	border: none;
+	padding: 9px 16px;
+	background: #01de4f;
+	transition: all 0.4s ease;
+	margin: 28px;
+	cursor: pointer;
+	border: 2.5px solid #008c23;
+	font-weight: bold;
+}
+
+.enviar-formulario-content button:hover{
+	background: #eeee;
+	color: #009b27;
+	box-shadow: 5px 5px 5px #01de4f;
+}
+
 /*********************************
-**********   SESIONES   *********
+***********   MODAL   ************
 *********************************/
+.modal-container {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  pointer-events: none;
+  opacity: 0;  
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  transition: opacity 0.8s ease;
+}
+
+.show {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.modal-body {
+  background-color: #fff;
+  width: 600px;
+  max-width: 100%;
+  padding: 30px 60px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal-body h1 {
+  margin: 0;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: rgb(46, 109, 164);
+}
+
+.modal-body p {
+  font-size: 19px;
+  color: #333;
+  margin-bottom: 28px;
+  line-height: 25px;
+}
+
+.modal-body img{
+	height: 80px;
+	width: 93px;
+	border: 3px solid #ebebeb;
+	border-radius: 5px;
+	margin: 0 20px;
+}
+
+.modal-body form{
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    max-width: 1000px;
+    margin-top: 0px;
+}
+
+.modal-body form .input-group{
+	display: flex;
+    width: 100%;
+    margin: 10px 20px 10px 0;
+}
+
+.modal-body form .input-group__label {
+    width: 100%;
+    text-align: left;
+    font-size: 18px;
+    color: #222;
+    padding-left: 20px;
+}
+
+.modal-body form .input-group__input{
+	width: 100%;
+	text-align: left;
+}
+
+.modal-body form input[type="text"],
+.modal-body form select {
+    outline: none;
+    font-size: 17px;
+    border: 1px solid #ccc;
+    width: 100%;
+    text-align: center;
+}
+
+.modal-body form input[type="text"]:focus,
+.modal-body form select:focus {
+    outline: 2px solid #5ec2fc;
+}
+
+.modal-body .icon-modal {
+	max-width: 100%;
+	font-size: 100px;
+	color: #2ede2e;
+	margin-bottom: 25px;
+}
+
+.modal-body .modal-buttons{
+	margin-top: 20px;
+}
+
+.modal-body .modal-buttons button{
+	width: 121px;
+	padding: 4px 20px;
+}
+
+.modal-body button {
+	padding: 5px 20px;
+	font-size: 19px;
+	background: #fff;
+	border: 2.5px solid #222;
+	color: #222;
+	cursor: pointer;
+	margin: 0 15px;
+}
+
+.modal-body button:hover {
+	background: #222;
+	border: 2.5px solid #222;
+	color: #fff;
+}
+
+/*********************************
+********   NUEVA SESIÓN   ********
+*********************************/
+/*************APARTADO DE LAS CAJAS DE CAMARA**********/
+.content-session .guide{
+	margin-left: 83px;
+}
+
+.contenedor-sesion .aside{
+    width: 35%;
+    height: 496px;
+    background: rgb(232, 232, 236);
+    border-radius: 10px;
+    align-items: center;
+    padding-top: 9px;
+    margin-left: 20px;
+}
+.contenedor-sesion section{
+    width: 60%;
+    height: 496px;
+    border-radius: 10px;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-image: linear-gradient(to right top, #0234c0, #0267da, #4995ea, #89c0f4, #cee9fd);
+}
+.contenedor-sesion{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 22px;
+}
+
+/***********APARTADO CAMARA Y VIDEO DE REDES NEURONALES**********/
+.camara{
+    display: flex;
+}
+.botones{
+    width: 15%;
+    height: 200px;
+    background: rgb(255, 255, 255);
+    margin-top: 5px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 20px;
+}
+#gum{
+	width: 74%;
+	height: 199px;
+    margin: 5px 15px 5px 19px;
+    background: rgba(74, 78, 81, 0.7);
+    border-radius: 8px;
+}
+.neuronales{
+    border-radius: 8px;
+    margin-top: 18px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+}
+.tabla{
+	width: auto; /* Tamaño video de la tabla */
+	height: 248px;
+    border-radius: 8px;
+}
+.botones .fa-video,
+.botones .fa-video-slash,
+.botones .fa-circle,
+.botones .fa-download {
+	color: #333;
+	font-size: 21px;
+}
+
+.botones .caja1,
+.botones .caja2,
+.botones .caja3 {
+    width: 40px;
+    height: 40px;;
+    border: 1px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.botones .caja1:hover .fa-video,
+.botones .caja1:hover .fa-video-slash,
+.botones .caja2:hover .fa-circle,
+.botones .caja3:hover .fa-download{
+    color: #666;
+}
+
+/***********APARTADO JUEGO LADO DERECHO**********/
+.caja-derecha{
+    display: flex;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.juego{
+    margin: 45px 0px;
+    margin-left: 50px;
+    margin-right: 50px;
+	width: auto; 
+	height: 420px;
+    border-radius: 8px;
+    border: 12px solid #fff;
+}
+
+/*********************************
+****   REGISTRO DE SESIONES   ****
+*********************************/
+.content-registro-sesiones{
+	width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
 #registro-sesiones{
 	display: flex;
 	gap: 25px;
+	width: 1100px;
+	margin: auto;
+	margin-top: 35px;
 }
 
 .sesiones-grabadas{
@@ -904,6 +1204,17 @@ input[type="text"], input[type="date"]{
 	margin-right: 20px;
 }
 
+.sesion{
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+}
+.numero_sesion{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .cajita1-left .info {
 	padding-top: 18px;
 }
@@ -915,124 +1226,6 @@ input[type="text"], input[type="date"]{
     gap: 12px;
 }
 
-#gum{
-	width: 299px; 
-	height: 168px;
-    margin: 10px 0px;
-    margin-left: 20px;
-    background: rgba(74, 78, 81, 0.7);
-    border-radius: 8px;
-}
-
-.datos{
-	line-height: 30px; /* Como tipo interlineado */
-    display: flex;
-    align-items: center;
-}
-
-.tablita{
-	width: 400px;
-	height: 200px;
-}
-
-.juego1{
-	width: 400px;
-	height: 200px;
-}
-
-.cajavideo{
-    margin-top: 20px;
-	padding: 30px;  /* La caja del video*/
-	grid-column: 1;
-	grid-row: 2;
-	display: flex;
-	justify-content: center; /* Se centren y se ponga alado , si se hace mas chico aun no se hace para abajo, */
-    background: #f1f1f1;
-    box-shadow: 0px 5px 0px 0 rgba(56, 56, 56, 0.15);
-    border-radius: 10px;
-}
-
-.activar-camara{
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	width: 110px;
-}
-
-.cajita1 .fa-video,
-.cajita1 .fa-download,
-.cajita1 .fa-video-slash,
-.cajita1.fa-circle,
-.cajita1 .fa-stop-circle{
-	color: #444;
-	font-size: 48px;
-	cursor: pointer;
-	transition: 0.2s ease;
-}
-
-.cajita1 .fa-video:hover,
-.cajita1 .fa-download:hover,
-.cajita1 .fa-video-slash:hover,
-.cajita1 .fa-circle:hover,
-.cajita1 .fa-stop-circle:hover{
-	font-size: 51px;
-}
-
-.gum-icon{
-	position: relative;
-	top: calc(50% - 24px);
-	left: calc(-50% + 65px);
-	cursor: default;
-}
-
-.gum-icon:hover{
-	font-size: 48px;
-}
-
-.activar-camara__label,
-.descarga__label,
-.label-recording{
-	width: 100%;
-}
-
-.recording{
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	width: 57px;
-}
-
-.descarga{
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	width: 74px;
-	margin-left: 3px;
-}
-
-.icon-recording{
-    margin-bottom: 7px;
-    cursor: pointer;
-}
-
-.icon-borde-exterior{
-    border-radius: 50%;
-    border: 3px solid black;
-}
-
-.icon-borde-interior{
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: red;
-    border: 12px solid #fff;
-}
-.icon-descargar1{
-    margin-left: 9px;
-    width: 60px;
-    height: 60px;
-    
-}
 .icon-borrar{
     color:#444;
     font-size: 40px;
@@ -1046,16 +1239,6 @@ input[type="text"], input[type="date"]{
 .icon-borrar:hover{
 	font-size: 42px;
 	color: #e10000;
-}
-.sesion{
-    display: flex;
-    flex-direction: column;
-    padding-right: 10px;
-}
-.numero_sesion{
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /* ------------------------- */

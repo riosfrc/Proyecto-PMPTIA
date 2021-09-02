@@ -26,8 +26,8 @@ public class SessionService {
 	PatientService patientService;
 	
 	private final Path ABSOLUTE_PATH = Paths.get(".").toAbsolutePath();
-	private final String RELATIVE_PATH = "/src/main/resources/static/projects/tdah/uploads/";
-	private final String SHORT_RELATIVE_PATH = "/projects/tdah/uploads/";
+	private final String RELATIVE_PATH = "/src/main/resources/static/projects/tdah/sessions/";
+	private final String SHORT_RELATIVE_PATH = "/projects/tdah/sessions/";
 	
 	public void save(MultipartFile file) throws Exception {
 		// store recording in the specified directory
@@ -36,13 +36,13 @@ public class SessionService {
 		fos.close();
 		
 		// get upload date
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String fecha = dtf.format(LocalDateTime.now());
 		
 		// save recording information to the database
 		Sesion sesion = new Sesion(file.getOriginalFilename(), SHORT_RELATIVE_PATH, fecha);
 		
-		Paciente paciente = new Paciente("Fernando", "Rios", "09/06/2001");
+		Paciente paciente = new Paciente("Fernando", "Rios Contreras", "2001-06-09");
 		patientService.save(paciente);
 		
 		sesion.setPaciente(paciente);

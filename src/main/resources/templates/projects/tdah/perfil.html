@@ -10,6 +10,7 @@
 <body>
     
     <header th:replace="layout/plantilla :: header"></header>
+    
 	<div class="content">
 		<nav class="guide">
         	<ul>
@@ -28,8 +29,8 @@
 	        <div class="foto-perfil">
 	            <img th:src="@{/generics/media/blank-profile.png}">
 	            <div>
-	                <h3>Nombre completo</h3>
-	                <h4>correo@correo.com</h4>
+	                <h3 th:text="${usuario.nombre}">Nombre completo</h3>
+	                <h4 th:text="${usuario.correo}">correo@correo.com</h4>
 	            </div>
 	        </div>
 	        <div class="informacion-profesional">
@@ -37,19 +38,19 @@
 	            <div class="datos">
 	                <div class="datos-group">
 	                    <label for="">Nombre Completo:</label>
-	                    <input type="text">
+	                    <input type="text" th:field="${usuario.nombre}">
 	                </div>
 	                <div class="datos-group">
 	                    <label for="">Correo:</label>
-	                    <input type="text">
+	                    <input type="text" th:field="${usuario.correo}">
 	                </div>
 	                <div class="datos-group">
 	                    <label for="">Cédula profesional:</label>
-	                    <input type="text">
+	                    <input type="text" th:field="${usuario.terapeuta.cedulaProfesional}">
 	                </div>
 	                <div class="datos-group">
 	                    <label for="">Especialidad:</label>
-	                    <input type="text">
+	                    <input type="text" th:field="${usuario.terapeuta.especialidad}">
 	                </div>
 	                <div class="datos-group">
 	                </div>
@@ -86,31 +87,34 @@
 			            <tbody>
 			            	<tr th:each="paciente : ${pacientes}">
 			            		<td>QWERTY_0102</td>
-			            		<td th:text="${paciente.nombre} + ${paciente.apellido}"></td>
+			            		<td th:text="${paciente.nombre + ' ' + paciente.apellido}"></td>
 			            		<td th:text="${paciente.fechaNacimiento}"></td>
 			            		<td th:text="${paciente.sexo}"></td>
 			            		<td th:text="${paciente.fechaRegistro}"></td>
-			            		<td><a class="btn sesion" th:href="@{#}">R.Sesiones</a></td>
+			            		<td><a class="btn sesion" th:href="@{/tdah/recorded-sessions}">Sesiones</a></td>
 			            		<td><a class="btn myButton" th:href="@{/tdah/patient/edit/} + ${paciente.idPaciente}">Editar</a></td>
 			            		<td><a class="btn delete" th:href="@{/tdah/patient/delete/} + ${paciente.idPaciente}">Eliminar</a></td>
 			            	</tr>
 			            </tbody>
-			            <!-- <tr>
-			            		<td>QWERTY_0102</td>
-			            		<td>Pablo Ruiz vasquez</td>
-			            		<td>10</td>
-			            		<td>Masculino</td>
-			            		<td>2021-07-30</td>
-			            		<td><i class="fas fa-eye"></i> Consultar | <i class="fas fa-edit"></i> Editar | <i class="fas fa-minus-circle"></i> Eliminar</td>
-			            	</tr> -->
 		            </table>
 	            </div>
 	        </div>
 	    </div>
+	    
+	    <div id="modal_container" class="modal-container" th:if="${success != ''}">
+  			<div class="modal-body">
+  				<div class="icon-modal"><i class="far fa-check-circle"></i></div>
+    			<h1>Nuevo Paciente Registrado</h1>
+   	 			<p>Ya puede acceder a los datos registrados del paciente desde su perfil.</p>
+			    <button id="close">Cerrar</button>
+			</div>
+		</div>
+	    
 	</div>
 
     <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
     <script th:src="@{/generics/js/nav.js}"></script>
+    <script th:src="@{/projects/tdah/js/modal-submit-successfully.js}" th:if="${success != ''}"></script>
     <script th:src="@{/projects/tdah/js/buscar.js}"></script>
 </body>
 </html>

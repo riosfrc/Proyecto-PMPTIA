@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.Data;
+import lombok.ToString;
+import mx.cenidet.projects.tdah.entities.Terapeuta;
 
 @Data
 @Entity
@@ -32,6 +34,10 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "id_rol")
     )
 	private List<Rol> roles = new ArrayList<Rol>();
+	
+	@ToString.Exclude
+	@OneToOne(mappedBy = "usuario")
+	private Terapeuta terapeuta;
 	
 	public Usuario() {
 		

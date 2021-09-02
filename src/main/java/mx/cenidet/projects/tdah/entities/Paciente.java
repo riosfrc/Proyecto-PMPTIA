@@ -77,6 +77,10 @@ public class Paciente {
 	@OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
 	private List<Sesion> sesiones;
 	
+	@ManyToOne
+	@JoinColumn(name = "idTerapeuta")
+	private Terapeuta terapeuta;
+	
 	public Paciente() {
 		
 	}

@@ -5,7 +5,7 @@ function addSessions(sessions) {
 		sessionHtml = `
 			<div class="sesiones-sidebar">
                 <div class="button-new-sesion">
-            		<a href="#"><span><i class="fas fa-video"></i></span> Nueva sesión</a>
+            		<a href="/tdah/new-session"><span><i class="fas fa-video"></i></span> Nueva sesión</a>
             	</div>
             	<div class="button-sort-sesion">
             		<button>Ordenar por <span><i class="fas fa-caret-down"></i></span></button>
@@ -73,7 +73,7 @@ function addSessions(sessions) {
 				</br>
             	</br>
                 <div class="button-new-sesion">
-            		<a href="#"><span><i class="fas fa-video"></i></span> Nueva sesión</a>
+            		<a href="/tdah/new-session"><span><i class="fas fa-video"></i></span> Nueva sesión</a>
             	</div>
             	</br>
             	</br>

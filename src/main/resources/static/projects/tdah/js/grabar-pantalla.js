@@ -79,11 +79,9 @@ document.querySelector('#start').addEventListener('click', async (e) => {
   if(e.target.classList.contains('fa-video')){
      e.target.classList.remove('fa-video');
      e.target.classList.add('fa-video-slash');
-     document.querySelector('.activar-camara__label').textContent = "Apagar camara";
   } else{
 	e.target.classList.add('fa-video');
     e.target.classList.remove('fa-video-slash');
-    document.querySelector('.activar-camara__label').textContent = "Activar camara";
 }
   const hasEchoCancellation = true;
   const constraints = {

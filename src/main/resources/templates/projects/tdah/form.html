@@ -26,7 +26,7 @@
         </nav>
         <h1 class="title-form">PERFIL DEL PACIENTE</h1>
         <div class="buttons">
-        	<button id= "pdf-button"><i class="fas fa-download"></i> Descargar PDF</button>
+        	<button id= "pdf-button" th:if="${paciente.idPaciente != null}"><i class="fas fa-download"></i> Descargar PDF</button>
         </div>
         
         <div class="section">
@@ -38,7 +38,7 @@
             <div class="section__name section__antecedentes-escolares">Antecedentes escolares</div>
             <div class="section__name section__dinamica-familiar">Dinámica familiar</div>
             <div class="section__name section__aspecto-de-personalidad-emocionales">Aspectos de personalidad y/o emocionales</div>
-            <div class="section__name section__registro-sesiones">Reg. de sesiones</div>
+            <div class="section__name section__enviar-formulario">Enviar formulario</div>
         </div>
         <form class="tdah-form" id="formulario" method="POST" th:action="@{/tdah/patient/save}" th:object="${paciente}">
         	
@@ -216,7 +216,7 @@
                     </div>
                     <div class="input-group input-group--color1"></div>
                     <div class="input-group--btn input-group--color1">
-                        <button type="submit" class="input-group--btn__guardar boton_datos">Guardar</button>
+                        <button type="button" class="input-group--btn__guardar boton_datos">Guardar</button>
                     </div>
                 </div>
 
@@ -1461,20 +1461,24 @@
                 <div class="division"></div>
             </div>
 
-            <!-- REGISTRO DE SESIONES -->
-            <div class="tdah-form__registro-sesiones" id="registro-sesiones">
-                
-                
+            <!-- ENVIAR FORMULARIO -->
+            <div class="tdah-form__enviar-formulario" id="enviar-formulario">
+            	<div class="enviar-formulario-content">
+					<p class="aviso">Aviso</p>
+					<p class="aviso-text">Antes de enviar el formulario asegurese de haber llenado todos los campos obligatorios correctamente.</br>Los datos registrados serán protegidos y se tendrán acceso únicamente desde su perfil.</p>
+		            <div class="button-new-sesion">
+		            	<button type="submit">Enviar datos</button>
+		            </div>
+	            </div>
             </div>
         </form>
     </div>
+    
     <script src="https://kit.fontawesome.com/2ff9a12d18.js" crossorigin="anonymous"></script>
     <script th:src="@{/generics/js/nav.js}"></script>
-    <script th:src="@{/projects/tdah/js/registro-sesiones.js}"></script>
     <script th:src="@{/projects/tdah/js/form.js}"></script>
 	<script th:src="@{/projects/tdah/js/Pdf generador.js}"></script> 
 	<script th:src="@{/projects/tdah/js/jspdf.min.js}"></script>
-	<!-- <script th:src="@{/projects/tdah/js/grabadorpantalla.js}"></script> -->
 	<!-- <script th:src="@{/projects/tdah/js/validaciones.js}"></script> -->
 	<!-- <script th:src="@{/projects/tdah/js/script-validaciones.js}"></script> -->
 	<!-- <script th:src="@{/projects/tdah/js/combobox-validaciones.js}"></script> -->

@@ -6,9 +6,11 @@ const historiaDelDesarrollo = document.getElementById("historia-del-desarrollo")
 const antecedentesEscolares = document.getElementById("antecedentes-escolares");
 const dinamicaFamiliar = document.getElementById("dinamica-familiar");
 const aspectoDePersonalidad = document.getElementById("aspecto-de-personalidad-emocionales");
-const registroSesiones = document.getElementById("registro-sesiones");
+const enviarFormulario = document.getElementById("enviar-formulario");
 const section = document.querySelector(".section");
 const sectionNames = document.querySelectorAll(".section__name");
+
+document.body.style.overflowY = "scroll";
 
 section.addEventListener("click",(e)=>{
     if(e.target.classList.contains("section__name")){
@@ -20,7 +22,7 @@ section.addEventListener("click",(e)=>{
         antecedentesEscolares.style.display="none";
         dinamicaFamiliar.style.display="none";
         aspectoDePersonalidad.style.display="none";
-        registroSesiones.style.display="none";
+        enviarFormulario.style.display="none";
         for (sectionName of sectionNames) {
             sectionName.classList.remove("section__name--selected");
         }
@@ -56,8 +58,8 @@ section.addEventListener("click",(e)=>{
             aspectoDePersonalidad.style.display="block";
             e.target.classList.add("section__name--selected");
         }
-        else if(e.target.classList.contains("section__registro-sesiones")){
-            registroSesiones.style.display="flex";
+        else if(e.target.classList.contains("section__enviar-formulario")){
+            enviarFormulario.style.display="block";
             e.target.classList.add("section__name--selected");
         }
     }
