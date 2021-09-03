@@ -24,6 +24,10 @@ public class PatientService {
 	public Paciente find(Paciente paciente) {
 		return pacienteRepository.findById(paciente.getIdPaciente()).orElse(null);
 	}
+	
+	public Paciente find(Long idPaciente) {
+		return pacienteRepository.findById(idPaciente).orElse(null);
+	}
 
 	public void save(Paciente paciente) {
 		pacienteRepository.save(paciente);

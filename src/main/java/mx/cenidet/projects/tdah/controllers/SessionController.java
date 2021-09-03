@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,11 +32,11 @@ public class SessionController {
 	@Autowired
 	PatientService patientService;
 	
-	@PostMapping("/upload")
-	public ResponseEntity<ResponseMessage> uploadSession(@RequestParam("file") MultipartFile file) {
+	@PostMapping("/{idPaciente}/upload")
+	public ResponseEntity<ResponseMessage> uploadSession(@RequestParam("file") MultipartFile file, @PathVariable Long idPaciente) {
 	    String message = "";
 	    try {
-	    	sessionService.save(file);
+	    	sessionService.save(file, idPaciente);
 	    	message = "Uploaded the file successfully: " + file.getOriginalFilename();
 	    	return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
 	    } catch (Exception e) {
@@ -45,16 +46,16 @@ public class SessionController {
 	    }
 	}
 	
-	@GetMapping("/getAll")
-	public ResponseEntity<?> getAllSessions(){
+	@GetMapping("/{idPaciente}/getAll")
+	public ResponseEntity<?> getAllSessions(@PathVariable Long idPaciente){
 		try {
-			List<Sesion> sesiones = sessionService.findAll();
+			Paciente paciente = patientService.find(idPaciente);
+			List<Sesion> sesiones = paciente.getSesiones();
 			List<JSONObject> jsonResponse = new ArrayList<JSONObject>();
 			
 			// Create a new jsonitem for each session in the database
 			for(Sesion sesion : sesiones) {
 				JSONObject jsonItem = new JSONObject();
-				Paciente paciente = sesion.getPaciente();
 				jsonItem.put("nombre", sesion.getNombre());
 				jsonItem.put("ruta", sesion.getRuta());
 				jsonItem.put("fecha", sesion.getFecha());

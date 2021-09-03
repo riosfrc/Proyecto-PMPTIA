@@ -91,7 +91,7 @@
 			            		<td th:text="${paciente.fechaNacimiento}"></td>
 			            		<td th:text="${paciente.sexo}"></td>
 			            		<td th:text="${paciente.fechaRegistro}"></td>
-			            		<td><a class="btn sesion" th:href="@{/tdah/recorded-sessions}">Sesiones</a></td>
+			            		<td><a class="btn sesion" th:href="@{/tdah/patient/} + ${paciente.idPaciente} + @{/recorded-sessions}">Sesiones</a></td>
 			            		<td><a class="btn myButton" th:href="@{/tdah/patient/edit/} + ${paciente.idPaciente}">Editar</a></td>
 			            		<td><a class="btn delete" th:href="@{/tdah/patient/delete/} + ${paciente.idPaciente}">Eliminar</a></td>
 			            	</tr>

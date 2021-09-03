@@ -1,5 +1,9 @@
 let blobs;
 
+const pathname = window.location.pathname;
+const splitPathname = pathname.split('/');
+const idPaciente = splitPathname[splitPathname.length - 2];
+
 const cameraButton = document.getElementById('cameraButton');
 const recordButton = document.getElementById('recordButton');
 const downloadButton = document.getElementById('downloadButton');
@@ -13,7 +17,7 @@ function requestSessionUpload(){
 	let formData = new FormData();
 	formData.append('file', blob, `GRABACION_${new Date().getTime()}.webm`);
 	
-	fetch('http://localhost:8090/tdah/session/upload', {
+	fetch(`http://localhost:8090/tdah/session/${idPaciente}/upload`, {
 		method: 'POST',
 		body: formData
 	})
@@ -113,20 +117,17 @@ cameraButton.addEventListener('click', async (e) => {
 // Ventana modal
 const modal_container = document.getElementById('modal_container');
 const close = document.getElementById('close');
+const save = document.getElementById('save');
 
 const showModal = function() {
 	modal_container.classList.add('show');
-	window.addEventListener('click', closeModal);
 };
-
-function closeModal(e) {
-	if (e.target === modal_container) {
-		modal_container.classList.remove('show');
-		window.removeEventListener('click', closeModal);
-		requestSessionUpload();
-	}
-}
 
 close.addEventListener('click', () => {
 	modal_container.classList.remove('show');
+});
+
+save.addEventListener('click', () => {
+	modal_container.classList.remove('show');
+	requestSessionUpload();
 });

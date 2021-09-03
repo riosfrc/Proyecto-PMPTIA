@@ -20,7 +20,7 @@
                 <li><i class="fas fa-angle-right"></i></li>
                 <li><a href="/tdah/profile">Perfil</a></li>
                 <li><i class="fas fa-angle-right"></i></li>
-                <li><a href="/tdah/recorded-sessions">Registro de sesiones</a></li>
+                <li><a th:href="@{/tdah/patient/} + ${idPaciente} + @{/recorded-sessions}">Registro de sesiones</a></li>
         	</ul>
         </nav>
         

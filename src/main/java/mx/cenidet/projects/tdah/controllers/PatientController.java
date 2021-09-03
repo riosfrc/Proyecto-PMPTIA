@@ -5,6 +5,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -78,5 +79,17 @@ public class PatientController {
 		
 		patientService.delete(paciente.getIdPaciente());
 		return "redirect:/tdah/profile";
+	}
+	
+	@GetMapping("{idPaciente}/recorded-sessions")
+	public String showRecordedSessions(@PathVariable Long idPaciente, Model model) {
+		model.addAttribute("idPaciente", idPaciente);
+		return "projects/tdah/registro-sesiones";
+	}
+	
+	@GetMapping("{idPaciente}/new-session")
+	public String recordNewSession(@PathVariable Long idPaciente, Model model) {
+		model.addAttribute("idPaciente", idPaciente);
+		return "projects/tdah/nueva-sesion";
 	}
 }

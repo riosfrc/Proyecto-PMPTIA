@@ -29,7 +29,7 @@ public class SessionService {
 	private final String RELATIVE_PATH = "/src/main/resources/static/projects/tdah/sessions/";
 	private final String SHORT_RELATIVE_PATH = "/projects/tdah/sessions/";
 	
-	public void save(MultipartFile file) throws Exception {
+	public void save(MultipartFile file, Long idPaciente) throws Exception {
 		// store recording in the specified directory
 		FileOutputStream fos = new FileOutputStream(ABSOLUTE_PATH + RELATIVE_PATH + file.getOriginalFilename());
 		fos.write(file.getBytes());
@@ -42,8 +42,7 @@ public class SessionService {
 		// save recording information to the database
 		Sesion sesion = new Sesion(file.getOriginalFilename(), SHORT_RELATIVE_PATH, fecha);
 		
-		Paciente paciente = new Paciente("Fernando", "Rios Contreras", "2001-06-09");
-		patientService.save(paciente);
+		Paciente paciente = patientService.find(idPaciente);
 		
 		sesion.setPaciente(paciente);
 		sesionRepository.save(sesion);

@@ -1240,6 +1240,16 @@ input[type="text"], input[type="date"]{
 	font-size: 42px;
 	color: #e10000;
 }
+.content-session .modal-body button{
+	margin: 0 22px;
+	width: 130px;
+}
+.content-session .modal-body .icon-modal{
+	max-width: 100%;
+	font-size: 100px;
+	color: #ff1a1a;
+	margin-bottom: 25px;
+}
 
 /* ------------------------- */
 /* Estilos CSS del Reproductor */

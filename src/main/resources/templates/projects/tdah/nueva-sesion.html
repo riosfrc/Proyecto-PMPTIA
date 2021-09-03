@@ -20,9 +20,9 @@
 		        <li><i class="fas fa-angle-right"></i></li>
 		        <li><a href="/tdah/profile">Perfil</a></li>
 		        <li><i class="fas fa-angle-right"></i></li>
-                <li><a href="/tdah/recorded-sessions">Registro de sesiones</a></li>
+                <li><a th:href="@{/tdah/patient/} + ${idPaciente} + @{/recorded-sessions}">Registro de sesiones</a></li>
 		        <li><i class="fas fa-angle-right"></i></li>
-				<li><a href="/tdah/new-session">Nueva sesión</a></li>
+				<li><a th:href="@{/tdah/patient/} + ${idPaciente} + @{/new-session}">Nueva sesión</a></li>
 			</ul>
 		</nav>
     
@@ -68,11 +68,11 @@
         
         <div id="modal_container" class="modal-container" th:if="${success != ''}">
   			<div class="modal-body">
-  				<div class="icon-modal"><i class="far fa-check-circle"></i></div>
-    			<h1>Se grabó la sesión correctamente</h1>
-   	 			<p>Ha detenido la grabación, ¿qué desea hacer?</p>
-   	 			<button>Descartar</button>
-			    <button id="close">Guardar</button>
+  				<div class="icon-modal"><i class="far fa-stop-circle"></i></div>
+    			<h1>Se ha detenido la grabación</h1>
+   	 			<p>¿Qué desea hacer con la grabación?</p>
+   	 			<button id="close">Descartar</button>
+			    <button id="save">Guardar</button>
 			</div>
 		</div>
 	</div>  

@@ -1,3 +1,7 @@
+const pathname = window.location.pathname;
+const splitPathname = pathname.split('/');
+const idPaciente = splitPathname[splitPathname.length - 2];
+
 function addSessions(sessions) {
 	let count = 1;
 	let sessionHtml = '';
@@ -5,7 +9,7 @@ function addSessions(sessions) {
 		sessionHtml = `
 			<div class="sesiones-sidebar">
                 <div class="button-new-sesion">
-            		<a href="/tdah/new-session"><span><i class="fas fa-video"></i></span> Nueva sesión</a>
+            		<a href="/tdah/patient/${idPaciente}/new-session"><span><i class="fas fa-video"></i></span> Nueva sesión</a>
             	</div>
             	<div class="button-sort-sesion">
             		<button>Ordenar por <span><i class="fas fa-caret-down"></i></span></button>
@@ -73,7 +77,7 @@ function addSessions(sessions) {
 				</br>
             	</br>
                 <div class="button-new-sesion">
-            		<a href="/tdah/new-session"><span><i class="fas fa-video"></i></span> Nueva sesión</a>
+            		<a href="/tdah/patient/${idPaciente}/new-session"><span><i class="fas fa-video"></i></span> Nueva sesión</a>
             	</div>
             	</br>
             	</br>
@@ -88,7 +92,7 @@ function addSessions(sessions) {
 
 
 function requestGetAllSessions() {
-	fetch('http://localhost:8090/tdah/session/getAll', {
+	fetch(`http://localhost:8090/tdah/session/${idPaciente}/getAll`, {
 		method: 'GET'
 	})
 	.then(res => res.json())
